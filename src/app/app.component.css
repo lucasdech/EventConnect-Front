@@ -1,0 +1,13 @@
+:host {
+  display: block;
+}
+
+main {
+  padding-top: 0; /* Supprimez le padding-top */
+}
+
+@media screen and (max-width: 768px) {
+  main {
+    padding-top: 0; /* Supprimez également le padding-top pour les écrans plus petits */
+  }
+}

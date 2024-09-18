@@ -1,15 +1,39 @@
-<div class="container mx-auto flex flex-col md:flex-row items-start justify-center min-h-[calc(100vh-64px)] pt-4">
-  <div class="w-full md:w-1/2 p-4 text-center md:text-left md:pr-8">
+<div class="container mx-auto flex flex-col md:flex-row items-center justify-center min-h-[calc(100vh-128px)] -mt-16 mb-20">
+  <div class="w-full md:w-1/2 p-4 text-left md:pl-8 flex flex-col justify-center">
     <h1 class="mb-4 font-lilita">
-      <span class="block">EVENT</span>
-      <span class="block">CONNECT</span>
+      <span class="block text-color">EVENT</span>
+      <span class="block text-color">CONNECT</span>
     </h1>
-    <div class="flex flex-row justify-center md:justify-start space-x-4">
-      <a href="#" class="text-white hover:text-gray-200 no-underline btn btn-inscription">S'inscrire</a>
-      <a href="#" class="text-white hover:text-gray-200 no-underline btn btn-connexion">Se Connecter</a>
+    <div class="flex flex-row justify-start space-x-10">
+      <a href="#" class="text-white no-underline btn btn-inscription">S'inscrire</a>
+      <a href="#" class="text-white no-underline btn btn-connexion">Se Connecter</a>
     </div>
   </div>
   <div class="w-full md:w-1/2 p-4 flex justify-center items-center md:pl-8">
-    <img src="assets/logo/logoBlack.png" alt="Grand logo" class="w-full max-w-md">
+    <img src="assets/logo/logoBlack.png" alt="Grand logo" class="w-full max-w-md logo">
+  </div>
+</div>
+
+<div class="container mx-auto mt-16 mb-20">
+  <h3 class="text-center text-3xl font-bold mb-8 text-color font-lilita">Découvrez nos événements</h3>
+  <div class="flex flex-col md:flex-row items-center justify-between">
+    <div class="w-full md:w-1/2 mb-8 md:mb-0">
+      <!-- Carrousel d'images -->
+      <div class="carousel relative w-4/5 mx-auto">
+        <button (click)="prevImage()" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2">Précédent</button>
+        <button (click)="nextImage()" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2">Suivant</button>
+        <img *ngFor="let image of images; let i = index" 
+             [src]="image.src" 
+             [alt]="image.alt" 
+             class="w-full h-64 object-cover absolute transition-opacity duration-500 ease-in-out"
+             [ngClass]="{'opacity-100': i === currentIndex, 'opacity-0': i !== currentIndex}">
+      </div>
+    </div>
+    <div class="w-full md:w-5/12 bg-[#F29F05] p-6 rounded-lg">
+      <h3 class="text-white mb-6">Lorem ipsum dolor sit</h3>
+      <p class="text-white">
+        Rejoignez-nous pour des événements incroyables ! EventConnect vous offre une plateforme unique pour découvrir et participer à des expériences inoubliables. Que vous soyez passionné de musique, d'art, de technologie ou de sport, vous trouverez toujours quelque chose qui vous correspond.
+      </p>
+    </div>
   </div>
 </div>

@@ -1,11 +1,14 @@
 h1 {
     font-size: 120px;
-    color: #63281A;
     line-height: 1;
 }
 
 h1 span {
     display: block;
+}
+
+.text-color  {
+  color: #63281A;
 }
 
 .btn {
@@ -25,6 +28,10 @@ h1 span {
 
 .btn:hover {
   scale: 1.1;
+}
+
+.logo {
+    scale: 1.3;
 }
 
 
