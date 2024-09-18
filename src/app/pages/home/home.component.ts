@@ -20,23 +20,18 @@ export class HomeComponent implements OnInit {
   currentIndex = 0;
 
   ngOnInit() {
-    // Utilisez requestAnimationFrame au lieu de setInterval
     this.startCarousel();
   }
 
   startCarousel() {
     const animate = () => {
       this.nextImage();
-      setTimeout(() => requestAnimationFrame(animate), 5000);
+      setTimeout(() => requestAnimationFrame(animate), 100);
     };
     requestAnimationFrame(animate);
   }
 
   nextImage() {
     this.currentIndex = (this.currentIndex + 1) % this.images.length;
-  }
-
-  prevImage() {
-    this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
   }
 }
