@@ -1,0 +1,21 @@
+.NavLink {
+    color: #F35733;
+}
+
+.NavLogo {
+    width: 100%;
+    max-width: 160px;
+    height: auto;
+}
+
+@media screen and (max-width: 768px) {
+    .NavLogo {
+        max-width: 120px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .NavLogo {
+        max-width: 80px;
+    }
+}

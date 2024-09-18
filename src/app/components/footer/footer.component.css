@@ -1,0 +1,26 @@
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #F35733;
+    padding: 10px 0;
+}
+
+.footer-logo {
+    width: 100%;
+    max-width: 160px;
+    height: auto;
+}
+
+@media screen and (max-width: 768px) {
+    .footer-logo {
+        max-width: 120px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .footer-logo {
+        max-width: 80px;
+    }
+}

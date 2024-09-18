@@ -1,0 +1,48 @@
+h1 {
+    font-size: 120px;
+    color: #63281A;
+    line-height: 1;
+}
+
+h1 span {
+    display: block;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 10px;
+  transition: background-color 0.5s ease-in-out;
+}
+
+.btn-inscription {
+  background-color: #F35733;
+}
+
+.btn-connexion {
+  background-color: #F29F05;
+}
+
+.btn:hover {
+  scale: 1.1;
+}
+
+
+
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 80px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    h1 {
+        font-size: 60px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 90%;
+  }
+}
