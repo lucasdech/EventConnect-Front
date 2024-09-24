@@ -15,19 +15,12 @@
 </div>
 
 <div class="container mx-auto mt-8 mb-10">
-  <h3 class="text-center text-3xl font-bold mb-8 text-color font-lilita">Découvrez nos événements</h3>
-  <div class="flex flex-col md:flex-row items-start justify-between my-10">
-    <div class="w-full md:w-1/2 mb-8 md:mb-0">
-      <!-- Carrousel d'images -->
-      <div class="carousel relative w-4/5 mx-auto">
-        <img *ngFor="let image of images; let i = index" 
-             [src]="image.src" 
-             [alt]="image.alt" 
-             class="w-full h-64 object-cover transition-opacity duration-500 ease-in-out"
-             [ngClass]="{'opacity-100': i === currentIndex, 'opacity-0': i !== currentIndex}">
-      </div>
+  <h3 class="text-center text-3xl font-bold text-color font-lilita">Découvrez nos événements</h3>
+  <div class="flex flex-col md:flex-row items-start justify-between">
+    <div class="w-full md:w-1/2 -mt-10  md:mb-0">
+        <img src="assets/images/1.png" alt="">
     </div>
-    <div class="w-full md:w-5/12 bg-[#F29F05] mt-10 p-6 rounded-xl">
+    <div class="w-full md:w-5/12 bg-[#F29F05] mt-20 p-6 rounded-xl">
       <h3 class="text-white mb-6">Lorem ipsum dolor sit</h3>
       <p class="text-white">
         Rejoignez-nous pour des événements incroyables ! EventConnect vous offre une plateforme unique pour découvrir et participer à des expériences inoubliables. Que vous soyez passionné de musique, d'art, de technologie ou de sport, vous trouverez toujours quelque chose qui vous correspond.

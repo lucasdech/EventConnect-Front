@@ -1,37 +1,12 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [CommonModule],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
-    images: { src: string, alt: string }[] = [
-    { src: 'assets/images/home-carousel/1.png', alt: 'Événement 1'},
-    { src: 'assets/images/home-carousel/2.png', alt: 'Événement 2'},
-    { src: 'assets/images/home-carousel/4.png', alt: 'Événement 3'},
-  ];
 
-  currentIndex = 0;
-
-  ngOnInit() {
-    this.startCarousel();
-  }
-
-  startCarousel() {
-    const animate = () => {
-      this.nextImage();
-      setTimeout(() => requestAnimationFrame(animate), 100);
-    };
-    requestAnimationFrame(animate);
-  }
-
-  nextImage() {
-    this.currentIndex = (this.currentIndex + 1) % this.images.length;
-  }
 }

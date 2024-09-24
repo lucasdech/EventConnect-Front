@@ -2,14 +2,12 @@ import { createRequire } from 'module';const require = createRequire(import.meta
 import {
   BrowserDomAdapter,
   BrowserModule,
+  DOCUMENT,
   DomRendererFactory2,
   EVENT_MANAGER_PLUGINS,
   EventManagerPlugin,
   HTTP_ROOT_INTERCEPTOR_FNS,
-  HttpClientModule
-} from "./chunk-CUTPVJPM.js";
-import {
-  DOCUMENT,
+  HttpClientModule,
   NullViewportScroller,
   PLATFORM_SERVER_ID,
   PlatformLocation,
@@ -17,7 +15,7 @@ import {
   XhrFactory,
   getDOM,
   setRootDomAdapter
-} from "./chunk-4HWACCY7.js";
+} from "./chunk-3JS7Q763.js";
 import {
   ALLOW_MULTIPLE_PLATFORMS,
   ANIMATION_MODULE_TYPE,
