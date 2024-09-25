@@ -5,7 +5,7 @@
       <span class="block text-color">CONNECT</span>
     </h1>
     <div class="flex flex-row justify-start space-x-10">
-      <button class="text-white no-underline btn btn-inscription">S'inscrire</button>
+      <button id="registerBtn" class="text-white no-underline btn btn-inscription">S'inscrire</button>
       <button id="loginBtn" class="text-white no-underline btn btn-connexion">Se Connecter</button>
     </div>
   </div>
@@ -14,8 +14,9 @@
   </div>
 </div>
 
-<div  class="flex justify-center items-center">
+<div  class="flex justify-center items-center -mt-20">
     <app-login-form id="loginForm" class="hidden"/>
+    <app-register-form id="registerForm" class="hidden"/>
 </div>
 
 <div class="container mx-auto mt-8 mb-10">

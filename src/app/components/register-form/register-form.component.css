@@ -1,0 +1,55 @@
+.register-form {
+    background-color: #F35733;
+    padding: 10%;
+    border-radius: 10px;
+    margin: auto;
+    width: 30em;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.register-form h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.register-form label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+.register-form input {
+    width: 100%;
+    padding: 2%;
+    border: none;
+    border-radius: 5px; 
+}
+
+.photo-upload {
+    margin: 10px 0;
+}
+
+.photo-upload button {
+    background-color: #fff;
+    color: #F35733;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+button {
+    border: 2px solid white;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+}
+
+.register_password {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    margin-left: 25%;
+}
