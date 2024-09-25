@@ -1,0 +1,21 @@
+#about_us {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 20em;
+    width: 100%;
+    margin-top: 2em;
+}
+
+.col {
+    height: 100%;
+    width: 30%;
+}
+
+.box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50%;
+}
