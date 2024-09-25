@@ -1,38 +1,49 @@
-<div class="register-form">
-    <h1>juste 1 minute !</h1>
-    
-    <div class="flex">
+<div class="register-form ">
+    <p>juste 1 minute !</p>
+  
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="flex">
         <div>
-            <label for="pseudo">Pseudo :</label>
-            <input type="text" id="pseudo" name="pseudo" required>
-        
-            <label for="email">email :</label>
-            <input type="email" id="email" name="email" required>
+          <label for="pseudo">Pseudo :</label>
+          <input class="text-black" type="text" id="pseudo" formControlName="pseudo" required>
+          
+          <label for="email">Email :</label>
+          <input class="text-black" type="email" id="email" formControlName="email" required>
         </div>
+  
         <div class="ml-20">
-            <img src="assets/images/Forms/personnes-pointant.png" alt="personne poitant du doigts" style="height: 150px;">
+          <img src="assets/images/Forms/personnes-pointant.png" alt="personne poitant du doigts" style="height: 150px;">
         </div>
-    </div>
-
-    <label for="profile-photo">Photo de profil :</label>
-    <div class="photo-upload">
+      </div>
+  
+      <label for="profile-photo">Photo de profil :</label>
+      <div class="photo-upload">
         <label for="custom_pp"></label>
-        <input type="file" name="custom_pp" id="custom_pp">
+        <input type="file" formControlName="custom_pp" id="custom_pp">
+  
         <label for="default_pp"></label>
-        <input type="file" name="default_pp" id="default_pp">
-    </div>
-
-    <div class="register_password">
+        <input type="file" formControlName="default_pp" id="default_pp">
+      </div>
+  
+      <div class="register_password">
         <div>
-            <label for="password">password :</label>
-            <input type="password" id="password" name="password" required>
-
-            <label for="confirm-password">Confirm Password :</label>
-            <input type="password" id="confirm-password" name="confirm-password" required>
+          <label for="password">Password :</label>
+          <input class="text-black" type="password" id="password" formControlName="password" required>
+  
+          <label for="confirm-password">Confirm Password :</label>
+          <input class="text-black" type="password" id="confirm-password" formControlName="confirmPassword" required>
         </div>
-    
+        
+        <div *ngIf="passwordMismatch" style="color: red;">
+          Les mots de passe ne correspondent pas !
+        </div>
+  
         <div>
-            <button type="submit" class="p-2 mt-6 rounded-md">S'inscrire</button>
+          <button type="submit" class="p-2 mt-6 rounded-md" [disabled]="registerForm.invalid">
+            S'inscrire
+          </button>
         </div>
-    </div>
-</div>
+      </div>
+    </form>
+  </div>
+  

@@ -23,20 +23,20 @@ export class HomeComponent implements OnInit {
 
     if (loginBtn && formLogin && registerBtn && registerForm) {
       loginBtn.addEventListener('click', () => {
-        // Fermer le formulaire d'inscription s'il est ouvert
+        
         if (!registerForm.classList.contains('hidden')) {
           registerForm.classList.add('hidden');
         }
-        // Ouvrir/fermer le formulaire de connexion
+        
         formLogin.classList.toggle('hidden');
       });
 
       registerBtn.addEventListener('click', () => {
-        // Fermer le formulaire de connexion s'il est ouvert
+        
         if (!formLogin.classList.contains('hidden')) {
           formLogin.classList.add('hidden');
         }
-        // Ouvrir/fermer le formulaire d'inscription
+      
         registerForm.classList.toggle('hidden');
       });
     }
