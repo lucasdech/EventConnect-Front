@@ -5,8 +5,8 @@
       <span class="block text-color">CONNECT</span>
     </h1>
     <div class="flex flex-row justify-start space-x-10">
-      <a href="#" class="text-white no-underline btn btn-inscription">S'inscrire</a>
-      <a href="#" class="text-white no-underline btn btn-connexion">Se Connecter</a>
+      <button class="text-white no-underline btn btn-inscription">S'inscrire</button>
+      <button id="loginBtn" class="text-white no-underline btn btn-connexion">Se Connecter</button>
     </div>
   </div>
   <div class="w-full md:w-1/2 p-4 flex justify-center items-center md:pl-8">
@@ -14,8 +14,8 @@
   </div>
 </div>
 
-<div id="loginForm">
-    <app-login-form />
+<div  class="flex justify-center items-center">
+    <app-login-form id="loginForm" class="hidden"/>
 </div>
 
 <div class="container mx-auto mt-8 mb-10">

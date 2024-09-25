@@ -1,6 +1,43 @@
-#loginForm {
+#login {
+    position: relative; 
+    width: 30em;
+    height: auto; /* Hauteur automatique */
+    color: white;
     background-color: #F29F05;
-    width: 40%;
-    height: 100%;
-    border-radius: 10px;
+    flex-direction: column;
+}
+
+#login_content {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+#login_form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+#login_form input {
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.8);
+    width: 80%;   
+}
+
+.password_input {
+    width: 80%;
+}
+
+#login img {
+    position: relative;
+    bottom: -13%;
+    left: -5%;
+    height: 170px;
+}
+
+button {
+    border: 2px solid white;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
 }
