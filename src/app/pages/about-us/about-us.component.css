@@ -1,21 +1,28 @@
 #about_us {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    height: 20em;
+
     width: 100%;
     margin-top: 2em;
+    display: flex;
+    flex-direction: column
+    ;
+    color: #63281A;
+
 }
 
-.col {
-    height: 100%;
-    width: 30%;
+.row {
+    border: 2px solid black;
+    display: flex;
+}
+
+#about_us img {
+    height: 235px;
 }
 
 .box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 50%;
+    border: 2px solid red;
+    margin-bottom: 3em;
+}
+
+.box-1 {
+    font-size: 40px;
 }
