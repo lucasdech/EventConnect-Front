@@ -1,11 +1,11 @@
 <div class="register-form ">
     <p class="text-2xl -mt-8">Juste 1 minute !</p>
   
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="registerForm" (ngSubmit)="Register()">
       <div class="flex">
         <div>
-          <label for="pseudo">Pseudo :</label>
-          <input class="text-black" type="text" id="pseudo" formControlName="pseudo" required>
+          <label for="name">Prénom - Nom :</label>
+          <input class="text-black" type="text" id="name" formControlName="name" required>
           
           <label for="email">Email :</label>
           <input class="text-black" type="email" id="email" formControlName="email" required>

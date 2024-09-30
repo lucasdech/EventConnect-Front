@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginFormComponent } from '../../components/login-form/login-form.component';
 import { RegisterFormComponent } from '../../components/register-form/register-form.component';
+import { LoginFormComponent } from '../../components/login-form/login-form.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   standalone: true,
-  imports: [LoginFormComponent, RegisterFormComponent]
+  imports: [RegisterFormComponent, LoginFormComponent]
 })
 export class HomeComponent implements OnInit {
 

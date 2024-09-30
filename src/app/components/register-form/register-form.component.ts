@@ -1,21 +1,29 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Credentials, RegisterService } from '../../services/user/register.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-form',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule], // Ajout de ReactiveFormsModule ici
+  imports: [ReactiveFormsModule, CommonModule], 
   templateUrl: './register-form.component.html',
   styleUrls: ['./register-form.component.css']
 })
 export class RegisterFormComponent {
+
+  private RegisterService = inject(RegisterService);
+  private router = inject(Router);
+
   registerForm: FormGroup;
+  invalidCredentials = false;
+
   passwordMismatch: boolean = false;
 
   constructor(private fb: FormBuilder) {
     this.registerForm = this.fb.group({
-      pseudo: ['', Validators.required],
+      name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       custom_pp: [''],
       default_pp: [''],
@@ -31,8 +39,26 @@ export class RegisterFormComponent {
       this.passwordMismatch = true;
     } else {
       this.passwordMismatch = false;
-      // Soumission du formulaire
+
       console.log('Form Submitted', this.registerForm.value);
     }
+  }
+
+  Register() {
+    if (this.registerForm.invalid) return 
+
+    this.RegisterService.register(this.registerForm.value as Credentials).subscribe({
+      next: (success: boolean) => {
+        if (success) {
+          this.router.navigate(['My-Board']);
+        } else {
+          this.invalidCredentials = true;
+        }
+      },error: (err) => {
+        console.error("Erreur lors de l\'enregistrement :", err);
+        this.invalidCredentials = true;
+      }
+    })
+
   }
 }
