@@ -1,4 +1,3 @@
-import { registerLocaleData } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { Observable, tap, map } from 'rxjs';

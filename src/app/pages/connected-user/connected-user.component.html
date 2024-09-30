@@ -1,29 +1,23 @@
 <div class="event-container p-6">
     <h2 class="text-2xl font-semibold mb-4">Mes Événements :</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="event-card bg-orange-200 p-4 rounded-lg shadow-md">
-            <h3 class="text-lg font-bold">titre de l'événement</h3>
-            <p class="text-sm text-gray-600">date de début</p>
-            <p class="text-sm">blablabla : a : vdriz ve ivpi cckm jflpiz mk pie vpo...</p>
-            <button class="mt-2 bg-blue-500 text-white py-1 px-3 rounded">voir</button>
-        </div>
-        <div class="event-card bg-orange-200 p-4 rounded-lg shadow-md">
-            <h3 class="text-lg font-bold">titre de l'événement</h3>
-            <p class="text-sm text-gray-600">date de début</p>
-            <p class="text-sm">blablabla : a : vdriz ve ivpi cckm jflpiz mk pie vpo...</p>
-            <button class="mt-2 bg-blue-500 text-white py-1 px-3 rounded">voir</button>
-        </div>
-        <div class="event-card bg-orange-200 p-4 rounded-lg shadow-md">
-            <h3 class="text-lg font-bold">titre de l'événement</h3>
-            <p class="text-sm text-gray-600">date de début</p>
-            <p class="text-sm">blablabla : a : vdriz ve ivpi cckm jflpiz mk pie vpo...</p>
-            <button class="mt-2 bg-blue-500 text-white py-1 px-3 rounded">voir</button>
-        </div>
-        <div class="event-card bg-orange-200 p-4 rounded-lg shadow-md">
-            <h3 class="text-lg font-bold">titre de l'événement</h3>
-            <p class="text-sm text-gray-600">date de début</p>
-            <p class="text-sm">blablabla : a : vdriz ve ivpi cckm jflpiz mk pie vpo...</p>
-            <button class="mt-2 bg-blue-500 text-white py-1 px-3 rounded">voir</button>
-        </div>
+        <ng-container *ngIf="events$ | async as events; else loading">
+            <ng-container *ngIf="events.length; else noEvents">
+                <div *ngFor="let event of events" class="event-card bg-orange-200 p-4 rounded-lg shadow-md">
+                    <h3 class="text-lg font-bold">{{ event.event.title }}</h3> <!-- Titre de l'événement -->
+                    <p class="text-sm text-gray-600">{{ event.event.description }}</p> <!-- Description de l'événement -->
+                    <p class="text-sm text-gray-600">Date de début : {{ event.event.starting_at | date: 'short' }}</p> <!-- Date de début -->
+                    <button class="mt-2 bg-blue-500 text-white py-1 px-3 rounded">voir</button>
+                </div>
+            </ng-container>
+        </ng-container> 
     </div>
 </div>
+
+<ng-template #loading>
+    <p>Loading events...</p>
+</ng-template>
+
+<ng-template #noEvents>
+    <p>Aucun événement trouvé.</p>
+</ng-template>
