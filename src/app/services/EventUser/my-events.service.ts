@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { map, catchError, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,11 @@ export class MyEventsService {
 
   getUserEvents(): Observable<any[]> {
     return this.http.get<{ data: { 'User Event': any[] } }>(`${this.BASE_URL}/api/MyEvents`).pipe(
-      map(response => response.data['User Event'])
+      map(response => response.data['User Event']),
+      catchError(error => {
+        console.error('Erreur lors de la récupération des événements', error);
+        return of([]); // Renvoie un tableau vide en cas d'erreur
+      })
     );
   }
 }

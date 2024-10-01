@@ -1,23 +1,36 @@
 <div class="event-container p-6">
     <h2 class="text-2xl font-semibold mb-4">Mes Événements :</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <ng-container *ngIf="events$ | async as events; else loading">
-            <ng-container *ngIf="events.length; else noEvents">
-                <div *ngFor="let event of events" class="event-card bg-orange-200 p-4 rounded-lg shadow-md">
-                    <h3 class="text-lg font-bold">{{ event.event.title }}</h3>
-                    <p class="text-sm text-gray-600">{{ event.event.description }}</p> 
-                    <p class="text-sm text-gray-600">Date de début : {{ event.event.starting_at | date: 'short' }}</p> 
-                    <button class="mt-2 bg-blue-500 text-white py-1 px-3 rounded">voir</button>
-                </div>
-            </ng-container>
-        </ng-container> 
+  
+    <!-- Gestion du chargement -->
+    <ng-container *ngIf="events$ | async as events; else loading">
+      
+      <!-- Gestion si aucun événement trouvé -->
+      <ng-container *ngIf="events.length; else noEvents">
+        <div *ngFor="let event of events" class="event-card bg-orange-200 p-4 rounded-lg shadow-md">
+          <h3 class="text-lg font-bold">{{ event.event.title }}</h3>
+          <p class="text-sm text-gray-600">{{ event.event.description }}</p>
+          <p class="text-sm text-gray-600">Date de début : {{ event.event.starting_at | date: 'short' }}</p>
+          <button class="mt-2 bg-blue-500 text-white py-1 px-3 rounded">voir</button>
+        </div>
+      </ng-container>
+    
+    </ng-container>
+  
+    <!-- Template de fallback pendant le chargement -->
+    <ng-template #loading>
+      <p>Chargement des événements...</p>
+    </ng-template>
+  
+    <!-- Template de fallback si aucun événement trouvé -->
+    <ng-template #noEvents>
+      <p>Aucun événement trouvé.</p>
+    </ng-template>
+  </div>
+  
+  <!-- Fallback global -->
+  <ng-template #errorFallback>
+    <div class="text-center">
+      <p>Une erreur est survenue. Veuillez réessayer plus tard.</p>
     </div>
-</div>
-
-<ng-template #loading>
-    <p>Loading events...</p>
-</ng-template>
-
-<ng-template #noEvents>
-    <p>Aucun événement trouvé.</p>
-</ng-template>
+  </ng-template>
+  
