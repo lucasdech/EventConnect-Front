@@ -1,23 +1,40 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, catchError, Observable, of } from 'rxjs';
+import { map, catchError, Observable, of, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MyEventsService {
-
   private http = inject(HttpClient);
   private BASE_URL = "https://eventconnectapi.projets.p8.garage404.com";
+  MyEvents = signal<any[]>([]); // Utilisation d'un tableau au lieu de JSON
 
-  constructor() { }
+  constructor() {
+    this.loadEventsFromLocalStorage(); // Charger les événements depuis le localStorage au démarrage
+  }
+
+  private loadEventsFromLocalStorage(): void {
+    const storedEvents = localStorage.getItem("MyEvents");
+    if (storedEvents) {
+      this.MyEvents.set(JSON.parse(storedEvents)); // Charger les données dans le signal
+    }
+  }
 
   getUserEvents(): Observable<any[]> {
     return this.http.get<{ data: { 'User Event': any[] } }>(`${this.BASE_URL}/api/MyEvents`).pipe(
-      map(response => response.data['User Event']),
-      catchError(error => {
+      tap((result: any) => {
+        if (result) {
+          localStorage.setItem("MyEvents", JSON.stringify(result.data['User Event'])); // Stockage des événements dans le localStorage
+          this.MyEvents.set(result.data['User Event']); // Mettre à jour le signal
+        } else {
+          console.log('Aucun MyEvents dans la réponse');
+        }
+      }),
+      map((result: any) => result.data['User Event']), // Retourne directement les événements
+      catchError((error) => {
         console.error('Erreur lors de la récupération des événements', error);
-        return of([]);
+        return of(this.MyEvents()); // Retourne les événements déjà chargés ou une liste vide
       })
     );
   }
