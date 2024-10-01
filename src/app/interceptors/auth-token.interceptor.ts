@@ -1,11 +1,11 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 
 export const authTokenInterceptor: HttpInterceptorFn = (req, next) => {
-  const token = localStorage.getItem('JWT'); // Assure-toi que le nom correspond
+  const token = localStorage.getItem('JWT');
 
   let requestToSend = req;
   if (token) {
-    const headers = req.headers.set('Authorization', 'Bearer ' + token); // Ajoute "Bearer" avant le token
+    const headers = req.headers.set('Authorization', 'Bearer ' + token);
     requestToSend = req.clone({
       headers: headers
     });
