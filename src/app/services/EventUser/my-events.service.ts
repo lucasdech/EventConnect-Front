@@ -17,7 +17,7 @@ export class MyEventsService {
       map(response => response.data['User Event']),
       catchError(error => {
         console.error('Erreur lors de la récupération des événements', error);
-        return of([]); // Renvoie un tableau vide en cas d'erreur
+        return of([]);
       })
     );
   }
