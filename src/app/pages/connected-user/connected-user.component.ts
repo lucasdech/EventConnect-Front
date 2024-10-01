@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./connected-user.component.css']
 })
 export class ConnectedUserComponent implements OnInit {
-  events$: Observable<any[]> = of([]); // Initialisation à un tableau vide
+  events$: Observable<any[]> = of([]);
 
   constructor(private myEventsService: MyEventsService) {}
 
