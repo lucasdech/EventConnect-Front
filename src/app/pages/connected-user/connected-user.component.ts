@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { MyEventsService } from '../../services/EventUser/my-events.service';
 import { CommonModule } from '@angular/common';
 
@@ -11,11 +11,9 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./connected-user.component.css']
 })
 export class ConnectedUserComponent {
-  events$: Observable<any[]> = of([]); // Initialisation ajoutée
+  events$: Observable<any[]>;
 
-  constructor(private myEventsService: MyEventsService) {}
-
-  ngOnInit() {
+  constructor(private myEventsService: MyEventsService) {
     this.events$ = this.myEventsService.getUserEvents();
   }
 }

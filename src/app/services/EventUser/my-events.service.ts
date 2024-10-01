@@ -25,16 +25,16 @@ export class MyEventsService {
     return this.http.get<{ data: { 'User Event': any[] } }>(`${this.BASE_URL}/api/MyEvents`).pipe(
       tap((result: any) => {
         if (result) {
-          localStorage.setItem("MyEvents", JSON.stringify(result.data['User Event'])); // Stockage des événements dans le localStorage
-          this.MyEvents.set(result.data['User Event']); // Mettre à jour le signal
+          localStorage.setItem("MyEvents", JSON.stringify(result.data['User Event'])); 
+          this.MyEvents.set(result.data['User Event']);
         } else {
           console.log('Aucun MyEvents dans la réponse');
         }
       }),
-      map((result: any) => result.data['User Event']), // Retourne directement les événements
+      map((result: any) => result.data['User Event']),
       catchError((error) => {
         console.error('Erreur lors de la récupération des événements', error);
-        return of(this.MyEvents()); // Retourne les événements déjà chargés ou une liste vide
+        return of(this.MyEvents());
       })
     );
   }
