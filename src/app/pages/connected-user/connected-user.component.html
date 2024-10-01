@@ -4,9 +4,9 @@
         <ng-container *ngIf="events$ | async as events; else loading">
             <ng-container *ngIf="events.length; else noEvents">
                 <div *ngFor="let event of events" class="event-card bg-orange-200 p-4 rounded-lg shadow-md">
-                    <h3 class="text-lg font-bold">{{ event.event.title }}</h3> <!-- Titre de l'événement -->
-                    <p class="text-sm text-gray-600">{{ event.event.description }}</p> <!-- Description de l'événement -->
-                    <p class="text-sm text-gray-600">Date de début : {{ event.event.starting_at | date: 'short' }}</p> <!-- Date de début -->
+                    <h3 class="text-lg font-bold">{{ event.event.title }}</h3>
+                    <p class="text-sm text-gray-600">{{ event.event.description }}</p> 
+                    <p class="text-sm text-gray-600">Date de début : {{ event.event.starting_at | date: 'short' }}</p> 
                     <button class="mt-2 bg-blue-500 text-white py-1 px-3 rounded">voir</button>
                 </div>
             </ng-container>
