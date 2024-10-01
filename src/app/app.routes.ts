@@ -7,7 +7,7 @@ import { ConnectedUserComponent } from './pages/connected-user/connected-user.co
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'contact', component: ContactComponent},
+  { path: '/contact', component: ContactComponent},
   { path: 'about-us', component: AboutUsComponent},
   { path: 'My-Board', component: ConnectedUserComponent},
 ];
