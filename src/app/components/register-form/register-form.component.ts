@@ -50,7 +50,7 @@ export class RegisterFormComponent {
     this.RegisterService.register(this.registerForm.value as Credentials).subscribe({
       next: (success: boolean) => {
         if (success) {
-          this.router.navigate(['My-Board']);
+          this.router.navigate(['my-board']);
         } else {
           this.invalidCredentials = true;
         }

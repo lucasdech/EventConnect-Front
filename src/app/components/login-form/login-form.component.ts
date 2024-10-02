@@ -31,7 +31,7 @@ export class LoginFormComponent {
     this.loginService.login(this.loginForm.value as Credentials).subscribe({
       next: (success: boolean) => {
         if (success) {
-          this.router.navigate(['My-Board']);
+          this.router.navigate(['my-board']);
         } else {
           this.invalidCredentials = true;
         }
