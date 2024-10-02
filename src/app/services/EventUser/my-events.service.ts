@@ -11,13 +11,13 @@ export class MyEventsService {
   MyEvents = signal<any[]>([]); // Utilisation d'un tableau au lieu de JSON
 
   constructor() {
-    this.loadEventsFromLocalStorage(); // Charger les événements depuis le localStorage au démarrage
+    this.loadEventsFromLocalStorage();
   }
 
   private loadEventsFromLocalStorage(): void {
     const storedEvents = localStorage.getItem("MyEvents");
     if (storedEvents) {
-      this.MyEvents.set(JSON.parse(storedEvents)); // Charger les données dans le signal
+      this.MyEvents.set(JSON.parse(storedEvents)); 
     }
   }
 
