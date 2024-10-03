@@ -8,7 +8,7 @@ import { map, catchError, Observable, of, tap } from 'rxjs';
 export class MyEventsService {
   private http = inject(HttpClient);
   private BASE_URL = "https://eventconnectapi.projets.p8.garage404.com";
-  MyEvents = signal<any[]>([]); // Utilisation d'un tableau au lieu de JSON
+  MyEvents = signal<any[]>([]);
 
   constructor() {
     this.loadEventsFromLocalStorage();

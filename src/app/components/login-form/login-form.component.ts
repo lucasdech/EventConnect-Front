@@ -26,6 +26,7 @@ export class LoginFormComponent {
   }
 
   login() {
+    
     if (this.loginForm.invalid) return;
 
     this.loginService.login(this.loginForm.value as Credentials).subscribe({

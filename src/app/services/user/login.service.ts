@@ -23,6 +23,8 @@ export class LoginService {
     return this.http.post(this.BASE_URL + "/api/login", credentials).pipe(
       tap((result: any) => {
         if (result && result.data['token']) {
+            localStorage.setItem('ID', result.data['user'].id)
+            localStorage.setItem('MyEvents', '');
             localStorage.setItem("JWT", result.data['token']);
             this.token.set(result.data['token']);
         } else {
