@@ -26,6 +26,7 @@ export class RegisterService {
     return this.http.post(this.BASE_URL + "/api/register", credentials).pipe(
       tap((result: any) => {
         if (result && result.data['token']) {
+          localStorage.setItem("MyEvents", "")
           localStorage.setItem("JWT", result.data['token']);
           this.token.set(result.data['token']);
         } else {
