@@ -36,9 +36,9 @@ export class CreateEventService {
   }
 
   participateInEvent(eventId: number): Observable<any> {
-    const userId = localStorage.getItem('ID')
-    console.log(userId)
-    const body = { event_id: eventId, user_id: 41};
+    const userIdString = localStorage.getItem('ID');
+    const userId = userIdString ? parseInt(userIdString, 10) : null;
+    const body = { event_id: eventId, user_id: userId};
     console.log(body);
     return this.http.post(`${this.BASE_URL}/api/MyEvent/participate`, body).pipe(
       tap((result: any) => {
