@@ -1,3 +1,59 @@
-<div>
-     <a class="" href="">Créer un évènement</a>
-</div>
+<form class="p-8 rounded-lg shadow-md w-full max-w-5xl mx-auto text-white space-y-4">
+     <div class="grid grid-cols-3 gap-8">
+         <!-- Première colonne : Lieu et Description -->
+         <div class="col-span-1 space-y-4 mt-24">
+             <div>
+                 <label for="place" class="block mb-2 text-lg">Le lieu :</label>
+                 <input type="text" id="place" name="place" required 
+                        class="w-full p-2 rounded-md text-black">
+             </div>
+             <div>
+                 <label for="description" class="block mb-2 text-lg">Une description :</label>
+                 <textarea id="description" name="description" required 
+                           class="w-full p-2 rounded-md text-black h-32"></textarea>
+             </div>
+         </div>
+ 
+         <!-- Deuxième colonne : Titre et Image -->
+         <div class="col-span-1 space-y-4">
+             <div>
+                 <label for="title" class="block mb-2 text-lg">Un titre :</label>
+                 <input type="text" id="title" name="title" required 
+                        class="w-full p-2 rounded-md text-black">
+             </div>
+             <div class="flex justify-center items-center h-30">
+                 <img src="assets/images/Forms/Event-form.png" alt="Personne avce un téléphone en main" >
+             </div>
+         </div>
+ 
+         <!-- Troisième colonne : Date, Événement privé, et Mot de passe -->
+         <div class="col-span-1 space-y-4 mt-24">
+             <div>
+                 <label for="date" class="block mb-2 text-lg">La date :</label>
+                 <input type="date" id="date" name="date" required 
+                        class="w-full p-2 mb-4 rounded-md text-black">
+             </div>
+             <div class="flex items-center space-x-4">
+                 <label for="is_private" class="text-lg">Événement privé :</label>
+                 <input type="checkbox" id="is_private" name="is_private" 
+                        class="h-6 w-6 rounded-md">
+             </div>
+             <div>
+                 <label for="password" class="block mb-2 mt-8 text-lg">Mot de passe :</label>
+                 <input type="password" id="password" name="password" required 
+                        class="w-full p-2  rounded-md text-black">
+             </div>
+         </div>
+     </div>
+ 
+     <div class="text-center mt-4">
+         <button type="submit" class="bg-white text-orange-500 py-2 px-4 rounded-md text-lg font-semibold">
+             Soumettre
+         </button>
+     </div>
+ 
+     <p class="text-center text-white mt-4">
+         Ajouter des participants une fois l’événement créé
+     </p>
+ </form>
+ 

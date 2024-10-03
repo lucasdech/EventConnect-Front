@@ -19,5 +19,18 @@ export class ConnectedUserComponent implements OnInit {
 
   ngOnInit() {
     this.events$ = this.myEventsService.getUserEvents();
+    this.setupToggleForms();
   }
+
+  setupToggleForms() {
+    const EventBtn = document.querySelector('#event-form-btn');
+    const formEvent = document.querySelector('#event-form');
+    
+    if (EventBtn && formEvent) {
+      EventBtn.addEventListener('click', () => {
+        formEvent.classList.toggle('hidden')
+      });
+    }
+  }
+
 }
