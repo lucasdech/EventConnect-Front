@@ -37,6 +37,7 @@ export class EventFormComponent {
         this.eventService.participateInEvent(eventId).subscribe({
           next: (participationResult) => {
             console.log('Participation réussie:', participationResult);
+            location.reload()
           },
           error: (err) => {
             console.error('Erreur lors de la participation à l\'événement:', err);

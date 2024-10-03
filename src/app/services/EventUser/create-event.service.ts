@@ -44,7 +44,6 @@ export class CreateEventService {
       tap((result: any) => {
         if (result) {
           console.log('Participation à l\'événement réussie :', result);
-          location.reload()
         } else {
           console.log('Participation à l\'événement échouée');
         }
