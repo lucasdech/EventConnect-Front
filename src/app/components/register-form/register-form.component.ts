@@ -26,7 +26,6 @@ export class RegisterFormComponent {
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       custom_pp: [''],
-      default_pp: [''],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required]
     });

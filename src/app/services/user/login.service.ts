@@ -23,8 +23,8 @@ export class LoginService {
     return this.http.post(this.BASE_URL + "/api/login", credentials).pipe(
       tap((result: any) => {
         if (result && result.data['token']) {
-          localStorage.setItem("JWT", result.data['token']);
-          this.token.set(result.data['token']);
+            localStorage.setItem("JWT", result.data['token']);
+            this.token.set(result.data['token']);
         } else {
           console.error('Aucun token dans la réponse');
         }
