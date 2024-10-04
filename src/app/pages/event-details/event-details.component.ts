@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { GetEventService } from '../../services/Event/get-event.service';
 import { ActivatedRoute } from '@angular/router';
 import { RouterModule } from '@angular/router';
+import { ChatComponent } from '../../components/event-details/chat/chat.component';
+import { ParticipantsComponent } from '../../components/event-details/participants/participants.component';
 
 @Component({
   selector: 'app-event-details',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, ChatComponent, ParticipantsComponent],
   templateUrl: './event-details.component.html',
   styleUrls: ['./event-details.component.css']
 })
