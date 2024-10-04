@@ -1,7 +1,5 @@
-<!--
-
 <div class="min-h-screen flex flex-col items-center">
-    <h1 class="text-3xl font-bold mb-4">Événement 1</h1>
+    <h1 class="text-3xl font-lilita mb-4">{{eventDetails.title}}</h1>
   
     <div class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-4">
       
@@ -55,13 +53,19 @@
         </div>
         
 
-        <div class="bg-orange-400 p-4 rounded-lg shadow-lg text-white">
-          <h2 class="text-lg font-bold">Nom de l'événement</h2>
-          <p class="mt-2">Description blablabla blabla blablabla blablabla</p>
+        <div >
+          <h3 >Nom de l'événement</h3>
+          <p >Description blablabla blabla blablabla blablabla</p>
           <p class="mt-2">Sévelinges</p>
           <p>22/06/2001</p>
         </div>
         
+        <div *ngIf="eventDetails; else loading" class="bg-orange-400 p-4 rounded-lg shadow-lg text-white">
+            <h3 class="text-lg font-lilita">{{ eventDetails.title }}</h3>
+            <p class="mt-2">{{ eventDetails.description }}</p>
+            <p class="mt-2">Date : {{ eventDetails.starting_at | date: 'dd/MM/yyyy HH:mm' }}</p>
+            <p>Lieu : {{ eventDetails.location }}</p>
+          </div>
 
         <div class="bg-gray-200 p-4 rounded-lg shadow-lg">
           <img src="https://via.placeholder.com/300x150" alt="Carte de l'événement" class="rounded-lg">
@@ -77,14 +81,7 @@
       </div>
     </div>
   </div>
--->
 
-<div *ngIf="eventDetails; else loading">
-    <h1>{{ eventDetails.title }}</h1>
-    <p>{{ eventDetails.description }}</p>
-    <p>Date : {{ eventDetails.starting_at | date: 'dd/MM/yyyy HH:mm' }}</p>
-    <p>Lieu : {{ eventDetails.location }}</p>
-  </div>
   
   <ng-template #loading>
     <p>Chargement des détails.event de l'événement...</p>
