@@ -6,7 +6,10 @@
   
   <app-event-form id="event-form" class="hidden"/>
 
-  <app-search-bar />
+  <!--
+  
+    <app-search-bar />
+  -->
   
   <div id="event-list" class="event-container p-8 text-white mb-10">
     <h2 class="text-3xl font-lilita mb-6 text-center">Mes Événements :</h2>
@@ -17,8 +20,8 @@
           <div *ngFor="let event of events" id="event-card" class="event-card p-4 border border-white rounded-lg shadow-md text-center">
             <h3 class="text-lg font-lilita">{{ event.event.title }}</h3>
             <p class="text-sm">{{ event.event.starting_at | date: 'dd/MM/yyyy HH:mm' }}</p> 
-            <p class="text-sm">{{ event.event.description }}</p> 
-            <button class="mt-2 text-white border border-white py-1 px-3 rounded">Voir</button>
+            <p class="text-sm mb-6">{{ event.event.description }}</p> 
+            <a href="/event" class="link border border-white p-2 rounded-lg">Voir</a>
           </div>
         </ng-container>
       </ng-container>
