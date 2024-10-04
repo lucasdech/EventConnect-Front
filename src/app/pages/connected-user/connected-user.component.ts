@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { MyEventsService } from '../../services/EventUser/my-events.service';
 import { CommonModule } from '@angular/common';
 import { EventFormComponent } from '../../components/event-form/event-form.component';
 import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-connected-user',
@@ -16,7 +17,11 @@ export class ConnectedUserComponent implements OnInit {
   
   events$: Observable<any[]> = of([]);
 
-  constructor(private myEventsService: MyEventsService) {}
+  constructor(private myEventsService: MyEventsService, private router: Router) {}
+
+  navigateToEvent(eventId: number) {
+    this.router.navigate(['/event', eventId]);
+  }
 
   ngOnInit() {
     this.events$ = this.myEventsService.getUserEvents();

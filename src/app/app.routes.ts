@@ -8,8 +8,8 @@ import { EventDetailsComponent } from './pages/event-details/event-details.compo
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'contact', component: ContactComponent},
-  { path: 'about-us', component: AboutUsComponent},
-  { path: 'my-board', component: ConnectedUserComponent},
-  { path: 'event', component: EventDetailsComponent}
+  { path: 'contact', component: ContactComponent },
+  { path: 'about-us', component: AboutUsComponent },
+  { path: 'my-board', component: ConnectedUserComponent },
+  { path: 'event/:id', component: EventDetailsComponent }
 ];

@@ -1,1 +1,92 @@
-<p>event-details works!</p>
+<!--
+
+<div class="min-h-screen flex flex-col items-center">
+    <h1 class="text-3xl font-bold mb-4">Événement 1</h1>
+  
+    <div class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-4">
+      
+   
+      <div class="bg-white p-4 rounded-lg shadow-lg flex flex-col justify-between">
+        <div class="flex flex-col space-y-4 overflow-y-auto">
+   
+          <div class="bg-orange-400 p-2 rounded-lg text-white">
+            Message 1
+          </div>
+          <div class="bg-orange-400 p-2 rounded-lg text-white">
+            Message 2
+          </div>
+          <div class="bg-red-400 p-2 rounded-lg text-white">
+            Message 3
+          </div>
+          <div class="bg-orange-400 p-2 rounded-lg text-white">
+            Message 4
+          </div>
+        </div>
+        
+  
+        <div class="mt-4 flex items-center">
+          <input type="text" class="flex-1 border p-2 rounded-lg" placeholder="Écrivez votre message ici" />
+          <button class="ml-2 p-2 bg-gray-200 rounded-lg">
+            ➡️
+          </button>
+        </div>
+      </div>
+  
+
+      <div class="flex flex-col space-y-4">
+        
+
+        <div class="bg-orange-400 p-4 rounded-lg shadow-lg text-white">
+          <h2 class="text-lg font-bold mb-2">Les participants :</h2>
+          <ul class="space-y-2">
+            <li class="bg-gray-300 rounded-lg p-2 flex items-center">
+              <div class="h-8 w-8 bg-gray-400 rounded-full"></div>
+              <p class="ml-2">Participant 1</p>
+            </li>
+            <li class="bg-gray-300 rounded-lg p-2 flex items-center">
+              <div class="h-8 w-8 bg-gray-400 rounded-full"></div>
+              <p class="ml-2">Participant 2</p>
+            </li>
+          </ul>
+          <div class="flex justify-around mt-4">
+            <button class="bg-red-500 text-white px-4 py-2 rounded-lg">Supprimer</button>
+            <button class="bg-green-500 text-white px-4 py-2 rounded-lg">Ajouter</button>
+          </div>
+        </div>
+        
+
+        <div class="bg-orange-400 p-4 rounded-lg shadow-lg text-white">
+          <h2 class="text-lg font-bold">Nom de l'événement</h2>
+          <p class="mt-2">Description blablabla blabla blablabla blablabla</p>
+          <p class="mt-2">Sévelinges</p>
+          <p>22/06/2001</p>
+        </div>
+        
+
+        <div class="bg-gray-200 p-4 rounded-lg shadow-lg">
+          <img src="https://via.placeholder.com/300x150" alt="Carte de l'événement" class="rounded-lg">
+        </div>
+        
+
+        <div class="flex justify-center">
+          <button class="bg-red-500 text-white px-4 py-2 rounded-lg">
+            Supprimer l'Évent
+          </button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+-->
+
+<div *ngIf="eventDetails; else loading">
+    <h1>{{ eventDetails.title }}</h1>
+    <p>{{ eventDetails.description }}</p>
+    <p>Date : {{ eventDetails.starting_at | date: 'dd/MM/yyyy HH:mm' }}</p>
+    <p>Lieu : {{ eventDetails.location }}</p>
+  </div>
+  
+  <ng-template #loading>
+    <p>Chargement des détails.event de l'événement...</p>
+  </ng-template>
+  

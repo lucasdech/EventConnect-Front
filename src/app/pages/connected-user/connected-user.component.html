@@ -7,7 +7,6 @@
   <app-event-form id="event-form" class="hidden"/>
 
   <!--
-  
     <app-search-bar />
   -->
   
@@ -21,7 +20,7 @@
             <h3 class="text-lg font-lilita">{{ event.event.title }}</h3>
             <p class="text-sm">{{ event.event.starting_at | date: 'dd/MM/yyyy HH:mm' }}</p> 
             <p class="text-sm mb-6">{{ event.event.description }}</p> 
-            <a href="/event" class="link border border-white p-2 rounded-lg">Voir</a>
+            <a (click)="navigateToEvent(event.event.id)" class="link border border-white p-2 rounded-lg">Voir</a>
           </div>
         </ng-container>
       </ng-container>
