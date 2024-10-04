@@ -3,11 +3,12 @@ import { Observable, of } from 'rxjs';
 import { MyEventsService } from '../../services/EventUser/my-events.service';
 import { CommonModule } from '@angular/common';
 import { EventFormComponent } from '../../components/event-form/event-form.component';
+import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
 
 @Component({
   selector: 'app-connected-user',
   standalone: true,
-  imports: [CommonModule, EventFormComponent],
+  imports: [CommonModule, EventFormComponent, SearchBarComponent],
   templateUrl: './connected-user.component.html',
   styleUrls: ['./connected-user.component.css']
 })

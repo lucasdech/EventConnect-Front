@@ -12,3 +12,14 @@
 .btn-Form {
     background-color: #F35733;
 }
+
+#event-list {
+    background-color: #F29F05;
+    border-radius: 10px;
+    width: 75%;
+}
+
+.event-card {
+    width: 90%;
+    margin-bottom: 10%;
+}

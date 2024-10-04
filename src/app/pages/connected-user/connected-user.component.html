@@ -5,23 +5,26 @@
   </div>
   
   <app-event-form id="event-form" class="hidden"/>
+
+  <app-search-bar />
   
-  <div class="event-container p-6">
-    <h2 class="text-2xl font-semibold mb-4 text-center">Mes Événements :</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+  <div id="event-list" class="event-container p-8 text-white mb-10">
+    <h2 class="text-3xl font-lilita mb-6 text-center">Mes Événements :</h2>
+    <hr class="border-t border-white w-full mb-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-2 justify-items-center">
       <ng-container *ngIf="events$ | async as events; else loading">
         <ng-container *ngIf="events.length; else noEvents">
-          <div *ngFor="let event of events" class="event-card bg-orange-200 p-4 rounded-lg shadow-md text-center">
-            <h3 class="text-lg font-bold">{{ event.event.title }}</h3>
-            <p class="text-sm text-gray-600">{{ event.event.description }}</p> 
-            <p class="text-sm text-gray-600">Date de début : {{ event.event.starting_at | date: 'short' }}</p> 
-            <button class="mt-2 bg-blue-500 text-white py-1 px-3 rounded">Voir</button>
+          <div *ngFor="let event of events" id="event-card" class="event-card p-4 border border-white rounded-lg shadow-md text-center">
+            <h3 class="text-lg font-lilita">{{ event.event.title }}</h3>
+            <p class="text-sm">{{ event.event.starting_at | date: 'dd/MM/yyyy HH:mm' }}</p> 
+            <p class="text-sm">{{ event.event.description }}</p> 
+            <button class="mt-2 text-white border border-white py-1 px-3 rounded">Voir</button>
           </div>
         </ng-container>
       </ng-container>
     </div>
   </div>
-  
+
   <ng-template #loading>
     <p>Chargement des événements...</p>
   </ng-template>
