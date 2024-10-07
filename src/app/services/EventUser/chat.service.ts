@@ -13,6 +13,7 @@ export class ChatService {
   constructor() { }
 
   getMessages(eventId: number) {
+    console.log('Récupération des messages pour l\'événement', eventId);
     return this.http.get(`${this.BASE_URL}/messages/${eventId}`).pipe(
       tap((result: any) => {
         console.log('Réponse Messages:', result);
