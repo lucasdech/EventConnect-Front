@@ -31,6 +31,9 @@ export class ChatComponent {
   }
 
   ngOnInit() {
+
+    this.getMessages();
+
     this.route.paramMap.subscribe((params) => {
       this.eventId = +params.get('id')!;
       console.log("ID de l'événement récupéré :", this.eventId);
