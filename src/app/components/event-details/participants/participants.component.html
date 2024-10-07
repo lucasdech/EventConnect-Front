@@ -3,15 +3,14 @@
     <ul class="space-y-2">
       <ng-container *ngFor="let participant of participants">
         <li class="bg-transparent border border-white rounded-lg p-2 flex items-center">
-          <img src="{{ participant.profile_picture }}" class="h-8 w-8 bg-gray-400 rounded-full">
+          <img src="/assets/profile_pictures/{{ participant.profile_picture }}.png" class="h-8 w-8 bg-gray-400 rounded-full">
           <p class="ml-2">{{ participant.name }}</p>
-          <button class="h-8 w-8 bg-red-400 rounded-full" (click)="deleteParticipant(participant.id)">X</button>
+          <button class="h-8 w-8 bg-[#F35733] rounded-full" (click)="deleteParticipant(participant.id)">X</button>
         </li>
       </ng-container>
     </ul>
     <div class="flex justify-around mt-4">
-      <button class="bg-[#F35733] text-white px-4 py-2 rounded-lg">Supprimer</button>
-      <button class="bg-[#F35733] text-white px-4 py-2 rounded-lg">Ajouter</button>
+      <button class="bg-transparent border border-white text-white px-4 py-2 rounded-lg">Ajouter</button>
     </div>
   </div>
 
