@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { map, tap } from 'rxjs';
+import { map, tap, catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,14 +20,18 @@ export class ChatService {
         console.log('Réponse Messages:', result);
       }),
       map((result: any) => {
-        if (Array.isArray(result?.data['Messages'])) {
-          console.log('RESULT DATA : ', result.data['Messages']);
-          return result.data['Messages'];
+        if (Array.isArray(result?.data?.Messages)) {
+          console.log('RESULT DATA : ', result.data.Messages);
+          return result.data.Messages;
         } else {
           console.error('La réponse n\'est pas un tableau valide');
           return [];
         }
-      }
-    ));
+      }),
+      catchError((error) => {
+        console.error('Erreur lors de la récupération des messages:', error);
+        return of([]);
+      })
+    );
   }
 }
