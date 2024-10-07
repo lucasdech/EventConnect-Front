@@ -20,6 +20,7 @@ export class ChatService {
       }),
       map((result: any) => {
         if (Array.isArray(result?.data['Messages'])) {
+          console.log('RESULT DATA : ', result.data['Messages']);
           return result.data['Messages'];
         } else {
           console.error('La réponse n\'est pas un tableau valide');
