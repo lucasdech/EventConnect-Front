@@ -28,4 +28,15 @@ export class ParticipantsService {
       })
     );
   }
+
+  deleteParticipant(participantId: number) {
+    return this.http.delete(`${this.BASE_URL}/MyEvent/${participantId}`).pipe(
+      tap((result: any) => {
+        console.log('Réponse suppression participant:', result);
+      }),
+      map((result: any) => {
+        return result;
+      })
+    );
+  }
 }

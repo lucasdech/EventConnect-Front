@@ -28,11 +28,23 @@ export class ParticipantsComponent implements OnInit {
   getParticipants() {
     this.participantsService.getUsersInEvent(this.EventId).subscribe({
       next: (data) => {
-        this.participants = data
+        this.participants = data;
         console.log('Participants récupérés :', this.participants);
       },
       error: (err) => {
         console.error('Erreur lors de la récupération des participants :', err);
+      }
+    });
+  }
+
+  deleteParticipant(participantId: number) {
+    this.participantsService.deleteParticipant(participantId).subscribe({
+      next: (data) => {
+        console.log('Participant supprimé :', data);
+        this.participants = this.participants.filter(participant => participant.id !== participantId);
+      },
+      error: (err) => {
+        console.error('Erreur lors de la suppression du participant :', err);
       }
     });
   }
