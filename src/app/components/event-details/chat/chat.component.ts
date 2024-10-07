@@ -32,6 +32,7 @@ export class ChatComponent {
     this.chatService.getMessages(this.eventId).subscribe({
       next: (data) => {
         this.messages = data;
+        console.log('DATA : ', data)
         console.log('Messages récupérés :', this.messages);
       },
       error: (err) => {
