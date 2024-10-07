@@ -1,22 +1,17 @@
 <div class="bg-[#F29F05] p-4 rounded-lg shadow-lg text-white">
     <h2 class="text-lg font-bold mb-2">Les participants :</h2>
     <ul class="space-y-2">
-        <li class="bg-gray-300 rounded-lg p-2 flex items-center">
-                <div class="h-8 w-8 bg-gray-400 rounded-full"></div>
-                <p class="ml-2">Participant 1</p>
-            </li>
-       
-        <li class="bg-gray-300 rounded-lg p-2 flex items-center">
-            <div class="h-8 w-8 bg-gray-400 rounded-full"></div>
-            <p class="ml-2">Participant 1</p>
-        </li>
-        <li class="bg-gray-300 rounded-lg p-2 flex items-center">
-            <div class="h-8 w-8 bg-gray-400 rounded-full"></div>
-            <p class="ml-2">Participant 2</p>
-        </li>
+      <li *ngFor="let participant of participants" class="bg-transparent border border-white rounded-lg p-2 flex items-center">
+        <div class="h-8 w-8 bg-gray-400 rounded-full"></div>
+        <p class="ml-2">{{ participant.name }}</p>
+      </li>
     </ul>
     <div class="flex justify-around mt-4">
-        <button class="bg-[#F35733] text-white px-4 py-2 rounded-lg">Supprimer</button>
-        <button class="bg-[#F35733] text-white px-4 py-2 rounded-lg">Ajouter</button>
+      <button class="bg-[#F35733] text-white px-4 py-2 rounded-lg">Supprimer</button>
+      <button class="bg-[#F35733] text-white px-4 py-2 rounded-lg">Ajouter</button>
     </div>
-</div>
+  </div>
+
+<ng-template #loading>
+    <p>Chargement des participants...</p>
+</ng-template>

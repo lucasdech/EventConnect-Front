@@ -23,8 +23,8 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "src/assets",
-                "output": "assets"
+                "input": "public/assets",
+                "output": "/"
               },
               {
                 "glob": "favicon.ico",

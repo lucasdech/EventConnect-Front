@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class LoginFormComponent {
 
   private loginService = inject(LoginService);
-  private router = inject(Router);
+  private route = inject(Router);
 
   loginForm: FormGroup;
   invalidCredentials = false;
@@ -32,7 +32,7 @@ export class LoginFormComponent {
     this.loginService.login(this.loginForm.value as Credentials).subscribe({
       next: (success: boolean) => {
         if (success) {
-          this.router.navigate(['my-board']);
+          this.route.navigate(['my-board']);
         } else {
           this.invalidCredentials = true;
         }
