@@ -2,7 +2,7 @@
     <h2 class="text-lg font-bold mb-2">Les participants :</h2>
     <ul class="space-y-2">
       <li *ngFor="let participant of participants" class="bg-transparent border border-white rounded-lg p-2 flex items-center">
-        <div class="h-8 w-8 bg-gray-400 rounded-full"></div>
+        <img src="{{ participant.profile_picture }}" class="h-8 w-8 bg-gray-400 rounded-full">
         <p class="ml-2">{{ participant.name }}</p>
       </li>
     </ul>
