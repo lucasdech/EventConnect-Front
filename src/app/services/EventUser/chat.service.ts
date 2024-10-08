@@ -21,7 +21,6 @@ export class ChatService {
     // Initialisation de Pusher
     this.pusher = new Pusher('YOUR_PUSHER_KEY', {
       cluster: 'YOUR_PUSHER_CLUSTER',
-      encrypted: true,
     });
   }
 
@@ -36,7 +35,7 @@ export class ChatService {
           return result.data.messages;
         } else {
           console.error(
-            'Les messages ne sont pas définis ou ne sont pas dans un tableau'
+            'Les messages ne sont pas définis'
           );
           return [];
         }
