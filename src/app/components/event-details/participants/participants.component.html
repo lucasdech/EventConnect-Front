@@ -1,19 +1,36 @@
 <div class="bg-[#F29F05] p-4 rounded-lg shadow-lg text-white">
-    <h2 class="text-lg font-bold mb-2">Les participants :</h2>
-    <ul class="space-y-2">
-      <ng-container *ngFor="let participant of participants">
+  <h2 class="text-lg font-bold mb-2">Les participants :</h2>
+  <ul class="space-y-2">
+    <div class="max-h-64 overflow-y-scroll">
+      <ng-container *ngFor="let participant of participants" class="">
         <li class="bg-transparent border border-white rounded-lg p-2 flex items-center">
-          <img src="/assets/profile_pictures/{{ participant.profile_picture }}.png" class="h-8 w-8 bg-gray-400 rounded-full">
+          <img src="/assets/profile_pictures/{{ participant.profile_picture }}.png"
+            class="h-8 w-8 bg-gray-400 rounded-full">
           <p class="ml-2">{{ participant.name }}</p>
-          <button class="h-8 w-8 bg-[#F35733] rounded-full ml-auto" (click)="deleteParticipant(participant.id)">X</button>
+          <button class="h-8 w-8 bg-[#F35733] rounded-full ml-auto"
+            (click)="deleteParticipant(participant.id)">X</button>
         </li>
       </ng-container>
-    </ul>
-    <div class="flex justify-around mt-4">
-      <button class="bg-transparent border border-white text-white px-4 py-2 rounded-lg">Ajouter</button>
     </div>
+  </ul>
+  <div class="flex justify-around mt-4">
+    <button id="AddParticipantBtn" class="bg-transparent border border-white text-white px-4 py-2 rounded-lg">Ajouter</button>
   </div>
+</div>
+
+<div id="userList" class="flex justify-center mt-4 bg-white border border-red-500 userList hidden">
+  <div class="h-80 overflow-y-scroll w-full max-w-md p-10">
+    <ng-container *ngFor="let user of users">
+      <li class="bg-gray-200 border border-white rounded-lg p-2 flex items-center my-2">
+        <img src="/assets/profile_pictures/{{ user.profile_picture }}.png" class="h-8 w-8 bg-gray-400 rounded-full">
+        <p class="ml-2">{{ user.name }}</p>
+        <button class="h-8 w-8 bg-transparent border border-white rounded-full ml-auto"
+          (click)="addParticipants(user.id)">+</button>
+      </li>
+    </ng-container>
+  </div>
+</div>
 
 <ng-template #loading>
-    <p>Chargement des participants...</p>
+  <p>Chargement ...</p>
 </ng-template>

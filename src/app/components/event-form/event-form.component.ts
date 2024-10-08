@@ -31,7 +31,7 @@ export class EventFormComponent {
     if (this.eventForm.invalid) return;
 
     this.eventService.createEvent(this.eventForm.value as Credentials).subscribe({
-      next: (eventId: number) => { // Attendez maintenant un nombre
+      next: (eventId: number) => {
         console.log('Événement créé avec succès, ID:', eventId);
         
         this.eventService.participateInEvent(eventId).subscribe({

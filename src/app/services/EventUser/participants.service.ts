@@ -39,4 +39,31 @@ export class ParticipantsService {
       })
     );
   }
+
+  userList(){
+    return this.http.get(`${this.BASE_URL}/users`).pipe(
+      tap((result: any) => {
+        console.log('liste de tout les users :', result)
+      }),
+      map((result: any) => {
+        return result;
+      })
+    )
+  }
+
+  addParticipant(userId: number, eventId: number) {
+    const body = { event_id: eventId, user_id: userId };
+  
+    return this.http.post(`${this.BASE_URL}/MyEvent/participate`, body).pipe(
+      tap((result: any) => {
+        if (result && result.success) {
+          console.log('Participation à l\'événement réussie :', result);
+        } else {
+          console.log('Participation à l\'événement échouée');
+        }
+      })
+    );
+  }
+
+
 }
