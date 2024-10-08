@@ -4,7 +4,7 @@
     <div class="max-h-64 overflow-y-scroll">
       <ng-container *ngFor="let participant of participants" class="">
         <li class="bg-transparent border border-white rounded-lg p-2 flex items-center">
-          <img src="/assets/profile_pictures/{{ participant.profile_picture }}.png"
+          <img src="https://eventconnectapi.projets.p8.garage404.com/storage/{{ participant.profile_picture }}"
             class="h-8 w-8 bg-gray-400 rounded-full">
           <p class="ml-2">{{ participant.name }}</p>
           <button class="h-8 w-8 bg-[#F35733] rounded-full ml-auto"

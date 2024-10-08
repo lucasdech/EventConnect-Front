@@ -1,46 +1,45 @@
 <div class="register-form ">
-    <p class="text-2xl -mt-8">Juste 1 minute !</p>
-  
-    <form [formGroup]="registerForm" (ngSubmit)="Register()">
-      <div class="flex">
-        <div>
-          <label for="name">Prénom - Nom :</label>
-          <input class="text-black" type="text" id="name" formControlName="name" required>
-          
-          <label for="email">Email :</label>
-          <input class="text-black" type="email" id="email" formControlName="email" required>
-        </div>
-  
-        <div class="ml-20">
-          <img src="assets/images/Forms/personnes-pointant.png" alt="personne poitant du doigts" style="height: 150px;">
-        </div>
-      </div>
-  
-      <label for="profile-photo">Photo de profil :</label>
-      <div class="photo-upload">
-        <label for="custom_pp"></label>
-        <input type="file" formControlName="custom_pp" id="custom_pp">
-      </div>
-  
-      <div class="register_password">
-        <div>
-          <label for="password">Password :</label>
-          <input class="text-black" type="password" id="password" formControlName="password" required>
-  
-          <label for="confirm-password">Confirm Password :</label>
-          <input class="text-black" type="password" id="confirm-password" formControlName="confirmPassword" required>
-        </div>
+  <p class="text-2xl -mt-8">Juste 1 minute !</p>
+
+  <form [formGroup]="registerForm" (ngSubmit)="Register()">
+    <div class="flex">
+      <div>
+        <label for="name">Prénom - Nom :</label>
+        <input class="text-black" type="text" id="name" formControlName="name" required>
         
-        <div *ngIf="passwordMismatch" style="color: red;">
-          Les mots de passe ne correspondent pas !
-        </div>
-  
-        <div>
-          <button type="submit" class="p-2 mt-6 rounded-md" [disabled]="registerForm.invalid">
-            S'inscrire
-          </button>
-        </div>
+        <label for="email">Email :</label>
+        <input class="text-black" type="email" id="email" formControlName="email" required>
       </div>
-    </form>
-  </div>
-  
+
+      <div class="ml-20">
+        <img src="assets/images/Forms/personnes-pointant.png" alt="personne poitant du doigts" style="height: 150px;">
+      </div>
+    </div>
+
+    <label for="profile-photo">Photo de profil :</label>
+    <div class="photo-upload">
+      <label for="profile_picture"></label>
+      <input type="file" (change)="onFileChange($event)" id="profile_picture" required>
+    </div>
+
+    <div class="register_password">
+      <div>
+        <label for="password">Password :</label>
+        <input class="text-black" type="password" id="password" formControlName="password" required>
+
+        <label for="confirm-password">Confirm Password :</label>
+        <input class="text-black" type="password" id="confirm-password" formControlName="confirmPassword" required>
+      </div>
+      
+      <div *ngIf="passwordMismatch" style="color: red;">
+        Les mots de passe ne correspondent pas !
+      </div>
+
+      <div>
+        <button type="submit" class="p-2 mt-6 rounded-md" [disabled]="registerForm.invalid">
+          S'inscrire
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -18,16 +18,22 @@ export class RegisterFormComponent {
 
   registerForm: FormGroup;
   invalidCredentials = false;
-
   passwordMismatch: boolean = false;
 
   constructor(private fb: FormBuilder) {
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      custom_pp: [''],
+      profile_picture: [null, Validators.required], // Changez ici le nom pour qu'il corresponde
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required]
+    });
+  }
+
+  onFileChange(event: any) {
+    const file = event.target.files[0];
+    this.registerForm.patchValue({
+      profile_picture: file // Remplacez custom_pp par profile_picture
     });
   }
 
@@ -40,11 +46,14 @@ export class RegisterFormComponent {
       this.passwordMismatch = false;
 
       console.log('Form Submitted', this.registerForm.value);
+      this.Register();
     }
   }
 
   Register() {
     if (this.registerForm.invalid) return 
+
+    console.log(this.registerForm.value)
 
     this.RegisterService.register(this.registerForm.value as Credentials).subscribe({
       next: (success: boolean) => {
@@ -53,11 +62,11 @@ export class RegisterFormComponent {
         } else {
           this.invalidCredentials = true;
         }
-      },error: (err) => {
+      },
+      error: (err) => {
         console.error("Erreur lors de l\'enregistrement :", err);
         this.invalidCredentials = true;
       }
-    })
-
+    });
   }
 }
