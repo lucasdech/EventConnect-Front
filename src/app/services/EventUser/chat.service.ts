@@ -60,9 +60,10 @@ export class ChatService {
     );
   }
 
-  // Méthode pour souscrire aux événements de messages
   subscribeToMessages(eventId: number, callback: (message: any) => void) {
     this.channel = this.pusher.subscribe(`event-${eventId}`);
-    this.channel.bind('message-sent', callback);
-  }
+    this.channel.bind('message-sent', (data: any) => {
+        callback(data.message); // Appel de la fonction de rappel avec le message reçu
+    });
+}
 }
