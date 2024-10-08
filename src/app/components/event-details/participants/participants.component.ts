@@ -36,9 +36,20 @@ export class ParticipantsComponent implements OnInit {
     const UserList = document.querySelector('#userList');
 
     if (AddParticipantBtn && UserList) {
-      AddParticipantBtn.addEventListener('click', () => {
-        UserList.classList.toggle('hidden')
-      })
+      AddParticipantBtn.addEventListener('click', (event) => {
+        event.stopPropagation();
+        UserList.classList.toggle('hidden');
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!UserList.classList.contains('hidden') && !UserList.contains(event.target as Node)) {
+          UserList.classList.add('hidden');
+        }
+      });
+
+      UserList.addEventListener('click', (event) => {
+        event.stopPropagation();
+      });
     }
   }
 
