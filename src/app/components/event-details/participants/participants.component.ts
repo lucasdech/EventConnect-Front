@@ -16,11 +16,14 @@ export class ParticipantsComponent implements OnInit {
   private route = inject(ActivatedRoute);
   public participants: any[] = [];
   public EventId: number = 0;
+  public participantId: number = 0; 
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.EventId = +params.get('id')!;
-      console.log('ID de l\'événement récupéré :', this.EventId); 
+      console.log('ID de l\'événement récupéré :', this.EventId);
+      const participantIdStr = localStorage.getItem('ID');
+      this.participantId = participantIdStr ? +participantIdStr : 0;
       this.getParticipants(); 
     });
   }
