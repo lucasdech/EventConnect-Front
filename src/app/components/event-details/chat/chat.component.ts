@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ChatService, Credentials } from '../../../services/EventUser/chat.service';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -11,7 +11,7 @@ import { FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angula
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css'],
 })
-export class ChatComponent {
+export class ChatComponent implements OnInit {
   private chatService = inject(ChatService);
   private route = inject(ActivatedRoute);
 
@@ -31,9 +31,6 @@ export class ChatComponent {
   }
 
   ngOnInit() {
-
-    this.getMessages();
-
     this.route.paramMap.subscribe((params) => {
       this.eventId = +params.get('id')!;
       console.log("ID de l'événement récupéré :", this.eventId);
@@ -41,7 +38,14 @@ export class ChatComponent {
       // Mettre à jour le champ event_id dans le formulaire
       this.messageForm.patchValue({ event_id: this.eventId });
       
+      // Récupérer les messages initiaux
       this.getMessages();
+      
+      // S'abonner aux messages en temps réel
+      this.chatService.subscribeToMessages(this.eventId, (message: any) => {
+        this.messages.push(message); // Ajouter le nouveau message à la liste
+        console.log('Nouveau message reçu:', message);
+      });
     });
   }
   
@@ -66,18 +70,17 @@ export class ChatComponent {
     this.chatService.addMessage(this.messageForm.value as Credentials).subscribe({
       next: (response: any) => {
         // Vérifie si la réponse contient le statut 'success'      
-          console.log('Message ajouté:', response);
-          
-          // Vider le champ d'input après l'envoi du message
-          this.messageForm.reset({ 
-            content: '', 
-            event_id: this.eventId, 
-            user_id: this.userId
-          });
-          
-          // Réactualiser la liste des messages après l'envoi
-          this.getMessages();
-
+        console.log('Message ajouté:', response);
+        
+        // Vider le champ d'input après l'envoi du message
+        this.messageForm.reset({ 
+          content: '', 
+          event_id: this.eventId, 
+          user_id: this.userId
+        });
+        
+        // Réactualiser la liste des messages après l'envoi
+        this.getMessages();
       },
       error: (err) => {
         console.error('Erreur lors de l\'envoi du message :', err);
@@ -85,6 +88,4 @@ export class ChatComponent {
       },
     });
   }
-  
-  
 }

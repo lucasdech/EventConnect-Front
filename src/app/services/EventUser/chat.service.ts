@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { map, Observable, tap } from 'rxjs';
+import Pusher from 'pusher-js';
 
 export interface Credentials {
   content: string;
@@ -10,12 +11,19 @@ export interface Credentials {
 @Injectable({
   providedIn: 'root',
 })
-
 export class ChatService {
   private http = inject(HttpClient);
   private BASE_URL = 'https://eventconnectapi.projets.p8.garage404.com/api';
+  private pusher: Pusher;
+  private channel: any;
 
-  constructor() {}
+  constructor() {
+    // Initialisation de Pusher
+    this.pusher = new Pusher('YOUR_PUSHER_KEY', {
+      cluster: 'YOUR_PUSHER_CLUSTER',
+      encrypted: true,
+    });
+  }
 
   getMessages(eventId: number) {
     console.log("Récupération des messages pour l'événement", eventId);
@@ -50,5 +58,11 @@ export class ChatService {
         }
       })
     );
+  }
+
+  // Méthode pour souscrire aux événements de messages
+  subscribeToMessages(eventId: number, callback: (message: any) => void) {
+    this.channel = this.pusher.subscribe(`event-${eventId}`);
+    this.channel.bind('message-sent', callback);
   }
 }
