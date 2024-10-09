@@ -44,7 +44,7 @@ export class ChatComponent {
       
 
       this.InitPusher();
-      
+
     });
   }
 
@@ -55,7 +55,7 @@ export class ChatComponent {
       cluster: 'eu'
     });
     var channel = pusher.subscribe('chat' + this.eventId);
-    channel.bind('chat' + this.eventId, function(data: any) {
+    channel.bind('message', function(data: any) {
       alert(JSON.stringify(data));
     });
 
