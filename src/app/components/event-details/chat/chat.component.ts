@@ -46,7 +46,6 @@ export class ChatComponent {
       
       this.InitLaravelEcho();
 
-      //zrljbté" jgp"rjb gpi" rpit hrip
 
     });
   }
@@ -74,6 +73,8 @@ export class ChatComponent {
     const echo = new Echo({
       broadcaster: 'pusher',
       key: '7c0ef57af2bc0573502d',
+      cluster: 'eu',
+      wsHost: 'eventconnectapi.projets.p8.garage404.com',
     });
 
     /* @ts-ignore */
