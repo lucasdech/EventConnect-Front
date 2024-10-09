@@ -3,6 +3,7 @@ import { ChatService, Credentials } from '../../../services/EventUser/chat.servi
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import Pusher from 'pusher-js';
 
 @Component({
   selector: 'app-chat',
@@ -41,8 +42,23 @@ export class ChatComponent {
       // Mettre à jour le champ event_id dans le formulaire
       this.messageForm.patchValue({ event_id: this.eventId });
       
-      this.getMessages();
+
+      this.InitPusher();
+      
     });
+  }
+
+  InitPusher() {
+    
+    Pusher.logToConsole = true;
+    var pusher = new Pusher('7c0ef57af2bc0573502d', {
+      cluster: 'eu'
+    });
+    var channel = pusher.subscribe('chat' + this.eventId);
+    channel.bind('chat' + this.eventId, function(data: any) {
+      alert(JSON.stringify(data));
+    });
+
   }
   
 
