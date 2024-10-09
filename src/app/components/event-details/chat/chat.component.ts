@@ -3,6 +3,7 @@ import { ChatService, Credentials } from '../../../services/EventUser/chat.servi
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import Echo from 'laravel-echo';
 import Pusher from 'pusher-js';
 
 
@@ -43,11 +44,12 @@ export class ChatComponent {
       // Mettre à jour le champ event_id dans le formulaire
       this.messageForm.patchValue({ event_id: this.eventId });
       
-
       this.InitPusher();
 
     });
   }
+
+  //ch mode 644 to 655
 
   InitPusher() {
     
@@ -59,7 +61,20 @@ export class ChatComponent {
     channel.bind('NewMessage', function(data: any) {
       console.log(JSON.stringify(data));
     });
+  }
 
+  InitLaravelEcho () {
+
+    /* @ts-ignore */
+    
+    window.Pusher = Pusher;
+
+    /* @ts-ignore */
+
+    window.Echo = new Echo({
+      broadcaster: 'pusher',
+      key: '7c0ef57af2bc0573502d',
+  });
   }
   
 
