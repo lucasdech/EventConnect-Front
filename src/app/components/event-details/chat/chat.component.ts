@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import Pusher from 'pusher-js';
+import Echo from 'laravel-echo';
+
 
 @Component({
   selector: 'app-chat',
@@ -50,15 +52,25 @@ export class ChatComponent {
 
   InitPusher() {
     
-    Pusher.logToConsole = true;
-    var pusher = new Pusher('7c0ef57af2bc0573502d', {
-      cluster: 'eu'
-    });
-    var channel = pusher.subscribe('chat' + this.eventId);
-    channel.bind('message', function(data: any) {
-      alert(JSON.stringify(data));
-    });
+    // Pusher.logToConsole = true;
+    // var pusher = new Pusher('7c0ef57af2bc0573502d', {
+    //   cluster: 'eu'
+    // });
+    // var channel = pusher.subscribe('chat' + this.eventId);
+    // channel.bind('message', function(data: any) {
+    //   console.log(JSON.stringify(data));
+    // });
 
+    const options = {
+      broadcaster: 'pusher',
+      key: '7c0ef57af2bc0573502d',
+      cluster: 'eu'
+    }
+   
+    const echo = new Echo({
+      ...options,
+      client: new Pusher(options.key, options)
+  });
   }
   
 
