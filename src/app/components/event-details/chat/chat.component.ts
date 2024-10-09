@@ -46,6 +46,8 @@ export class ChatComponent {
       
       this.InitLaravelEcho();
 
+      //zrljbté" jgp"rjb gpi" rpit hrip
+
     });
   }
 
