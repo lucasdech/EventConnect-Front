@@ -79,7 +79,7 @@ export class ChatComponent {
     /* @ts-ignore */
     window.Echo = echo
 
-    echo.private(`chat.${this.eventId}`)
+    echo.private('chat' + this.eventId)
         .listen("NewMessage", (response: any) => {
           console.log(response)
           // this.messages.push(response.message)
