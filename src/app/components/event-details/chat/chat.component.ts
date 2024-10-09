@@ -75,6 +75,10 @@ export class ChatComponent {
       key: '7c0ef57af2bc0573502d',
       cluster: 'eu',
       wsHost: 'eventconnectapi.projets.p8.garage404.com',
+      wsPort: 80,
+      wssPort: 443,
+      forceTLS: 'https' === 'https',
+      enabledTransports: ['ws', 'wss'],
     });
 
     /* @ts-ignore */
