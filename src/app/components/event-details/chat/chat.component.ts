@@ -56,7 +56,7 @@ export class ChatComponent {
       cluster: 'eu'
     });
     var channel = pusher.subscribe('chat' + this.eventId);
-    channel.bind('message', function(data: any) {
+    channel.bind('NewMessage', function(data: any) {
       console.log(JSON.stringify(data));
     });
 
