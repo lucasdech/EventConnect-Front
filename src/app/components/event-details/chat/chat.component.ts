@@ -44,7 +44,7 @@ export class ChatComponent {
       // Mettre à jour le champ event_id dans le formulaire
       this.messageForm.patchValue({ event_id: this.eventId });
       
-      this.InitPusher();
+      this.InitLaravelEcho();
 
     });
   }
@@ -80,7 +80,7 @@ export class ChatComponent {
     echo.private(`chat.${this.eventId}`)
         .listen("NewMessage", (response: any) => {
           console.log(response)
-          // this.messageForm.push(response.message)
+          // this.messages.push(response.message)
           // messages.value.push(response.message);
     })
 
