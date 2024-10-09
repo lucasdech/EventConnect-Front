@@ -69,12 +69,21 @@ export class ChatComponent {
     
     window.Pusher = Pusher;
 
-    /* @ts-ignore */
-
-    window.Echo = new Echo({
+    const echo = new Echo({
       broadcaster: 'pusher',
       key: '7c0ef57af2bc0573502d',
-  });
+    });
+
+    /* @ts-ignore */
+    window.Echo = echo
+
+    echo.private(`chat.${this.eventId}`)
+        .listen("NewMessage", (response: any) => {
+          console.log(response)
+          // this.messageForm.push(response.message)
+          // messages.value.push(response.message);
+    })
+
   }
   
 
@@ -97,17 +106,16 @@ export class ChatComponent {
   
     this.chatService.addMessage(this.messageForm.value as Credentials).subscribe({
       next: (response: any) => {
-        // Vérifie si la réponse contient le statut 'success'      
+             
           console.log('Message ajouté:', response);
           
-          // Vider le champ d'input après l'envoi du message
+          
           this.messageForm.reset({ 
             content: '', 
             event_id: this.eventId, 
             user_id: this.userId
           });
           
-          // Réactualiser la liste des messages après l'envoi
           this.getMessages();
 
       },
