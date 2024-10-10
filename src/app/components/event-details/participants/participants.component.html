@@ -4,8 +4,16 @@
     <div class="max-h-64 overflow-y-scroll">
       <ng-container *ngFor="let participant of participants" class="">
         <li class="bg-transparent border border-white rounded-lg p-2 flex items-center">
-          <img src="https://eventconnectapi.projets.p8.garage404.com/storage/{{ participant.profile_picture }}"
-            class="h-8 w-8 bg-gray-400 rounded-full">
+
+          <img *ngIf="participant.profile_picture != 'default_PP'; else defaultPP"
+          src="https://eventconnectapi.projets.p8.garage404.com/storage/{{ participant.profile_picture }}"
+          class="h-8 w-8 bg-gray-400 rounded-full" >
+
+          <ng-template #defaultPP>
+            <img src="/assets/profile_pictures/{{ participant.profile_picture }}.png"
+              class="h-8 w-8 bg-gray-400 rounded-full">
+          </ng-template>
+
           <p class="ml-2">{{ participant.name }}</p>
           <button class="h-8 w-8 bg-[#F35733] rounded-full ml-auto"
             (click)="deleteParticipant(participant.id)">X</button>
@@ -23,7 +31,16 @@
     <app-search-bar />
     <ng-container *ngFor="let user of users">
       <li class="bg-gray-200 border border-white rounded-lg p-2 flex items-center my-2">
-        <img src="/assets/profile_pictures/{{ user.profile_picture }}.png" class="h-8 w-8 bg-gray-400 rounded-full">
+
+        <img *ngIf="user.profile_picture != 'default_PP'; else defaultPP"
+          src="https://eventconnectapi.projets.p8.garage404.com/storage/{{ user.profile_picture }}"
+          class="h-8 w-8 bg-gray-400 rounded-full" >
+
+          <ng-template #defaultPP>
+            <img src="/assets/profile_pictures/{{ user.profile_picture }}.png"
+              class="h-8 w-8 bg-gray-400 rounded-full">
+          </ng-template>
+
         <p class="ml-2">{{ user.name }}</p>
         <button class="h-8 w-8 bg-transparent border border-white rounded-full ml-auto"
           (click)="addParticipants(user.id)">+</button>
