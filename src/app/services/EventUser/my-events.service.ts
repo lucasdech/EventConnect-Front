@@ -21,8 +21,8 @@ export class MyEventsService {
     }
   }
 
-  getUserEvents(): Observable<any[]> {
-    return this.http.get<{ data: { 'User Event': any[] } }>(`${this.BASE_URL}/api/MyEvents`).pipe(
+  getUserEvents(query: string = ''): Observable<any[]> {
+    return this.http.get<{ data: { 'User Event': any[] } }>(`${this.BASE_URL}/api/MyEvents` + query).pipe(
       tap((result: any) => {
         if (result) {
           localStorage.setItem("MyEvents", JSON.stringify(result.data['User Event'])); 
