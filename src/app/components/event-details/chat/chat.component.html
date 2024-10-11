@@ -1,8 +1,8 @@
 <div class="flex flex-col space-y-4 overflow-y-auto">
     <div *ngFor="let message of messages" [ngClass]="{'justify-end bg-[#F27649]': message.user_id === userId, 'bg-[#F29F05]': message.user_id !== userId}" class="p-2 rounded-lg text-white flex items-center h-full">
-        <img *ngIf="message.user_id !== userId" src="/assets/profile_pictures/{{message.user.profile_picture}}.png" class="h-8 w-8 bg-red-300 rounded-full mr-2"/>
+        <img *ngIf="message.user_id !== userId" src="https://eventconnectapi.projets.p8.garage404.com/storage/{{ message.user.profile_picture }}" class="h-8 w-8 rounded-full mr-2"/>
         <span>{{ message.content }}</span>
-        <div *ngIf="message.user_id === userId" class="h-8 w-8 bg-gray-300 rounded-full ml-2"></div>
+        <img *ngIf="message.user_id === userId" src="https://eventconnectapi.projets.p8.garage404.com/storage/{{ message.user.profile_picture }}" class="h-8 w-8 rounded-full ml-2" />
     </div>
 </div>
 

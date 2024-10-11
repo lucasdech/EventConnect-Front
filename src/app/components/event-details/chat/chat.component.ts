@@ -37,6 +37,10 @@ export class ChatComponent {
 
     this.getMessages();
 
+    // setTimeout(() => {
+    //   this.getMessages();
+    // }, 10000);
+
     this.route.paramMap.subscribe((params) => {
       this.eventId = +params.get('id')!;
       console.log("ID de l'événement récupéré :", this.eventId);
@@ -44,57 +48,8 @@ export class ChatComponent {
       // Mettre à jour le champ event_id dans le formulaire
       this.messageForm.patchValue({ event_id: this.eventId });
       
-      this.InitLaravelEcho();
-
-
     });
   }
-
-  //ch mode 644 to 655
-
-  InitPusher() {
-    
-    Pusher.logToConsole = true;
-    var pusher = new Pusher('7c0ef57af2bc0573502d', {
-      cluster: 'eu'
-    });
-    var channel = pusher.subscribe('chat' + this.eventId);
-    channel.bind('NewMessage', function(data: any) {
-      console.log(JSON.stringify(data));
-    });
-  }
-
-  InitLaravelEcho () {
-
-    /* @ts-ignore */
-    
-    window.Pusher = Pusher;
-
-    const echo = new Echo({
-      broadcaster: 'pusher',
-      key: '7c0ef57af2bc0573502d',
-      cluster: 'eu',
-      wsHost: 'eventconnectapi.projets.p8.garage404.com',
-      wsPort: 80,
-      wssPort: 443,
-      forceTLS: 'https' === 'https',
-      enabledTransports: ['ws', 'wss'],
-    });
-
-    /* @ts-ignore */
-    window.Echo = echo
-
-    console.log('init laravel ECHO')
-
-    echo.private('chat' + this.eventId)
-        .listen("NewMessage", (response: any) => {
-          console.log(response)
-          // this.messages.push(response.message)
-          // messages.value.push(response.message);
-    })
-
-  }
-  
 
   getMessages() {
     this.chatService.getMessages(this.eventId).subscribe({

@@ -42,3 +42,5 @@ export class EventDetailsComponent implements OnInit {
     });
   }
 }
+
+
