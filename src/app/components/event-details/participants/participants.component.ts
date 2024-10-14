@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ParticipantsService } from '../../../services/EventUser/participants.service';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -14,7 +14,7 @@ import { SearchBarComponent } from '../../search-bar/search-bar.component';
 export class ParticipantsComponent implements OnInit {
   private participantsService = inject(ParticipantsService);
   private route = inject(ActivatedRoute);
-  public participants: any[] = [];
+  public participants = signal<any[]>([]);
   public EventId: number = 0;
   public participantId: number = 0;
   public users: any[] = [];
@@ -56,7 +56,7 @@ export class ParticipantsComponent implements OnInit {
   getParticipants() {
     this.participantsService.getUsersInEvent(this.EventId).subscribe({
       next: (data) => {
-        this.participants = data;
+        this.participants.set(data);
         console.log('Participants récupérés :', this.participants);
       },
       error: (err) => {
@@ -69,9 +69,9 @@ export class ParticipantsComponent implements OnInit {
     this.participantsService.deleteParticipant(participantId).subscribe({
       next: (data) => {
         console.log('Participant supprimé :', data);
-        this.participants = this.participants.filter(
+        this.participants.set(this.participants().filter(
           (participant) => participant.id !== participantId
-        );
+        ));
       },
       error: (err) => {
         console.error('Erreur lors de la suppression du participant :', err);

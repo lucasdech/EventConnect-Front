@@ -1,67 +1,55 @@
 {
-  "hash": "3bfce85a",
-  "configHash": "b32877da",
+  "hash": "0ae665b2",
+  "configHash": "99448e36",
   "lockfileHash": "ff1aafad",
-  "browserHash": "5c86b782",
+  "browserHash": "6823ee0c",
   "optimized": {
     "@angular/common": {
       "src": "../../../../../node_modules/@angular/common/fesm2022/common.mjs",
       "file": "@angular_common.js",
-      "fileHash": "c0845b1e",
+      "fileHash": "2a54c6bb",
       "needsInterop": false
     },
     "@angular/common/http": {
       "src": "../../../../../node_modules/@angular/common/fesm2022/http.mjs",
       "file": "@angular_common_http.js",
-      "fileHash": "1b8e6a08",
+      "fileHash": "8a3ec81b",
       "needsInterop": false
     },
     "@angular/core": {
       "src": "../../../../../node_modules/@angular/core/fesm2022/core.mjs",
       "file": "@angular_core.js",
-      "fileHash": "da7f1adb",
+      "fileHash": "a2af15b7",
       "needsInterop": false
     },
     "@angular/forms": {
       "src": "../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
       "file": "@angular_forms.js",
-      "fileHash": "b1448508",
+      "fileHash": "71ee3880",
       "needsInterop": false
     },
     "@angular/platform-browser": {
       "src": "../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
       "file": "@angular_platform-browser.js",
-      "fileHash": "6e6f89bf",
+      "fileHash": "cb62b5c6",
       "needsInterop": false
     },
     "@angular/platform-server": {
       "src": "../../../../../node_modules/@angular/platform-server/fesm2022/platform-server.mjs",
       "file": "@angular_platform-server.js",
-      "fileHash": "87537aa0",
+      "fileHash": "47dcb04d",
       "needsInterop": false
     },
     "@angular/router": {
       "src": "../../../../../node_modules/@angular/router/fesm2022/router.mjs",
       "file": "@angular_router.js",
-      "fileHash": "2122e215",
+      "fileHash": "e96ec6cb",
       "needsInterop": false
-    },
-    "laravel-echo": {
-      "src": "../../../../../node_modules/laravel-echo/dist/echo.js",
-      "file": "laravel-echo.js",
-      "fileHash": "d461e6c7",
-      "needsInterop": false
-    },
-    "pusher-js": {
-      "src": "../../../../../node_modules/pusher-js/dist/node/pusher.js",
-      "file": "pusher-js.js",
-      "fileHash": "edeaf5ae",
-      "needsInterop": true
     },
     "rxjs": {
       "src": "../../../../../node_modules/rxjs/dist/cjs/index.js",
       "file": "rxjs.js",
-      "fileHash": "517c762c",
+      "fileHash": "90fddfbc",
       "needsInterop": true
     }
   },
