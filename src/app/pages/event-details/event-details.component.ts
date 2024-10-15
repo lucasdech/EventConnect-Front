@@ -1,15 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GetEventService } from '../../services/Event/get-event.service';
+import { ParticipantsService } from '../../services/EventUser/participants.service';
+
 import { ActivatedRoute } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { ChatComponent } from '../../components/event-details/chat/chat.component';
 import { ParticipantsComponent } from '../../components/event-details/participants/participants.component';
+import { Router } from '@angular/router';
+import { inject, Injectable } from '@angular/core';
 
 @Component({
   selector: 'app-event-details',
   standalone: true,
-  imports: [CommonModule, RouterModule, ChatComponent, ParticipantsComponent],
+  imports: [CommonModule, RouterModule, ChatComponent, ParticipantsComponent, ],
   templateUrl: './event-details.component.html',
   styleUrls: ['./event-details.component.css']
 })
@@ -17,10 +21,32 @@ export class EventDetailsComponent implements OnInit {
 
   eventDetails: any;
 
-  constructor(private getEventService: GetEventService, private route: ActivatedRoute) {}
+  constructor(private getEventService: GetEventService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
+    this.isConnectedUser();
     this.getEventDetails();
+  }
+
+  isConnectedUser() {
+    if (!localStorage.getItem('JWT')) {
+      this.router.navigate(['/']);
+    }
+  }
+
+  isUserInEvent() {
+    const participants = localStorage.getItem('Participants');
+    const userId = localStorage.getItem('ID');
+
+    if (participants && userId) {
+      const participantsArray = JSON.parse(participants);
+      if (!participantsArray.includes(userId)) {
+        console.log('User is not in the event');
+        this.router.navigate(['/my-board']);
+      } else {
+        console.log('User is in the event');
+      }
+    }
   }
   
   getEventDetails() {

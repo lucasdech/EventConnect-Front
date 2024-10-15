@@ -15,6 +15,12 @@ export class MyEventsService {
   }
 
   private loadEventsFromLocalStorage(): void {
+
+    //vider le tableau de participants
+    const participants = localStorage.getItem("Participants");
+    if (participants) {
+      localStorage.setItem("Participants", JSON.stringify([]));
+    }
     const storedEvents = localStorage.getItem("MyEvents");
     if (storedEvents) {
       this.MyEvents.set(JSON.parse(storedEvents)); 

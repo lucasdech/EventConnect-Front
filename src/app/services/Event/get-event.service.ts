@@ -23,7 +23,7 @@ export class GetEventService {
       }),
       catchError(error => {
         console.error('Erreur lors de la récupération de l\'événement', error);
-        return of(null); // ou une valeur par défaut
+        return of(null);
       }),
       map((result: any) => result?.data)
     );

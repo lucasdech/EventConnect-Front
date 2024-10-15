@@ -18,14 +18,21 @@ export class ConnectedUserComponent implements OnInit {
   events$: Observable<any[]> = of([]);
 
   constructor(private myEventsService: MyEventsService, private router: Router) {}
+  
+  ngOnInit() {
+    this.isConnectedUser();
+    this.events$ = this.myEventsService.getUserEvents();
+    this.setupToggleForms();
+  }
 
   navigateToEvent(eventId: number) {
     this.router.navigate(['/event', eventId]);
   }
 
-  ngOnInit() {
-    this.events$ = this.myEventsService.getUserEvents();
-    this.setupToggleForms();
+  isConnectedUser() {
+    if (!localStorage.getItem('JWT')) {
+      this.router.navigate(['/']);
+    }
   }
 
   setupToggleForms() {

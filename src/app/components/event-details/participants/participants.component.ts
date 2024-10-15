@@ -12,16 +12,19 @@ import { SearchBarComponent } from '../../search-bar/search-bar.component';
   styleUrls: ['./participants.component.css'],
 })
 export class ParticipantsComponent implements OnInit {
+
   private participantsService = inject(ParticipantsService);
   private route = inject(ActivatedRoute);
   public participants = signal<any[]>([]);
   public EventId: number = 0;
   public participantId: number = 0;
   public users: any[] = [];
+  public ParticipantsArray: any[] = [];
 
   ngOnInit() {
     this.getAllUsers();
     this.setupToggleForms()
+    localStorage.setItem('Participants', JSON.stringify([]));
     this.route.paramMap.subscribe((params) => {
       this.EventId = +params.get('id')!;
       console.log("ID de l'événement récupéré :", this.EventId);
@@ -57,6 +60,12 @@ export class ParticipantsComponent implements OnInit {
     this.participantsService.getUsersInEvent(this.EventId).subscribe({
       next: (data) => {
         this.participants.set(data);
+
+        this.participants().forEach((participant) => {
+          this.ParticipantsArray.push(participant.id);
+        })
+        localStorage.setItem('Participants', JSON.stringify(this.ParticipantsArray));
+        
         console.log('Participants récupérés :', this.participants);
       },
       error: (err) => {
