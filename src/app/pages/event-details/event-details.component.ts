@@ -26,6 +26,9 @@ export class EventDetailsComponent implements OnInit {
   ngOnInit() {
     this.isConnectedUser();
     this.getEventDetails();
+    setTimeout(() => {
+      this.isUserInEvent();
+    }, 500);
   }
 
   isConnectedUser() {
@@ -40,11 +43,11 @@ export class EventDetailsComponent implements OnInit {
 
     if (participants && userId) {
       const participantsArray = JSON.parse(participants);
-      if (!participantsArray.includes(userId)) {
-        console.log('User is not in the event');
-        this.router.navigate(['/my-board']);
-      } else {
+      if (participantsArray.includes(Number(userId))) {
         console.log('User is in the event');
+      } else {
+        this.router.navigate(['my-board']);
+        console.log('User is not in the event');
       }
     }
   }
