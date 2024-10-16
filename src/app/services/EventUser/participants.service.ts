@@ -29,8 +29,8 @@ export class ParticipantsService {
     );
   }
 
-  deleteParticipant(participantId: number) {
-    return this.http.delete(`${this.BASE_URL}/MyEvent/${participantId}`).pipe(
+  deleteParticipant(participantId: number, eventId: number) {
+    return this.http.delete(`${this.BASE_URL}/MyEvent/${participantId}/${eventId}`).pipe(
       tap((result: any) => {
         console.log('Réponse suppression participant:', result);
       }),

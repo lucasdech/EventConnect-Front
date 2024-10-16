@@ -74,8 +74,8 @@ export class ParticipantsComponent implements OnInit {
     });
   }
 
-  deleteParticipant(participantId: number) {
-    this.participantsService.deleteParticipant(participantId).subscribe({
+  deleteParticipant(participantId: number, eventId: number) {
+    this.participantsService.deleteParticipant(participantId, this.EventId).subscribe({
       next: (data) => {
         console.log('Participant supprimé :', data);
         this.participants.set(this.participants().filter(
