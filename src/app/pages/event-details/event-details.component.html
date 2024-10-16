@@ -1,5 +1,10 @@
 <div class="min-h-screen flex flex-col items-center mb-10">
+
+<div class="flex items-center space-x-12">
+    <a href="/my-board" class="text-[#63281A]"> &larr; </a>
     <h2 class="text-5xl mt-8 mb-8 text-[#63281A] font-lilita mb-4">{{eventDetails.title}}</h2>
+</div>
+  
 
     <div class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-10"> <!-- 3 colonnes au total -->
       
@@ -10,7 +15,7 @@
 
         <!-- Colonne de droite avec les détails de l'événement (1/3 de la largeur) -->
         <div class="col-span-1 flex flex-col space-y-4">
-            <app-participants />
+            <app-participants [event]="eventDetails" />
 
             <div *ngIf="eventDetails; else loading">
                 <div class="bg-[#F27649] p-4 rounded-lg shadow-lg text-white text-center">
@@ -27,7 +32,7 @@
                 <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDA-wAzfEDLcn_9AmpmqR6pdjcYWLlEJW8&q={{ eventDetails.location }}`;" width="355px" height="100px" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
 
-            <div class="flex justify-center">
+            <div *ngIf="eventDetails.user_id == UserId" class="flex justify-center">
                 <button class="bg-[#F35733] text-white px-4 py-2 rounded-lg">Supprimer l'Évent</button>
             </div>
         </div>

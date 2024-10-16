@@ -15,9 +15,12 @@
           </ng-template>
 
           <p class="ml-2">{{ participant.name }}</p>
-          <button class="h-8 w-8 bg-[#F35733] rounded-full ml-auto"
+          
+          
+            <button *ngIf="event.user_id == UserId" class="h-8 w-8 bg-[#F35733] rounded-full ml-auto"
             (click)="deleteParticipant(participant.id, EventId)">X</button>
-        </li>
+          
+            </li>
       </ng-container>
     </div>
   </ul>

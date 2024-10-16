@@ -1,8 +1,9 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, Input } from '@angular/core';
 import { ParticipantsService } from '../../../services/EventUser/participants.service';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SearchBarComponent } from '../../search-bar/search-bar.component';
+
 
 @Component({
   selector: 'app-participants',
@@ -13,6 +14,8 @@ import { SearchBarComponent } from '../../search-bar/search-bar.component';
 })
 export class ParticipantsComponent implements OnInit {
 
+  @Input() event: any;
+
   private participantsService = inject(ParticipantsService);
   private route = inject(ActivatedRoute);
   public participants = signal<any[]>([]);
@@ -20,8 +23,10 @@ export class ParticipantsComponent implements OnInit {
   public participantId: number = 0;
   public users: any[] = [];
   public ParticipantsArray: any[] = [];
+  public UserId: number = +(localStorage.getItem('ID') || 0);
 
   ngOnInit() {
+    console.log('ICI LEVENT', this.event)
     this.getAllUsers();
     this.setupToggleForms()
     localStorage.setItem('Participants', JSON.stringify([]));

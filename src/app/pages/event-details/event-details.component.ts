@@ -17,6 +17,7 @@ import { Router } from '@angular/router';
 export class EventDetailsComponent implements OnInit {
 
   eventDetails: any;
+  UserId = +(localStorage.getItem('ID') || 0);
 
   constructor(private getEventService: GetEventService, private route: ActivatedRoute, private router: Router) {}
 
