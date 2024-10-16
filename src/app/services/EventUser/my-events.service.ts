@@ -14,7 +14,7 @@ export class MyEventsService {
     this.loadEventsFromLocalStorage();
   }
 
-  private loadEventsFromLocalStorage(): void {
+  loadEventsFromLocalStorage(): void {
 
     //vider le tableau de participants
     const participants = localStorage.getItem("Participants");

@@ -1,14 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GetEventService } from '../../services/Event/get-event.service';
-import { ParticipantsService } from '../../services/EventUser/participants.service';
-
 import { ActivatedRoute } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { ChatComponent } from '../../components/event-details/chat/chat.component';
 import { ParticipantsComponent } from '../../components/event-details/participants/participants.component';
 import { Router } from '@angular/router';
-import { inject, Injectable } from '@angular/core';
 
 @Component({
   selector: 'app-event-details',
@@ -28,7 +25,7 @@ export class EventDetailsComponent implements OnInit {
     this.getEventDetails();
     setTimeout(() => {
       this.isUserInEvent();
-    }, 500);
+    }, 800);
   }
 
   isConnectedUser() {
