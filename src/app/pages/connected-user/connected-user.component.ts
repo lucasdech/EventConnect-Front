@@ -22,7 +22,7 @@ export class ConnectedUserComponent implements OnInit {
   ngOnInit() {
     this.isConnectedUser();
     this.events$ = this.myEventsService.getUserEvents();
-    this.myEventsService.getUserEvents();
+    // this.myEventsService.getUserEvents();
     this.setupToggleForms();
   }
 

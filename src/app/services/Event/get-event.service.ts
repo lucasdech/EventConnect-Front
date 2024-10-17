@@ -45,4 +45,18 @@ export class GetEventService {
       map((result: any) => result?.data)
     );
   }
+
+  deleteParticipationEvent(eventId: number){
+    return this.http.delete(`${this.BASE_URL}/api/MyEvent/${eventId}`).pipe(
+      tap((result: any) => {
+        if (result) {
+          console.log('Participation supprimée :', result.data);
+        } else {
+          console.log('Aucune participation dans la requête');
+        }
+      }
+    ),
+  );
+}
+
 }

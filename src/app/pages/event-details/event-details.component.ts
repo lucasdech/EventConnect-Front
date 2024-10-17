@@ -21,7 +21,7 @@ export class EventDetailsComponent implements OnInit {
   eventDetails: any;
   UserId = +(localStorage.getItem('ID') || 0);
 
-  constructor(private getEventService: GetEventService, private route: ActivatedRoute, private router: Router, private MyEventService: MyEventsService) {}
+  constructor(private getEventService: GetEventService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
     this.isConnectedUser();
@@ -78,8 +78,8 @@ export class EventDetailsComponent implements OnInit {
     if (eventId) {
       this.getEventService.deleteEvent(eventId).subscribe({
         next: (data) => {
-          console.log('Résultat de la suppression de l\'événement :', data);
-          localStorage.removeItem('MyEvents');
+          console.log('Suppression de l\'événement réussie : ', data);
+          this.deleteParticipationEvent()
           this.router.navigate(['my-board']);
         },
         error: (err) => {
@@ -88,6 +88,19 @@ export class EventDetailsComponent implements OnInit {
       });
     }
   }
+  
+  deleteParticipationEvent() {
+    const eventId = this.eventDetails.id;
+
+    this.getEventService.deleteParticipationEvent(eventId).subscribe({
+      next: (data) => {
+        console.log('Suppression de la participation réussie : ', data);
+      },
+      error: (err) => {
+        console.error('Erreur lors de la suppression de la participation :', err);
+      }
+    });
+  }
+  
+  
 }
-
-
