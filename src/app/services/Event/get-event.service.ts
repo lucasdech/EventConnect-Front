@@ -28,6 +28,23 @@ export class GetEventService {
       map((result: any) => result?.data)
     );
   }
+
+  getAllEvents(params: string): Observable<any> {
+    return this.http.get(`${this.BASE_URL}/api/events?search=`+ params).pipe(
+      tap((result: any) => {
+        if (result) {
+          console.log('Événements récupérés :', result.data);
+        } else {
+          console.log('Aucun événement dans la requête');
+        }
+      }),
+      catchError(error => {
+        console.error('Erreur lors de la récupération des événements', error);
+        return of(null);
+      }),
+      map((result: any) => result?.data)
+    );
+  }
   
   deleteEvent(eventId: number): Observable<any> {
     return this.http.delete(`${this.BASE_URL}/api/event/${eventId}`).pipe(

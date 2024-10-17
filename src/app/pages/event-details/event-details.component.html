@@ -1,15 +1,19 @@
 <div class="min-h-screen flex flex-col items-center mb-10">
 
-<div class="flex items-center space-x-12">
-    <a href="/my-board" class="text-[#63281A]"> &larr; </a>
-    <h2 class="text-5xl mt-8 mb-8 text-[#63281A] font-lilita mb-4">{{eventDetails.title}}</h2>
-</div>
+    <div>
+
+    </div>
+
+    <div class="flex items-center space-x-12">
+        <a href="/my-board" class="text-[#63281A]"> &larr; </a>
+        <h2 class="text-5xl mt-8 mb-8 text-[#63281A] font-lilita mb-4">{{eventDetails.title}}</h2>
+    </div>
 
 
     <div class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-10"> <!-- 3 colonnes au total -->
-      
+
         <!-- Colonne de gauche pour le chat (2/3 de la largeur) -->
-        <div class="col-span-2 bg-white p-4 rounded-lg shadow-lg flex flex-col justify-between"> 
+        <div class="col-span-2 bg-white p-4 rounded-lg shadow-lg flex flex-col justify-between">
             <app-chat />
         </div>
 
@@ -29,12 +33,13 @@
             </div>
 
             <div class="rounded-lg">
-                <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDA-wAzfEDLcn_9AmpmqR6pdjcYWLlEJW8&q={{ eventDetails.location }}`;" width="355px" height="100px" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
+                <iframe width="350" height="120" style="border:0" load="lazy" allowfullscreen src='https://www.google.com/maps/embed/v1/place?q={{ eventDetails.location }}&key=AIzaSyDA-wAzfEDLcn_9AmpmqR6pdjcYWLlEJW8'></iframe>
+             </div>
 
             <div *ngIf="eventDetails.user_id == UserId" class="flex justify-center space-x-4">
                 <button class="bg-[#F27649] text-white px-4 py-2 rounded-lg">Modifier l'Évent</button>
-                <button (click)="deleteEvent()" class="bg-[#F35733] text-white px-4 py-2 rounded-lg">Supprimer l'Évent</button>
+                <button (click)="deleteEvent()" class="bg-[#F35733] text-white px-4 py-2 rounded-lg">Supprimer
+                    l'Évent</button>
             </div>
         </div>
     </div>
