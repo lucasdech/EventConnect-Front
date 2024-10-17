@@ -6,11 +6,13 @@ import { RouterModule } from '@angular/router';
 import { ChatComponent } from '../../components/event-details/chat/chat.component';
 import { ParticipantsComponent } from '../../components/event-details/participants/participants.component';
 import { Router } from '@angular/router';
+import { MyEventsService } from '../../services/EventUser/my-events.service';
 
 @Component({
   selector: 'app-event-details',
   standalone: true,
-  imports: [CommonModule, RouterModule, ChatComponent, ParticipantsComponent, ],
+  imports: [CommonModule, RouterModule, ChatComponent, ParticipantsComponent],
+  providers: [MyEventsService],
   templateUrl: './event-details.component.html',
   styleUrls: ['./event-details.component.css']
 })
@@ -19,7 +21,7 @@ export class EventDetailsComponent implements OnInit {
   eventDetails: any;
   UserId = +(localStorage.getItem('ID') || 0);
 
-  constructor(private getEventService: GetEventService, private route: ActivatedRoute, private router: Router) {}
+  constructor(private getEventService: GetEventService, private route: ActivatedRoute, private router: Router, private MyEventService: MyEventsService) {}
 
   ngOnInit() {
     this.isConnectedUser();
@@ -67,6 +69,24 @@ export class EventDetailsComponent implements OnInit {
         });
       }
     });
+  }
+
+  deleteEvent() {
+    const eventId = this.eventDetails.id;
+    console.log('ID de l\'événement à supprimer :', eventId);
+
+    if (eventId) {
+      this.getEventService.deleteEvent(eventId).subscribe({
+        next: (data) => {
+          console.log('Résultat de la suppression de l\'événement :', data);
+          localStorage.removeItem('MyEvents');
+          this.router.navigate(['my-board']);
+        },
+        error: (err) => {
+          console.error('Erreur lors de la suppression de l\'événement :', err);
+        }
+      });
+    }
   }
 }
 

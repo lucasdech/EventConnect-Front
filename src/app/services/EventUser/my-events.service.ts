@@ -6,17 +6,16 @@ import { map, catchError, Observable, of, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class MyEventsService {
-  private http = inject(HttpClient);
+  private http: HttpClient;
   private BASE_URL = "https://eventconnectapi.projets.p8.garage404.com";
   MyEvents = signal<any[]>([]);
 
-  constructor() {
+  constructor(http: HttpClient) {
+    this.http = http;
     this.loadEventsFromLocalStorage();
   }
 
   loadEventsFromLocalStorage(): void {
-
-    //vider le tableau de participants
     const participants = localStorage.getItem("Participants");
     if (participants) {
       localStorage.setItem("Participants", JSON.stringify([]));

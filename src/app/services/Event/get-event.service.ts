@@ -29,4 +29,20 @@ export class GetEventService {
     );
   }
   
+  deleteEvent(eventId: number): Observable<any> {
+    return this.http.delete(`${this.BASE_URL}/api/event/${eventId}`).pipe(
+      tap((result: any) => {
+        if (result) {
+          console.log('Événement supprimé :', result.data);
+        } else {
+          console.log('Aucun événement dans la requête');
+        }
+      }),
+      catchError(error => {
+        console.error('Erreur lors de la suppression de l\'événement', error);
+        return of(null);
+      }),
+      map((result: any) => result?.data)
+    );
+  }
 }
