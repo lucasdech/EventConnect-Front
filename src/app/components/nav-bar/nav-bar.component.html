@@ -8,7 +8,8 @@
                 <img class='NavLogo' src="/assets/logo/logoBlack.png" alt="Logo">
             </a>
           </div>
-          <a href="#" class="NavLink py-4 px-6 transition duration-300 hover:text-orange-400 text-lg">Connexion</a>
+            <a *ngIf="isConnected == false" href="" class="NavLink py-4 px-6 transition duration-300 hover:text-orange-400 text-lg">Connexion</a>
+            <a *ngIf="isConnected == true" href="" class="NavLink py-4 px-6 transition duration-300 hover:text-orange-400 text-lg">Mon Compte</a>
         </div>
       </div>
     </div>
