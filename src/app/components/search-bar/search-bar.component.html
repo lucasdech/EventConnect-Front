@@ -8,20 +8,30 @@
     </div>
   </form>
   
-  <!-- Modal -->
-  <div id="modal" class="modal" [ngClass]="{'show': isModalOpen}">
-    <div class="modal-content">
-      <span class="close" (click)="closeModal()">&times;</span>
-      <h2 class="text-3xl font-lilita mb-2 text-center">Les Event Dispo :</h2>
-      <hr class="border-t border-white w-full mb-12">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-2 justify-items-center">
-        <div *ngFor="let event of EventArray" class="event-card p-4 border border-white rounded-lg shadow-md text-center">
-          <h3 class="text-lg font-lilita">{{ event.title }}</h3>
-          <p class="text-sm">{{ event.starting_at | date: 'dd/MM/yyyy HH:mm' }}</p>
-          <p class="text-sm mb-6 truncate">{{ event.description }}</p>
-          <button class="link border border-white p-2 rounded-lg">Participer</button>
+<!-- Modal -->
+<div id="modal" class="modal" [ngClass]="{'show': isModalOpen}">
+  <div class="modal-content">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <h2 class="text-3xl font-lilita mb-2 text-center">Les Event Dispo :</h2>
+    <hr class="border-t border-white w-full mb-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-2 justify-items-center">
+      <div *ngFor="let event of EventArray" class="event-card p-4 border border-white rounded-lg shadow-md text-center">
+        <h3 class="text-lg font-lilita">{{ event.title }} 
+          <span class="m-2" *ngIf="event.is_private == 1">🔑</span>
+        </h3>
+        <p class="text-sm">{{ event.starting_at | date: 'dd/MM/yyyy HH:mm' }}</p>
+        <p class="text-sm mb-6 truncate">{{ event.description }}</p>
+        <button class="link border border-white p-2 rounded-lg mb-2" 
+                (click)="participate(event.id, event.is_private)">Participer</button>
+        
+        <!-- Formulaire de mot de passe pour les événements privés -->
+        <div *ngIf="event.showPasswordForm">
+          <form [formGroup]="PassWordForm" (ngSubmit)="submitPassword(event)">
+            <input type="password" formControlName="password" placeholder="Mot de Passe" class="w-full inputPassword text-black">  
+            <button type="submit" class="btn btn-primary rounded p-2 border border-black mt-2">Submit</button>
+          </form>
         </div>
       </div>
     </div>
   </div>
-  
+</div>

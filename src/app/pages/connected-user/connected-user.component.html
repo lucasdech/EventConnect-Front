@@ -17,7 +17,7 @@
           <div *ngFor="let event of events" id="event-card" class="event-card p-4 border border-white rounded-lg shadow-md text-center">
             <h3 class="text-lg font-lilita">{{ event.event.title }}</h3>
             <p class="text-sm">{{ event.event.starting_at | date: 'dd/MM/yyyy HH:mm' }}</p> 
-            <p class="text-sm mb-6">{{ event.event.description }}</p> 
+            <p class="text-sm mb-6 truncate">{{ event.event.description }}</p> 
             <a (click)="navigateToEvent(event.event.id)" class="link border border-white p-2 rounded-lg">Voir</a>
           </div>
         </ng-container>
