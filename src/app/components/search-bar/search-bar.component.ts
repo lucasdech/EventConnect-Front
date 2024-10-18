@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { GetEventService } from '../../services/Event/get-event.service';
 import { CommonModule } from '@angular/common';
@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.css'],
 })
-export class SearchBarComponent {
+export class SearchBarComponent implements OnInit {
 
   private getEventService = inject(GetEventService);
   public EventArray: any[] = [];
@@ -23,6 +23,10 @@ export class SearchBarComponent {
     });
   }
 
+  ngOnInit(): void {
+    this.onModalClick();
+  }
+
   search() {
     let search = this.searchForm.value.title || '';
 
@@ -30,7 +34,7 @@ export class SearchBarComponent {
       .subscribe({
         next: (result: any) => {
           this.EventArray = result.events;
-          this.openModal();  // Afficher la modal après la recherche
+          this.openModal();
         },
         error: (err) => {
           console.error('Erreur lors de la recherche :', err);
@@ -45,4 +49,18 @@ export class SearchBarComponent {
   closeModal() {
     this.isModalOpen = false;
   }
+
+  onModalClick() {
+    let modal = document.querySelector('#modal');
+
+    if (modal) {
+     
+      document.addEventListener('click', (event) => {
+        if (this.isModalOpen == true && event.target == modal) {
+         this.closeModal();
+        }
+      });
+    }
+  }
+
 }
