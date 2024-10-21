@@ -6,14 +6,13 @@ import { Component, OnInit, signal } from '@angular/core';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './nav-bar.component.html',
-  styleUrl: './nav-bar.component.css'
+  styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit {
 
   userId: number = 0;
-  // isConnected: boolean = false;
   public isConnected = signal<boolean>(false);
-
+  public menuOpen = signal<boolean>(false);  // Signal pour gérer l'état du menu burger
 
   constructor() {}
 
@@ -21,7 +20,7 @@ export class NavBarComponent implements OnInit {
     this.IsconnectedUser();
   }
 
-  logout() {  
+  logout() {
     localStorage.removeItem('ID');
     localStorage.removeItem('Participants');
     localStorage.removeItem('JWT');
@@ -30,11 +29,14 @@ export class NavBarComponent implements OnInit {
   }
 
   IsconnectedUser() {
-    if (typeof localStorage.getItem('ID') != undefined && localStorage.getItem('ID') != null) {
+    if (typeof localStorage.getItem('ID') !== 'undefined' && localStorage.getItem('ID') !== null) {
       this.isConnected.set(true);
-    }else {
+    } else {
       this.isConnected.set(false);
     }
   }
 
+  toggleMenu() {
+    this.menuOpen.set(!this.menuOpen());
+  }
 }

@@ -8,3 +8,9 @@
 .hidden {
     display: none;
 }
+
+@media (max-width: 600px) {
+    .userList {
+        width: 90%;
+    }
+}

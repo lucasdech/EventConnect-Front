@@ -3,11 +3,19 @@
 }
 
 main {
-  padding-top: 0; /* Supprimez le padding-top */
+  padding-top: 0;
+}
+
+a :hover {
+  cursor: pointer;
+}
+
+button :hover {
+  cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {
   main {
-    padding-top: 0; /* Supprimez également le padding-top pour les écrans plus petits */
+    padding-top: 0;
   }
 }

@@ -1,21 +1,35 @@
 .NavLink {
     color: #F35733;
-}
-
-.NavLogo {
+  }
+  
+  .NavLogo {
     width: 100%;
     max-width: 160px;
     height: auto;
-}
-
-@media screen and (max-width: 768px) {
+  }
+  
+  .mobile-menu-button {
+    outline: none;
+  }
+  
+  .mobile-menu {
+    display: none;
+  }
+  
+  @media screen and (max-width: 750px) {
     .NavLogo {
-        max-width: 120px;
+      max-width: 120px;
     }
-}
-
-@media screen and (max-width: 480px) {
+  
+    /* Mobile menu visible only on small screens */
+    .mobile-menu {
+      display: block;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
     .NavLogo {
-        max-width: 80px;
+      max-width: 80px;
     }
-}
+  }
+  

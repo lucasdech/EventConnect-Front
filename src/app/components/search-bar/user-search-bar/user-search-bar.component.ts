@@ -11,7 +11,7 @@ import { ParticipantsComponent } from '../../event-details/participants/particip
   templateUrl: './user-search-bar.component.html',
   styleUrls: ['./user-search-bar.component.css'],
 })
-export class UserSearchBarComponent implements OnInit {
+export class UserSearchBarComponent {
 
   public UserArray: any[] = [];
   searchForm: FormGroup;
@@ -25,12 +25,7 @@ export class UserSearchBarComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
-    
-  }
-
   search() {
-
     let search = this.searchForm.value.title || '';
 
     this.participantsService.userList(search).subscribe({

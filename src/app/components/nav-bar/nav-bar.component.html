@@ -1,7 +1,8 @@
-<nav class="bg-transparent mb-0">
+<nav class="bg-transparent flex mb-12">
   <div class="max-w-6xl mx-auto px-4">
-    <div class="flex justify-center items-center">
-      <div class="flex items-center space-x-20">
+    <div class="flex justify-between items-center">
+      <!-- Menu items for desktop (unchanged) -->
+      <div class="flex items-center space-x-20 hidden md:flex">
         <a href="my-board" class="NavLink py-4 px-6 transition duration-300 hover:text-orange-400 text-lg">Mes Events</a>
         <div class="flex items-center">
           <a href="#" class="flex items-center py-4 px-4">
@@ -15,9 +16,33 @@
           <a href="" class="NavLink py-4 px-6 transition duration-300 hover:text-orange-400 text-lg">Connexion</a>
         </ng-template>
       </div>
+
+      <!-- Burger icon for mobile -->
+      <div class="md:hidden flex items-center">
+        <a href="#" class="flex items-center py-4 px-4">
+          <img class='NavLogo' src="/assets/logo/logoBlack.png" alt="Logo">
+        </a>
+        <button class="mobile-menu-button" (click)="toggleMenu()">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+          </svg>
+        </button>
+      </div>
     </div>
   </div>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu md:hidden">
+    <a href="my-board" class="NavLink block py-2 px-4 text-sm">Mes Events</a>
+    <ng-container *ngIf="isConnected(); else mobileLoginLink">
+      <a (click)="logout()" class="NavLink block py-2 px-4 text-sm">Déconnexion</a>
+    </ng-container>
+    <ng-template #mobileLoginLink>
+      <a href="" class="NavLink block py-2 px-4 text-sm">Connexion</a>
+    </ng-template>
+  </div>
 </nav>
+
 <div class="flex justify-center -mt-2">
   <hr class="w-1/2 border-t border-black">
 </div>
