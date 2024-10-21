@@ -12,7 +12,7 @@ export class NavBarComponent implements OnInit {
 
   userId: number = 0;
   public isConnected = signal<boolean>(false);
-  public menuOpen = signal<boolean>(false);  // Signal pour gérer l'état du menu burger
+  
 
   constructor() {}
 
@@ -36,7 +36,7 @@ export class NavBarComponent implements OnInit {
     }
   }
 
-  toggleMenu() {
-    this.menuOpen.set(!this.menuOpen());
+  login() {
+    window.location.href = '/login';
   }
 }

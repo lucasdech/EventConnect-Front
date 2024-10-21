@@ -1,51 +1,26 @@
-<nav id="navBar" class="bg-transparent md:w-full flex mb-12">
-  <div class="max-w-full mx-auto px-4">
-    <div class="flex justify-between items-center">
-      <!-- Menu items for desktop (unchanged) -->
-      <div class="flex items-center space-x-20 hidden md:flex">
-        <a href="my-board" class="NavLink py-4 px-6 transition duration-300 hover:text-orange-400 text-lg">Mes Events</a>
-        <div class="flex items-center">
+<nav id="navBar" class="bg-transparent w-full flex flex-wrap mb-2 font-lilita">
+  <div class="max-w-full mx-auto px-4 w-full">
+    <div class="flex flex-wrap items-center justify-center items-center w-full">
+      <!-- Menu pour desktop -->
+      <div class="flex nav_content items-center justify-around w-full sm:w-auto space-x-4 sm:space-x-20">
+        <a href="my-board" class="NavLink py-4 px-6 transition duration-300 hover:text-orange-400 text-xl">Mes
+          Events</a>
+        <div class="flex items-center justify-center mx-auto">
           <a href="#" class="flex items-center py-4 px-4">
-              <img class='NavLogo' src="/assets/logo/logoBlack.png" alt="Logo">
-          </a>
-        </div>
-        <ng-container *ngIf="isConnected(); else loginLink">
-          <a (click)="logout()" class="NavLink py-4 px-6 transition duration-300 hover:text-orange-400 text-lg">Déconnexion</a>
-        </ng-container>
-        <ng-template #loginLink>
-          <a href="" class="NavLink py-4 px-6 transition duration-300 hover:text-orange-400 text-lg">Connexion</a>
-        </ng-template>
-      </div>
-
-      <!-- Burger icon for mobile -->
-      <div id="burguer" class="md:hidden w-full flex items-center justify-center">
-        <div>
-          <a href="#" class="flex items-center py-4 px-2">
             <img class='NavLogo' src="/assets/logo/logoBlack.png" alt="Logo">
           </a>
         </div>
-        <div>
-          <button id="burguerBtn" class="mobile-menu-button" (click)="toggleMenu()">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-            </svg>
-          </button>
-        </div>
+        <ng-container *ngIf="isConnected(); else loginLink">
+          <a (click)="logout()"
+            class="NavLink py-4 px-6 transition duration-300 hover:text-orange-400 text-xl">Déconnexion</a>
+        </ng-container>
+        <ng-template #loginLink>
+          <a (click)="login()"
+            class="NavLink py-4 px-6 transition duration-300 hover:text-orange-400 text-xl">Connexion</a>
+        </ng-template>
       </div>
     </div>
   </div>
-
-  <!-- Mobile menu -->
- <!-- <div class="mobile-menu md:hidden">
-    <a href="my-board" class="NavLink block py-2 px-4 text-sm">Mes Events</a>
-    <ng-container *ngIf="isConnected(); else mobileLoginLink">
-      <a (click)="logout()" class="NavLink block py-2 px-4 text-sm">Déconnexion</a>
-    </ng-container>
-    <ng-template #mobileLoginLink>
-      <a href="" class="NavLink block py-2 px-4 text-sm">Connexion</a>
-    </ng-template>
-  </div>
-  -->
 </nav>
 
 <div class="flex justify-center -mt-2">

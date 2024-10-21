@@ -1,41 +1,35 @@
 .NavLink {
-    color: #F35733;
-  }
-  
-  .NavLogo {
+  color: #F35733;
+}
+
+.NavLogo {
+  width: 100%;
+  max-width: 160px;
+  height: auto;
+}
+
+
+
+/* Mobile screen adjustments */
+@media (max-width: 640px) {
+  .NavLink {
+    text-align: center;
+    padding: 0.5rem 0;
     width: 100%;
-    max-width: 160px;
-    height: auto;
-  }
-  
-  .mobile-menu-button {
-    outline: none;
-  }
-  
-  .mobile-menu {
-    display: none;
   }
 
-  #burguer {
-    border: red 2px solid;
+  .NavLogo {
+    width: 80px;
+    margin: 0 auto;
   }
-  
-  @media screen and (max-width: 767px) {
-    .NavLogo {
-      max-width: 120px;
-    }
-  
-    /* Mobile menu visible only on small screens */
-    .mobile-menu {
-      display: block;
-    }
 
+  .NavLink, .NavLogo {
+    margin-bottom: 0.5rem;
   }
-  
-  @media screen and (max-width: 480px) {
-    .NavLogo {
-      max-width: 80px;
-    }
+}
 
+@media (max-width: 440px) {
+  .NavLogo {
+    max-width: 80px;
   }
-  
+}
