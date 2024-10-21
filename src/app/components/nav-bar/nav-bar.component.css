@@ -15,8 +15,12 @@
   .mobile-menu {
     display: none;
   }
+
+  #burguer {
+    border: red 2px solid;
+  }
   
-  @media screen and (max-width: 750px) {
+  @media screen and (max-width: 767px) {
     .NavLogo {
       max-width: 120px;
     }
@@ -25,11 +29,13 @@
     .mobile-menu {
       display: block;
     }
+
   }
   
   @media screen and (max-width: 480px) {
     .NavLogo {
       max-width: 80px;
     }
+
   }
   
