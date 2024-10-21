@@ -2,6 +2,10 @@
   color: #F35733;
 }
 
+.NavLink :hover {
+  border-bottom: 2px solid #F35733;
+}
+
 .NavLogo {
   width: 100%;
   max-width: 160px;
@@ -18,6 +22,10 @@
     width: 100%;
   }
 
+  #navBar {
+    margin-bottom: 2%;
+  }
+
   .NavLogo {
     width: 80px;
     margin: 0 auto;
@@ -31,5 +39,9 @@
 @media (max-width: 440px) {
   .NavLogo {
     max-width: 80px;
+  }
+
+  #navBar {
+    margin-bottom: 2%;
   }
 }
