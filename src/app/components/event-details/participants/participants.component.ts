@@ -2,13 +2,13 @@ import { Component, inject, OnInit, signal, Input } from '@angular/core';
 import { ParticipantsService } from '../../../services/EventUser/participants.service';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { SearchBarComponent } from '../../search-bar/search-bar.component';
+import { UserSearchBarComponent } from '../../search-bar/user-search-bar/user-search-bar.component';
 
 
 @Component({
   selector: 'app-participants',
   standalone: true,
-  imports: [CommonModule, SearchBarComponent],
+  imports: [CommonModule, UserSearchBarComponent],
   templateUrl: './participants.component.html',
   styleUrls: ['./participants.component.css'],
 })
@@ -95,7 +95,7 @@ export class ParticipantsComponent implements OnInit {
   }
 
   getAllUsers() {
-    this.participantsService.userList().subscribe({
+    this.participantsService.userList('').subscribe({
       next: (data) => {
         this.users = data.data.users;
         console.log('liste de users : ', data);

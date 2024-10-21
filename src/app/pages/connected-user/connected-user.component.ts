@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 import { MyEventsService } from '../../services/EventUser/my-events.service';
 import { CommonModule } from '@angular/common';
 import { EventFormComponent } from '../../components/event-form/event-form.component';
-import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
+import { SearchBarComponent } from '../../components/search-bar/event-search-bar/search-bar.component';
 import { Router } from '@angular/router';
 
 @Component({

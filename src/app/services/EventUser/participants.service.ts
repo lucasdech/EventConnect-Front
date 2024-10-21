@@ -40,8 +40,8 @@ export class ParticipantsService {
     );
   }
 
-  userList(){
-    return this.http.get(`${this.BASE_URL}/users`).pipe(
+  userList(params: string){
+    return this.http.get(`${this.BASE_URL}/users?search=` + params).pipe(
       tap((result: any) => {
         console.log('liste de tout les users :', result)
       }),

@@ -1,9 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { GetEventService } from '../../services/Event/get-event.service';
+import { GetEventService } from '../../../services/Event/get-event.service';
 import { CommonModule } from '@angular/common';
-import { ParticipantsService } from '../../services/EventUser/participants.service';
-import { EventSearchBarService } from '../../services/SearchBar/event-search-bar.service';
+import { ParticipantsService } from '../../../services/EventUser/participants.service';
+import { EventSearchBarService } from '../../../services/SearchBar/event-search-bar.service';
 
 @Component({
   selector: 'app-search-bar',

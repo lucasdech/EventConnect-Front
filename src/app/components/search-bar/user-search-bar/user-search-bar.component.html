@@ -1,0 +1,8 @@
+<form [formGroup]="searchForm" (ngSubmit)="search()">
+    <div id="search-bar" class="flex items-center justify-center my-5" style="width: 100% !important">
+      <hr class="border border-black w-full" style="border-width: 0.5px;">
+      <input type="text" formControlName="title" placeholder="Search..." class="mx-5 px-4 py-2 w-full sm:w-4/5 shadow-lg">
+      <button type="submit" (click)="search()" class="btn btn-primary me-4 rounded p-2 border border-black">🔍</button>
+      <hr class="border border-black w-full" style="border-width: 0.5px;">
+    </div>
+</form>

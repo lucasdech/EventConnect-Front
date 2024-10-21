@@ -98,7 +98,7 @@ export class RegisterFormComponent implements OnInit {
     this.RegisterService.updateProfile(this.registerForm.value as Credentials).subscribe({
       next: (success: boolean) => {
         if (success) {
-          this.router.navigate(['my-account']);
+          window.location.reload();
         } else {
           this.invalidCredentials = true;
         }
