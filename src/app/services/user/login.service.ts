@@ -35,4 +35,9 @@ export class LoginService {
       map((result: any) => !!result.data['token'])
     );
   }
+
+  getMyAccount(): Observable<any> {
+    return this.http.get(this.BASE_URL + "/api/users/" + localStorage.getItem('ID'), {
+    });
+  }
 }

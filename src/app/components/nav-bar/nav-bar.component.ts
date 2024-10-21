@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 
 @Component({
   selector: 'app-nav-bar',
@@ -11,7 +11,9 @@ import { Component, OnInit } from '@angular/core';
 export class NavBarComponent implements OnInit {
 
   userId: number = 0;
-  isConnected: boolean = false;
+  // isConnected: boolean = false;
+  public isConnected = signal<boolean>(false);
+
 
   constructor() {}
 
@@ -19,18 +21,19 @@ export class NavBarComponent implements OnInit {
     this.IsconnectedUser();
   }
 
-  logout() {
+  logout() {  
     localStorage.removeItem('ID');
     localStorage.removeItem('Participants');
     localStorage.removeItem('JWT');
+    localStorage.removeItem('MyEvents');
     window.location.href = '/';
   }
 
   IsconnectedUser() {
     if (typeof localStorage.getItem('ID') != undefined && localStorage.getItem('ID') != null) {
-      this.isConnected = true;
+      this.isConnected.set(true);
     }else {
-      this.isConnected = false;
+      this.isConnected.set(false);
     }
   }
 

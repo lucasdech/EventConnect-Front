@@ -1,20 +1,23 @@
 <nav class="bg-transparent mb-0">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="flex justify-center items-center">
-        <div class="flex items-center space-x-20">
-          <a href="/about-us" class="NavLink py-4 px-6 transition duration-300 hover:text-orange-400 text-lg">A Propos</a>
-          <div class="flex items-center">
-            <a href="#" class="flex items-center py-4 px-4">
-                <img class='NavLogo' src="/assets/logo/logoBlack.png" alt="Logo">
-            </a>
-          </div>
-            <a *ngIf="isConnected == false" href="" class="NavLink py-4 px-6 transition duration-300 hover:text-orange-400 text-lg">Connexion</a>
-            <a *ngIf="isConnected == true" href="" class="NavLink py-4 px-6 transition duration-300 hover:text-orange-400 text-lg">Mon Compte</a>
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="flex justify-center items-center">
+      <div class="flex items-center space-x-20">
+        <a href="my-board" class="NavLink py-4 px-6 transition duration-300 hover:text-orange-400 text-lg">Mes Events</a>
+        <div class="flex items-center">
+          <a href="#" class="flex items-center py-4 px-4">
+              <img class='NavLogo' src="/assets/logo/logoBlack.png" alt="Logo">
+          </a>
         </div>
+        <ng-container *ngIf="isConnected(); else loginLink">
+          <a (click)="logout()" class="NavLink py-4 px-6 transition duration-300 hover:text-orange-400 text-lg">Déconnexion</a>
+        </ng-container>
+        <ng-template #loginLink>
+          <a href="" class="NavLink py-4 px-6 transition duration-300 hover:text-orange-400 text-lg">Connexion</a>
+        </ng-template>
       </div>
     </div>
-  </nav>
-  <div class="flex justify-center -mt-2">
-    <hr class="w-1/2 border-t border-black">
   </div>
-  
+</nav>
+<div class="flex justify-center -mt-2">
+  <hr class="w-1/2 border-t border-black">
+</div>

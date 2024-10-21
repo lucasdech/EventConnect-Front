@@ -20,6 +20,8 @@ export class RegisterService {
 
   token = signal<string | null>(null);
 
+  userId = localStorage.getItem('ID');
+
   constructor() { }
 
   register(credentials: Credentials): Observable<boolean> {
@@ -47,4 +49,18 @@ export class RegisterService {
       map((result: any) => !!result.data)
     );
   }
+
+  updateProfile(credentials: Credentials): Observable<boolean> {
+    const formData = new FormData();
+    
+    console.table(credentials);
+    console.log(formData)
+    return this.http.put(this.BASE_URL + `/api/user/${this.userId}`, formData).pipe(
+      tap((result: any)=> {
+        console.log(result);
+      }),
+      map((result: any) => !!result.data)
+    );
+  }
+
 }

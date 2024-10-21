@@ -1,0 +1,22 @@
+<section class="flex flex-col justify-center items-center mt-6 text-white">
+    <h2 class="text-[#63281A] font-lilita">Mon Compte :</h2>
+
+    <div class="flex flex-raw p-8 my-6 rounded-lg bg-[#F29F05] items-center">
+        <div class="me-6">
+            <img class="h-32 w-32 bg-gray-400 rounded-full"
+                src="https://eventconnectapi.projets.p8.garage404.com/storage/{{user.profile_picture}}"
+                alt="photo de profil">
+        </div>
+        <div class="space-y-3">
+            <p> Nom : {{ user.name }}</p>
+            <p>E-mail : {{ user.email }}</p>
+        </div>
+    </div>
+
+    <button id="btnForm" (click)="openForm()" class="mb-6 rounded-lg bg-[#F35733] p-4">Modifier mon Profil</button>
+
+    <div class="mb-6">
+        <app-register-form id="updateForm" [user]="user" class="hidden" />
+    </div>
+
+</section>
