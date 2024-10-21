@@ -7,11 +7,10 @@ import { LoginFormComponent } from '../../components/login-form/login-form.compo
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   standalone: true,
-  imports: [RegisterFormComponent, LoginFormComponent]
+  imports: [RegisterFormComponent, LoginFormComponent],
 })
 export class HomeComponent implements OnInit {
-
-  ngOnInit() {  
+  ngOnInit() {
     this.setupToggleForms();
   }
 
@@ -23,21 +22,23 @@ export class HomeComponent implements OnInit {
 
     if (loginBtn && formLogin && registerBtn && registerForm) {
       loginBtn.addEventListener('click', () => {
-        
         if (!registerForm.classList.contains('hidden')) {
           registerForm.classList.add('hidden');
         }
-        
         formLogin.classList.toggle('hidden');
+        if (!formLogin.classList.contains('hidden')) {
+          formLogin.scrollIntoView({ behavior: 'smooth' });
+        }
       });
 
       registerBtn.addEventListener('click', () => {
-        
         if (!formLogin.classList.contains('hidden')) {
           formLogin.classList.add('hidden');
         }
-      
         registerForm.classList.toggle('hidden');
+        if (!registerForm.classList.contains('hidden')) {
+          registerForm.scrollIntoView({ behavior: 'smooth' });
+        }
       });
     }
   }
