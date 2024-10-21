@@ -30,7 +30,7 @@ export class RegisterService {
     // Ajoute les données au FormData
     formData.append('name', credentials.name);
     formData.append('email', credentials.email);
-    formData.append('profile_picture', credentials.profile_picture); // Assurez-vous que c'est bien le fichier
+    formData.append('profile_picture', credentials.profile_picture);
     formData.append('password', credentials.password);
     formData.append('confirm_password', credentials.confirm_password);
 
