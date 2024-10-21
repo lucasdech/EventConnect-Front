@@ -22,10 +22,6 @@
     width: 100%;
   }
 
-  #navBar {
-    margin-bottom: 2%;
-  }
-
   .NavLogo {
     width: 80px;
     margin: 0 auto;
@@ -34,6 +30,10 @@
   .NavLink, .NavLogo {
     margin-bottom: 0.5rem;
   }
+
+  .traits {
+    margin-bottom: 2%;
+  }
 }
 
 @media (max-width: 440px) {
@@ -41,7 +41,7 @@
     max-width: 80px;
   }
 
-  #navBar {
-    margin-bottom: 15%;
+  .traits {
+    margin-bottom: 4%;
   }
 }
