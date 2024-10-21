@@ -3,7 +3,6 @@ import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Credentials, RegisterService } from '../../services/user/register.service';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-register-form',
@@ -23,25 +22,28 @@ export class RegisterFormComponent implements OnInit {
   invalidCredentials = false;
   passwordMismatch: boolean = false;
 
-  @Input() user:any = [];
-
+  @Input() user: any = [];
 
   constructor(private fb: FormBuilder) {
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      profile_picture: [null, Validators.required],
+      profile_picture: null,
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required]
     });
   }
 
   ngOnInit(): void {
-    // Utilisation de this.router.url pour obtenir la route actuelle
     const currentRoute = this.router.url;
-    console.log("Route actuelle :", currentRoute);
-
     this.BtnContent = currentRoute === '/' ? 'S\'inscrire' : 'Modifier';
+
+    if (this.BtnContent === 'Modifier') {
+      this.registerForm.patchValue({
+        name: this.user.name,
+        email: this.user.email
+      });
+    }
   }
 
   onFileChange(event: any) {
@@ -89,6 +91,10 @@ export class RegisterFormComponent implements OnInit {
   }
 
   UpdateProfile() {
+    if (this.registerForm.invalid) return;
+
+    console.log('Mise à jour du profil en cours...', this.registerForm.value);
+    
     this.RegisterService.updateProfile(this.registerForm.value as Credentials).subscribe({
       next: (success: boolean) => {
         if (success) {

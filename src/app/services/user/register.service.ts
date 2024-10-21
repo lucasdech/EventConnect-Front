@@ -37,8 +37,6 @@ export class RegisterService {
     return this.http.post(this.BASE_URL + "/api/register", formData).pipe(
       tap((result: any) => {
         if (result && result.data['token']) {
-          localStorage.setItem('ID', "");
-          localStorage.setItem("MyEvents", "");
           localStorage.setItem("ID", result.data['user'].id);
           localStorage.setItem("JWT", result.data['token']);
           this.token.set(result.data['token']);
@@ -50,17 +48,24 @@ export class RegisterService {
     );
   }
 
-  updateProfile(credentials: Credentials): Observable<boolean> {
+  updateProfile(credentials: Partial<Credentials>): Observable<boolean> {
+
     const formData = new FormData();
+
+    // Ajoute les données au FormData si elles existent
+    if (credentials.name) formData.append('name', credentials.name);
+    if (credentials.email) formData.append('email', credentials.email);
+    if (credentials.profile_picture) formData.append('profile_picture', credentials.profile_picture);
+    if (credentials.password) formData.append('password', credentials.password);
+    if (credentials.confirm_password) formData.append('confirm_password', credentials.confirm_password);
     
-    console.table(credentials);
-    console.log(formData)
-    return this.http.put(this.BASE_URL + `/api/user/${this.userId}`, formData).pipe(
-      tap((result: any)=> {
-        console.log(result);
+    console.log('FORMDATA SERVICE', formData);
+
+    return this.http.put(this.BASE_URL + `/api/user/${this.userId}`, credentials).pipe(
+      tap((result: any) => {
+        console.log('Mise à jour réussie:', result);
       }),
       map((result: any) => !!result.data)
     );
   }
-
 }

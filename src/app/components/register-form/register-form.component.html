@@ -5,10 +5,10 @@
     <div class="flex">
       <div>
         <label for="name">Prénom - Nom :</label>
-        <input class="text-black" type="text" id="name" formControlName="name" placeholder="{{ BtnContent == 'Modifier' ? user.name : '' }}" required>
+        <input class="text-black" type="text" id="name" formControlName="name" placeholder="{{ BtnContent == 'Modifier' ? user.name : '' }}" [required]="BtnContent !== 'Modifier'">
         
         <label for="email">Email :</label>
-        <input class="text-black" type="email" id="email" formControlName="email" placeholder="{{ BtnContent == 'Modifier' ? user.email : '' }}" required>
+        <input class="text-black" type="email" id="email" formControlName="email" placeholder="{{ BtnContent == 'Modifier' ? user.email : '' }}" [required]="BtnContent !== 'Modifier'">
       </div>
 
       <div class="ml-20">
@@ -19,16 +19,16 @@
     <label for="profile-photo">Photo de profil :</label>
     <div class="photo-upload">
       <label for="profile_picture"></label>
-      <input type="file" (change)="onFileChange($event)" id="profile_picture" required>
+      <input type="file" (change)="onFileChange($event)" id="profile_picture">
     </div>
 
     <div class="register_password">
       <div>
         <label for="password">Password :</label>
-        <input class="text-black" type="password" id="password" formControlName="password" required>
+        <input class="text-black" type="password" id="password" formControlName="password" [required]="BtnContent !== 'Modifier'">
 
         <label for="confirm-password">Confirm Password :</label>
-        <input class="text-black" type="password" id="confirm-password" formControlName="confirmPassword" required>
+        <input class="text-black" type="password" id="confirm-password" formControlName="confirmPassword" [required]="BtnContent !== 'Modifier'">
       </div>
       
       <div *ngIf="passwordMismatch" style="color: red;">
