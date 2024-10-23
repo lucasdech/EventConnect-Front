@@ -21,14 +21,6 @@ export class SupabaseService {
   private supabase: SupabaseClient;
   private messageSubject = new BehaviorSubject<Message[]>([]);
 
-  EventID: number | 0 = 0;
-
-  ngOnInit() {
-    const eventIdParam = this.route.snapshot.paramMap.get('id');
-    this.EventID = +(eventIdParam || 0);
-      console.log('Rafraîchissement des messages pour l’événement:', this.EventID);
-    }
-
   constructor(private route: ActivatedRoute) {
     this.supabase = createClient(
       'https://egwnqsbqdugpatmobhcx.supabase.co',
@@ -87,9 +79,7 @@ export class SupabaseService {
       const { data, error } = await this.supabase
         .from('messages')
         .select('*')
-        .eq('event_id', this.EventID)
         .order('created_at', { ascending: true });
-
       if (error) throw error;
       if (data) {
         this.messageSubject.next(data);
