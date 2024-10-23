@@ -1,54 +1,44 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { map, Observable, tap } from 'rxjs';
+import { SupabaseService, Message } from '../supabase.service';
 
-export interface Credentials {
+export interface MessageInput {
   content: string;
   event_id: number;
+  user_id: number;
 }
 
 @Injectable({
   providedIn: 'root',
 })
-
 export class ChatService {
   private http = inject(HttpClient);
   private BASE_URL = 'https://eventconnectapi.projets.p8.garage404.com/api';
 
-  constructor() {}
+  constructor(private supabaseService: SupabaseService) {}
 
-  getMessages(eventId: number) {
-    console.log("Récupération des messages pour l'événement", eventId);
-    return this.http.get(`${this.BASE_URL}/messages/${eventId}`).pipe(
-      tap((result: any) => {
-        console.log('Réponse Messages:', result);
+  getMessages(eventId: number): Observable<Message[]> {
+    return this.http.get<any>(`${this.BASE_URL}/messages/${eventId}`).pipe(
+      tap((result) => {
+        console.log('Réponse Messages SERVICE:', result.data);
       }),
-      map((result: any) => {
-        if (result.data && Array.isArray(result.data.messages)) {
-          return result.data.messages;
-        } else {
-          console.error(
-            'Les messages ne sont pas définis ou ne sont pas dans un tableau'
-          );
-          return [];
-        }
-      })
+      map((result) => result.data.SupabaseMessage)
     );
   }
 
-  addMessage(credentials: Credentials): Observable<boolean>  {
-    return this.http.post(`${this.BASE_URL}/message`, credentials).pipe(
-      tap((result: any) => {
+  addMessage(messageInput: MessageInput): Observable<boolean> {
+    return this.http.post(`${this.BASE_URL}/message`, messageInput).pipe(
+      tap(async (result) => {
         console.log('Message ajouté:', result);
+        // Après avoir ajouté le message via l'API REST, on l'ajoute aussi dans Supabase
+        await this.supabaseService.insertMessage(messageInput);
       }),
-      map((result: any) => {
-        if (result.success) {
-          return result.data;
-        } else {
-          console.error("Erreur lors de l'ajout du message");
-          return null;
-        }
-      })
+      map((result: any) => result.success)
     );
+  }
+
+  subscribeToMessages(eventId: number, callback: (messages: Message[]) => void) {
+    return this.supabaseService.getMessagesByEvent(eventId).subscribe(callback);
   }
 }

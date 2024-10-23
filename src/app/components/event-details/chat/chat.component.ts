@@ -1,11 +1,8 @@
 import { Component, inject } from '@angular/core';
-import { ChatService, Credentials } from '../../../services/EventUser/chat.service';
+import { ChatService } from '../../../services/EventUser/chat.service';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import Echo from 'laravel-echo';
-import Pusher from 'pusher-js';
-
 
 @Component({
   selector: 'app-chat',
@@ -34,20 +31,13 @@ export class ChatComponent {
   }
 
   ngOnInit() {
-
-    this.getMessages();
-
-    // setTimeout(() => {
-    //   this.getMessages();
-    // }, 10000);
-
     this.route.paramMap.subscribe((params) => {
       this.eventId = +params.get('id')!;
       console.log("ID de l'événement récupéré :", this.eventId);
-      
-      // Mettre à jour le champ event_id dans le formulaire
+  
       this.messageForm.patchValue({ event_id: this.eventId });
-      
+      this.getMessages(); // Appeler pour charger les messages initiaux
+      this.subscribeToMessages(); // S'abonner aux messages en temps réel
     });
   }
 
@@ -55,33 +45,41 @@ export class ChatComponent {
     this.chatService.getMessages(this.eventId).subscribe({
       next: (data) => {
         this.messages = data;
-        console.log('Messages récupérés :', this.messages);
+        console.log('Messages récupérés COMPOSENT:', this.messages);
       },
       error: (err) => {
         console.error('Erreur lors de la récupération des messages :', err);
       },
     });
   }
+  
+
+  subscribeToMessages() {
+    this.chatService.subscribeToMessages(this.eventId, (newMessages) => {
+      this.messages = newMessages;
+      console.log('Messages mis à jour :', this.messages);
+    });
+  }
 
   sendMessage() {
     if (this.messageForm.invalid) return;
-  
-    console.log('Envoi du message :', this.messageForm.value);
-  
-    this.chatService.addMessage(this.messageForm.value as Credentials).subscribe({
-      next: (response: any) => {
-             
-          console.log('Message ajouté:', response);
-          
-          
-          this.messageForm.reset({ 
-            content: '', 
-            event_id: this.eventId, 
-            user_id: this.userId
-          });
-          
-          this.getMessages();
 
+    console.log('Envoi du message :', this.messageForm.value);
+
+    const messageData = {
+      content: this.messageForm.value.content,
+      event_id: this.eventId,
+      user_id: this.userId,
+    };
+
+    this.chatService.addMessage(messageData).subscribe({
+      next: (response: any) => {
+        console.log('Message ajouté:', response);
+        this.messageForm.reset({
+          content: '', 
+          event_id: this.eventId, 
+          user_id: this.userId
+        });
       },
       error: (err) => {
         console.error('Erreur lors de l\'envoi du message :', err);
@@ -89,6 +87,5 @@ export class ChatComponent {
       },
     });
   }
-  
-  
+
 }
