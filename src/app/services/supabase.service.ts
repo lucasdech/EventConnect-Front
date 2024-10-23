@@ -8,9 +8,6 @@ export interface Message {
   event_id: number;
   user_id: number;
   created_at: string;
-  user: {
-    profile_picture: string;
-  };
 }
 
 @Injectable({
@@ -29,13 +26,13 @@ export class SupabaseService {
           persistSession: true,
           detectSessionInUrl: false,
           autoRefreshToken: true,
-          storage: window.localStorage
+          storage: window.localStorage,
         },
         realtime: {
           params: {
-            eventsPerSecond: 10
-          }
-        }
+            eventsPerSecond: 10,
+          },
+        },
       }
     );
     this.initializeSupabase();
@@ -44,27 +41,26 @@ export class SupabaseService {
   private async initializeSupabase() {
     try {
       // Attendre un petit moment pour éviter les conflits de verrouillage
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
       await this.setupRealtimeSubscription();
     } catch (error) {
-      console.error('Erreur lors de l\'initialisation de Supabase:', error);
+      console.error("Erreur lors de l'initialisation de Supabase:", error);
     }
   }
 
   private async setupRealtimeSubscription() {
     try {
-      const channel = this.supabase.channel('messages-changes')
-        .on(
-          'postgres_changes',
-          {
-            event: '*',
-            schema: 'public',
-            table: 'messages'
-          },
-          async (payload) => {
-            await this.refreshMessages();
-          }
-        );
+      const channel = this.supabase.channel('messages-changes').on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'messages',
+        },
+        async (payload) => {
+          await this.refreshMessages();
+        }
+      );
 
       await channel.subscribe();
       console.log('Subscription aux messages établie');
@@ -75,14 +71,15 @@ export class SupabaseService {
 
   private async refreshMessages() {
     try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const eventId = urlParams.get('event_id');
+
+      console.log('Rafraîchissement des messages pour l’événement:', eventId);
+
       const { data, error } = await this.supabase
         .from('messages')
-        .select(`
-          *,
-          user:user_id (
-            profile_picture
-          )
-        `)
+        .select('*')
+        .eq('event_id', eventId)
         .order('created_at', { ascending: true });
 
       if (error) throw error;
@@ -113,24 +110,23 @@ export class SupabaseService {
     return this.messageSubject.asObservable();
   }
 
-  async insertMessage(messageData: { content: string; event_id: number; user_id: number }): Promise<Message | null> {
+  async insertMessage(messageData: {
+    content: string;
+    event_id: number;
+    user_id: number;
+  }): Promise<Message | null> {
     try {
       const { data, error } = await this.supabase
         .from('messages')
         .insert(messageData)
-        .select(`
-          *,
-          user:user_id (
-            profile_picture
-          )
-        `)
+        .select('*')
         .single();
 
       if (error) throw error;
       await this.refreshMessages();
       return data;
     } catch (error) {
-      console.error('Erreur lors de l\'insertion du message:', error);
+      console.error("Erreur lors de l'insertion du message:", error);
       return null;
     }
   }
