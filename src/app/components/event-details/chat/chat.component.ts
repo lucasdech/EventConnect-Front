@@ -74,7 +74,7 @@ export class ChatComponent implements OnInit {
 
     this.chatService.addMessage(messageData).subscribe({
       next: (response: any) => {
-        console.log('Message ajouté:', response);
+        console.log('Message ajoutéeee:', response);
         this.messageForm.reset({
           content: '', 
           event_id: this.eventId, 
