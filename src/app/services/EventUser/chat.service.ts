@@ -33,7 +33,7 @@ export class ChatService {
         console.log('Message ajouté:', result);
         // await this.supabaseService.insertMessage(messageInput);
       }),
-      map((result: any) => result.data.message)
+      map((result: any) => result.data.message.content)
     );
   }
 
