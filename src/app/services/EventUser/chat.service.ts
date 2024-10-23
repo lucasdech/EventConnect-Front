@@ -31,8 +31,9 @@ export class ChatService {
     return this.http.post(`${this.BASE_URL}/message`, messageInput).pipe(
       tap((result) => {
         console.log('Message ajouté:', result);
+        // await this.supabaseService.insertMessage(messageInput);
       }),
-      map((result: any) => result)
+      map((result: any) => result.success)
     );
   }
 

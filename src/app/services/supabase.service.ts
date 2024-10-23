@@ -108,26 +108,26 @@ export class SupabaseService {
     return this.messageSubject.asObservable();
   }
 
-  async insertMessage(messageData: {
-    content: string;
-    event_id: number;
-    user_id: number;
-  }): Promise<Message | null> {
-    try {
-      const { data, error } = await this.supabase
-        .from('messages')
-        .insert(messageData)
-        .select('*')
-        .single();
+  // async insertMessage(messageData: {
+  //   content: string;
+  //   event_id: number;
+  //   user_id: number;
+  // }): Promise<Message | null> {
+  //   try {
+  //     const { data, error } = await this.supabase
+  //       .from('messages')
+  //       .insert(messageData)
+  //       .select('*')
+  //       .single();
 
-      if (error) throw error;
-      await this.refreshMessages();
-      return data;
-    } catch (error) {
-      console.error("Erreur lors de l'insertion du message:", error);
-      return null;
-    }
-  }
+  //     if (error) throw error;
+  //     await this.refreshMessages();
+  //     return data;
+  //   } catch (error) {
+  //     console.error("Erreur lors de l'insertion du message:", error);
+  //     return null;
+  //   }
+  // }
 
   cleanup() {
     try {
