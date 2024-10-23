@@ -32,7 +32,7 @@ export class ChatService {
       tap((result) => {
         console.log('Message ajouté:', result);
       }),
-      map((result: any) => result.success)
+      map((result: any) => result)
     );
   }
 
