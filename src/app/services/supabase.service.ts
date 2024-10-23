@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 export interface Message {
   id: number;
@@ -10,6 +11,9 @@ export interface Message {
   created_at: string;
 }
 
+
+
+
 @Injectable({
   providedIn: 'root',
 })
@@ -17,7 +21,15 @@ export class SupabaseService {
   private supabase: SupabaseClient;
   private messageSubject = new BehaviorSubject<Message[]>([]);
 
-  constructor() {
+  EventID: number | 0 = 0;
+
+  ngOnInit() {
+    const eventIdParam = this.route.snapshot.paramMap.get('id');
+    this.EventID = +(eventIdParam || 0);
+      console.log('Rafraîchissement des messages pour l’événement:', this.EventID);
+    }
+
+  constructor(private route: ActivatedRoute) {
     this.supabase = createClient(
       'https://egwnqsbqdugpatmobhcx.supabase.co',
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVnd25xc2JxZHVncGF0bW9iaGN4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk2NzQ0MTEsImV4cCI6MjA0NTI1MDQxMX0._RGUbuzmuKXgSU39y7BXW6_O5_1xxedqCdg0M-4XE20',
@@ -71,15 +83,11 @@ export class SupabaseService {
 
   private async refreshMessages() {
     try {
-      const urlParams = new URLSearchParams(window.location.search);
-      const eventId = urlParams.get('event_id');
-
-      console.log('Rafraîchissement des messages pour l’événement:', eventId);
-
+    
       const { data, error } = await this.supabase
         .from('messages')
         .select('*')
-        .eq('event_id', eventId)
+        .eq('event_id', this.EventID)
         .order('created_at', { ascending: true });
 
       if (error) throw error;
