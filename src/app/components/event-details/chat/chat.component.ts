@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ChatService } from '../../../services/EventUser/chat.service';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -11,7 +11,7 @@ import { FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angula
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css'],
 })
-export class ChatComponent {
+export class ChatComponent implements OnInit {
   private chatService = inject(ChatService);
   private route = inject(ActivatedRoute);
 
