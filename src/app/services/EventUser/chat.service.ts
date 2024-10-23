@@ -29,10 +29,8 @@ export class ChatService {
 
   addMessage(messageInput: MessageInput): Observable<boolean> {
     return this.http.post(`${this.BASE_URL}/message`, messageInput).pipe(
-      tap(async (result) => {
+      tap((result) => {
         console.log('Message ajouté:', result);
-        // Après avoir ajouté le message via l'API REST, on l'ajoute aussi dans Supabase
-        await this.supabaseService.insertMessage(messageInput);
       }),
       map((result: any) => result.success)
     );

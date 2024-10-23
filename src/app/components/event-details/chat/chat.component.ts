@@ -36,8 +36,8 @@ export class ChatComponent {
       console.log("ID de l'événement récupéré :", this.eventId);
   
       this.messageForm.patchValue({ event_id: this.eventId });
-      this.getMessages(); // Appeler pour charger les messages initiaux
-      this.subscribeToMessages(); // S'abonner aux messages en temps réel
+      this.getMessages(); 
+      this.subscribeToMessages();
     });
   }
 
