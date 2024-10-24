@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ChatService } from '../../../services/EventUser/chat.service';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -14,6 +14,7 @@ import { FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angula
 export class ChatComponent implements OnInit {
   private chatService = inject(ChatService);
   private route = inject(ActivatedRoute);
+  @ViewChild('messagesContainer') messagesContainer!: ElementRef;
 
   messageForm: FormGroup;
   invalidCredentials = false;
@@ -39,6 +40,15 @@ export class ChatComponent implements OnInit {
       this.getMessages(); 
       this.subscribeToMessages();
     });
+  }
+
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
+  private scrollToBottom(): void {
+    const container = this.messagesContainer.nativeElement;
+    container.scrollTop = container.scrollHeight;
   }
 
   getMessages() {
@@ -86,6 +96,8 @@ export class ChatComponent implements OnInit {
         this.invalidCredentials = true;
       },
     });
+
+    this.scrollToBottom();
   }
 
 }

@@ -1,24 +1,21 @@
-<div class="flex flex-col space-y-4 overflow-y-auto p-4 max-h-[500px]">
-    <div *ngFor="let message of messages
-" 
+<div #messagesContainer class="flex flex-col space-y-4 overflow-y-auto p-4 max-h-[500px]">
+    <div *ngFor="let message of messages"
          class="flex" 
          [ngClass]="{'justify-end': message.user_id === userId}">
-        <div class="flex items-center max-w-[80%] break-words"
+        <div class="flex flex-row items-start max-w-[80%] break-words p-3 rounded-lg text-white"
              [ngClass]="{
                 'flex-row-reverse': message.user_id === userId,
                 'bg-[#F27649]': message.user_id === userId,
                 'bg-[#F29F05]': message.user_id !== userId
-             }"
-             class="p-3 rounded-lg text-white">
-            
-            <img *ngIf="message.user?.profile_picture" 
-                 [src]="'https://eventconnectapi.projets.p8.garage404.com/storage/' + message.user.profile_picture" 
-                 [ngClass]="{'ml-2': message.user_id === userId, 'mr-2': message.user_id !== userId}"
+             }">
+             
+            <img *ngIf="message?.profile_picture" 
+                 [src]="'https://eventconnectapi.projets.p8.garage404.com/storage/' + message.profile_picture" 
                  class="h-8 w-8 rounded-full object-cover" 
                  [alt]="'Photo de profil'"
-                 onerror="this.src='assets/default-avatar.png'"/>
-            
-            <span class="whitespace-pre-wrap">{{ message.content }}</span>
+                 onerror="this.src='assets/default_PP.png'"/>
+
+            <span class="whitespace-pre-wrap mx-2">{{ message.content }}</span>
         </div>
     </div>
 </div>
