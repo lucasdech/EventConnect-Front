@@ -12,6 +12,14 @@
     color: white;
 }
 
+h3 {
+    color: #63281A
+}
+
+#form-section{
+    width: 100%;
+}
+
 .modal.show {
     display: flex;
 }
@@ -40,6 +48,12 @@
 .event-card {
     width: 100%;
     margin-bottom: 10%;
+}
+
+@media screen and (max-width: 768px) {
+    hr {
+        width: auto;
+    }
 }
 
 /* .inputPassword {
