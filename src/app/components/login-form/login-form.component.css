@@ -1,7 +1,7 @@
 #login {
     position: relative; 
     width: 30em;
-    height: auto; /* Hauteur automatique */
+    height: auto;
     color: white;
     background-color: #F29F05;
     flex-direction: column;
@@ -40,4 +40,18 @@ button {
     background-color: transparent;
     color: white;
     cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    #login img {
+        height: 150px;
+        position: relative;
+        bottom: -25%;
+        left: -5%;
+    }
+
+    #login {
+        width: 25em;
+    }
+    
 }
