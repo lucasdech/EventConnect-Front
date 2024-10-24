@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 export interface Message {
   id: number;
@@ -11,9 +11,6 @@ export interface Message {
   created_at: string;
 }
 
-
-
-
 @Injectable({
   providedIn: 'root',
 })
@@ -21,7 +18,9 @@ export class SupabaseService {
   private supabase: SupabaseClient;
   private messageSubject = new BehaviorSubject<Message[]>([]);
 
-  constructor(private route: ActivatedRoute) {
+  private eventId: number | 0 = 0;
+
+  constructor(private route: ActivatedRoute, private router: Router) {
     this.supabase = createClient(
       'https://egwnqsbqdugpatmobhcx.supabase.co',
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVnd25xc2JxZHVncGF0bW9iaGN4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk2NzQ0MTEsImV4cCI6MjA0NTI1MDQxMX0._RGUbuzmuKXgSU39y7BXW6_O5_1xxedqCdg0M-4XE20',
@@ -43,6 +42,9 @@ export class SupabaseService {
   }
 
   private async initializeSupabase() {
+
+    this.eventId = +this.router.url.split('/')[2];
+
     try {
       await new Promise((resolve) => setTimeout(resolve, 100));
       await this.setupRealtimeSubscription();
@@ -52,6 +54,7 @@ export class SupabaseService {
   }
 
   private async setupRealtimeSubscription() {
+    console.log('URL : ', this.router.url.split('/')[2]);
     try {
       const channel = this.supabase.channel('messages-changes').on(
         'postgres_changes',
@@ -61,7 +64,7 @@ export class SupabaseService {
           table: 'messages',
         },
         async (payload) => {
-          await this.refreshMessages();
+          await this.refreshMessages(this.eventId);
         }
       );
 
@@ -72,12 +75,13 @@ export class SupabaseService {
     }
   }
 
-  private async refreshMessages() {
+  private async refreshMessages(eventId: number) {
+    eventId = +this.router.url.split('/')[2];
     try {
-    
       const { data, error } = await this.supabase
         .from('messages')
         .select('*')
+        .eq('event_id', eventId)
         .order('created_at', { ascending: true });
       if (error) throw error;
       if (data) {
