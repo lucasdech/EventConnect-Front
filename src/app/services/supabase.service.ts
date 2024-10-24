@@ -44,7 +44,6 @@ export class SupabaseService {
 
   private async initializeSupabase() {
     try {
-      // Attendre un petit moment pour éviter les conflits de verrouillage
       await new Promise((resolve) => setTimeout(resolve, 100));
       await this.setupRealtimeSubscription();
     } catch (error) {
