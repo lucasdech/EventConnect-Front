@@ -1,25 +1,28 @@
-<div class="register-form ">
+<div class="register-form">
   <p class="text-2xl -mt-8">Juste 1 minute !</p>
 
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <div class="flex">
-      <div>
+    <div class="flex flex-col md:flex-row">
+      <div class="flex-1">
         <label for="name">Prénom - Nom :</label>
         <input class="text-black" type="text" id="name" formControlName="name" placeholder="{{ BtnContent == 'Modifier' ? user.name : '' }}" [required]="BtnContent !== 'Modifier'">
-        
+
         <label for="email">Email :</label>
         <input class="text-black" type="email" id="email" formControlName="email" placeholder="{{ BtnContent == 'Modifier' ? user.email : '' }}" [required]="BtnContent !== 'Modifier'">
       </div>
 
-      <div class="ml-20">
-        <img src="assets/images/Forms/personnes-pointant.png" alt="personne poitant du doigts" style="height: 150px;">
+      <div class="ml-0 md:ml-20 mt-4 md:mt-0">
+        <img src="assets/images/Forms/personnes-pointant.png" alt="personne pointant du doigts" style="height: 150px;">
       </div>
     </div>
 
-    <label for="profile-photo">Photo de profil :</label>
-    <div class="photo-upload">
-      <label for="profile_picture"></label>
-      <input type="file" (change)="onFileChange($event)" id="profile_picture">
+    <label for="profile-photo" class="mt-4">Photo de profil :</label>
+    <div class="photo-upload flex items-center">
+      <label for="profile_picture" class="cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18v18H3V3zM12 8a4 4 0 110 8 4 4 0 010-8z" /></svg>
+      </label>
+      <input type="file" (change)="onFileChange($event)" id="profile_picture" class="hidden">
+      <span class="text-white">Choisir une image</span>
     </div>
 
     <div class="register_password">
@@ -37,7 +40,7 @@
 
       <div>
         <button type="submit" class="p-2 mt-6 rounded-md" [disabled]="registerForm.invalid">
-          {{ BtnContent}}
+          {{ BtnContent }}
         </button>
       </div>
     </div>
