@@ -3,7 +3,7 @@ form {
 }
 
 @media screen and (max-width: 768px) {
-    .event_form {
+    #event_form {
         width: 25em;
     }  
 }

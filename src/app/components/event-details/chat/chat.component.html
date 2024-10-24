@@ -1,35 +1,25 @@
-<div #messagesContainer class="flex flex-col space-y-4 overflow-y-auto p-4 max-h-[500px]">
-    <div *ngFor="let message of messages"
-         class="flex" 
-         [ngClass]="{'justify-end': message.user_id === userId}">
+<div id="chat" #messagesContainer class="flex flex-col space-y-4 overflow-y-auto p-4 max-h-[500px]">
+    <div *ngFor="let message of messages" class="flex" [ngClass]="{'justify-end': message.user_id === userId}">
         <div class="flex flex-row items-start max-w-[80%] break-words p-3 rounded-lg text-white"
-             [ngClass]="{
-                'flex-row-reverse': message.user_id === userId,
-                'bg-[#F27649]': message.user_id === userId,
-                'bg-[#F29F05]': message.user_id !== userId
-             }">
-             
-            <img *ngIf="message?.profile_picture" 
-                 [src]="'https://eventconnectapi.projets.p8.garage404.com/storage/' + message.profile_picture" 
-                 class="h-8 w-8 rounded-full object-cover" 
-                 [alt]="'Photo de profil'"
-                 onerror="this.src='assets/default_PP.png'"/>
+             [ngClass]="{'flex-row-reverse': message.user_id === userId,
+                        'bg-[#F27649]': message.user_id === userId,
+                        'bg-[#F29F05]': message.user_id !== userId}">
+            <img *ngIf="message?.profile_picture"
+                [src]="'https://eventconnectapi.projets.p8.garage404.com/storage/' + message.profile_picture"
+                class="h-8 w-8 rounded-full object-cover" [alt]="'Photo de profil'"
+                onerror="this.src='assets/profile_pictures/default_PP.png'" />
 
             <span class="whitespace-pre-wrap mx-2">{{ message.content }}</span>
         </div>
     </div>
 </div>
 
-<form [formGroup]="messageForm" 
-      (ngSubmit)="sendMessage()" 
-      class="mt-4 flex items-center bg-transparent p-4 border-t">
-    <input formControlName="content" 
-           type="text" 
-           class="flex-1 border p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F27649]" 
-           placeholder="Écrivez votre message ici" />
-    <button type="submit" 
-            [disabled]="messageForm.invalid"
-            class="ml-2 p-2 bg-[#F27649] text-white rounded-lg hover:bg-[#d66a41] transition-colors disabled:opacity-50">
+<form [formGroup]="messageForm" (ngSubmit)="sendMessage()" class="mt-4 flex items-center bg-transparent p-4 border-t">
+    <input formControlName="content" type="text"
+        class="flex-1 border p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F27649]"
+        placeholder="Écrivez votre message ici" />
+    <button type="submit" [disabled]="messageForm.invalid"
+        class="ml-2 p-2 bg-[#F27649] text-white rounded-lg hover:bg-[#d66a41] transition-colors disabled:opacity-50">
         ➡️
     </button>
 </form>
