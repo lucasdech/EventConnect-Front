@@ -1,13 +1,21 @@
-<form (submit)="sendContactMail($event)">
-    <label for="name">Nom</label>
-    <input type="text" name="name" id="name" required />
-  
-    <label for="email">Email</label>
-    <input type="email" name="email" id="email" required />
-  
-    <label for="message">Message</label>
-    <textarea name="message" id="message" required></textarea>
-  
-    <button type="submit" class="btn-send">Envoyer</button>
-  </form>
-  
+<div class="flex flex-col w-full items-center justify-center border-border-red-500 mt-8 text-white mb-10">
+    <h2 class="font-lilita text-[#63281A] text-4xl mb-2">Contacter Nous :</h2>
+    <form (submit)="sendContactMail($event)" class="flex flex-col items-center w-1/2 bg-[#F35733] rounded-xl py-4">
+        <div class="flex flex-col items-start space-y-2">
+            <label for="name">Nom : </label>
+            <input type="text" name="name" id="name" required class="text-black"/>
+        </div>
+
+        <div class="flex flex-col items-start space-y-2">
+            <label for="email">Email : </label>
+            <input type="email" name="email" id="email" required class="text-black"/>
+        </div>
+
+        <div class="flex flex-col items-start space-y-2">
+            <label for="message">Message : </label>
+            <textarea name="message" id="message" required class="text-black"></textarea>
+        </div>
+
+        <button type="submit" class="btn-send border border-white rounded-md p-2 mt-4!">Envoyer</button>
+    </form>
+</div>
