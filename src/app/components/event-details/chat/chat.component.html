@@ -1,16 +1,20 @@
 <div id="chat" #messagesContainer class="flex flex-col space-y-4 overflow-y-auto p-4 max-h-[500px]">
-    <div *ngFor="let message of messages" class="flex" [ngClass]="{'justify-end': message.user_id === userId}">
-        <div class="flex flex-row items-start max-w-[80%] break-words p-3 rounded-lg text-white"
+    <div *ngFor="let message of messages" class="flex flex-col items-start" 
+         [ngClass]="{'items-end': message.user_id === userId}">
+        <div class="flex items-start max-w-[80%] break-words p-3 rounded-lg text-white"
              [ngClass]="{'flex-row-reverse': message.user_id === userId,
                         'bg-[#F27649]': message.user_id === userId,
                         'bg-[#F29F05]': message.user_id !== userId}">
             <img *ngIf="message?.profile_picture"
                 [src]="'https://eventconnectapi.projets.p8.garage404.com/storage/' + message.profile_picture"
-                class="h-8 w-8 rounded-full object-cover" [alt]="'Photo de profil'"
+                class="h-8 w-8 rounded-full object-cover" alt="Photo de profil"
                 onerror="this.src='assets/profile_pictures/default_PP.png'" />
 
             <span class="whitespace-pre-wrap mx-2">{{ message.content }}</span>
         </div>
+        <span class="text-xs text-gray-400 mt-1">
+            {{ message.created_at | date:'dd/MM/yyyy - HH:mm' }} -- {{ message.name }} {{ message.user_id === userId ? '(moi)' : '' }}
+        </span>
     </div>
 </div>
 
