@@ -7,6 +7,7 @@ import { ChatComponent } from '../../components/event-details/chat/chat.componen
 import { ParticipantsComponent } from '../../components/event-details/participants/participants.component';
 import { Router } from '@angular/router';
 import { MyEventsService } from '../../services/EventUser/my-events.service';
+import { error } from 'console';
 
 @Component({
   selector: 'app-event-details',
@@ -101,5 +102,18 @@ export class EventDetailsComponent implements OnInit {
       }
     });
   }
+
+  deleteMyParticipation(event_id :number) {
+    const userId = localStorage.getItem('ID');
+    this.getEventService.deleteParticipationEvent(event_id).subscribe({
+      next: (data: any) => {
+        console.log('Suppression de la participation réussie : ', data);
+        this.router.navigate(['my-board'])
+      },
+      error: (err: any) => {
+        console.error('Erreur lors de la suppression de la participation :', err);
+      }
+      });
+    }
   
 }

@@ -1,8 +1,9 @@
-<div class="min-h-screen flex flex-col items-center mb-10 -mt-10">
+<div class="min-h-screen flex flex-col items-center mb-10 -mt-15">
 
     <div class="flex items-center justify-center space-x-10">
         <a href="/my-board" class="text-[#63281A] text-2xl mt-1"> &larr; </a>
         <h2 class="text-5xl mt-8 mb-8 text-[#63281A] font-lilita mb-4">{{eventDetails.title}}</h2>
+        <a id="leaveButton" (click)="deleteMyParticipation(eventDetails.id)" class="text-[#F35733] border border-red-500 rounded-xl p-2 cursor-pointer"> Quiter l'Event</a>
     </div>
 
 

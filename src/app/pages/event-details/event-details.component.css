@@ -1,5 +1,18 @@
+
+#leaveButton {
+    position: relative;
+    left: 90%;
+    top: 10%;
+}
+
 @media screen and (max-width: 768px) {
     #chat {
         width: 25em;
+    }
+
+    #leaveButton {
+        position: static;
+        left: auto;
+        top: auto;
     }
 }
