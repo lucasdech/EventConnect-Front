@@ -16,6 +16,11 @@
                 <div>
                     <button type="submit" class="p-2 rounded-md">Se connecter</button>
                 </div>
+
+                <div *ngIf="error != ''" class="mt-2">
+                    <p class="text-white text-xs">{{ error }}</p>
+                </div>
+
             </form>
         </div>
         <div class="md:flex-1">

@@ -35,7 +35,7 @@
         <input class="text-black" type="password" id="confirm-password" formControlName="confirmPassword" [required]="BtnContent !== 'Modifier'">
       </div>
       
-      <div *ngIf="passwordMismatch" style="color: white;">
+      <div *ngIf="passwordMismatch" class="tetx-white mt-2">
         Les mots de passe ne correspondent pas !
       </div>
 
@@ -43,6 +43,7 @@
         <button type="submit" class="p-2 mt-6 rounded-md" [disabled]="registerForm.invalid">
           {{ BtnContent }}
         </button>
+
       </div>
     </div>
   </form>

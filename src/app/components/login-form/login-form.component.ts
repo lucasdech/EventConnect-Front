@@ -2,11 +2,12 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms'; 
 import { Credentials, LoginService } from '../../services/user/login.service';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login-form',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.css'],
 })
@@ -14,6 +15,7 @@ export class LoginFormComponent {
 
   private loginService = inject(LoginService);
   private route = inject(Router);
+  public error = '';
 
   loginForm: FormGroup;
   invalidCredentials = false;
@@ -38,6 +40,7 @@ export class LoginFormComponent {
         }
       },
       error: (err) => {
+        this.error = 'Mot de passe ou email incorrect';
         console.error('Erreur lors de la connexion :', err);
         this.invalidCredentials = true;
       }

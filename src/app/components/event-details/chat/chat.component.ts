@@ -22,6 +22,7 @@ export class ChatComponent implements OnInit {
   public messages: any[] = [];
   public eventId: number = 0;
   public userId: number = +localStorage.getItem('ID')!;
+  public error = '';
 
   constructor(private fb: FormBuilder) {
     this.messageForm = this.fb.group({
@@ -92,6 +93,11 @@ export class ChatComponent implements OnInit {
         });
       },
       error: (err) => {
+        this.error = err.error.message.content[0];
+        setTimeout(() => {
+          this.error = '';
+        }, 3000);
+        console.log('ERREUR DU MESAGE',this.error);
         console.error('Erreur lors de l\'envoi du message :', err);
         this.invalidCredentials = true;
       },

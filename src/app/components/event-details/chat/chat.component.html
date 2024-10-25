@@ -22,4 +22,5 @@
         class="ml-2 p-2 bg-[#F27649] text-white rounded-lg hover:bg-[#d66a41] transition-colors disabled:opacity-50">
         ➡️
     </button>
+    <div *ngIf="error != ''" class="text-red-500 ml-2">{{ error }}</div>
 </form>

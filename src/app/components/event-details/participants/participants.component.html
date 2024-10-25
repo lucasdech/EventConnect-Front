@@ -5,9 +5,10 @@
       <ng-container *ngFor="let participant of participants()" class="">
         <li class="bg-transparent border border-white rounded-lg p-2 flex items-center">
 
-          <img *ngIf="participant.profile_picture != 'default_PP'; else defaultPP"
+            <img *ngIf="participant.profile_picture != 'default_PP' || participant.profile_picture != null; else defaultPP"
           src="https://eventconnectapi.projets.p8.garage404.com/storage/{{ participant.profile_picture }}"
-          class="h-8 w-8 bg-gray-400 rounded-full" >
+          class="h-8 w-8 bg-gray-400 rounded-full" 
+          onerror="this.src='assets/profile_pictures/default_PP.png'">
 
           <ng-template #defaultPP>
             <img src="/assets/profile_pictures/{{ participant.profile_picture }}.png"
@@ -39,7 +40,8 @@
 
         <img *ngIf="user.profile_picture != 'default_PP'; else defaultPP"
           src="https://eventconnectapi.projets.p8.garage404.com/storage/{{ user.profile_picture }}"
-          class="h-8 w-8 bg-gray-400 rounded-full" >
+          class="h-8 w-8 bg-gray-400 rounded-full"
+          onerror="this.src='assets/profile_pictures/default_PP.png'">
 
           <ng-template #defaultPP>
             <img src="/assets/profile_pictures/{{ user.profile_picture }}.png"
