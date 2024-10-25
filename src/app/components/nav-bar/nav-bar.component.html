@@ -1,6 +1,6 @@
 <nav id="navBar" class="bg-transparent w-full flex flex-wrap mb-2 font-lilita">
-  <div class="max-w-full mx-auto px-4 w-full">
-    <div class="flex flex-wrap items-center justify-center items-center w-full">
+  <div class="max-w-full mx-auto w-full">
+    <div class="hidden md:flex flex-wrap items-center justify-center items-center w-full">
       <!-- Menu pour desktop -->
       <div class="flex nav_content items-center justify-around w-full sm:w-auto space-x-4 sm:space-x-20">
         <a href="my-board" class="NavLink py-4 px-6 transition duration-300 hover:text-orange-400 text-xl">Mes
@@ -20,8 +20,34 @@
         </ng-template>
       </div>
     </div>
+    <!-- Menu pour mobile -->
+    <div class="flex md:hidden items-center justify-around w-full">
+      <a href="#" class="flex  items-center py-4 px-4">
+        <img class='NavLogo' src="/assets/logo/logoBlack.png" alt="Logo">
+      </a>
+      <button class="flex items-center" (click)="toggleBurgerMenu()">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+      </button>
+    </div>
+    <div id="BurgerMenu"
+      class="hidden flex-col justify-center gap-5 mx-auto w-auto h-auto z-50 overflow-hidden transition ease-in duration-300">
+      <hr class="relative mx-auto w-1/2 border-t border-black">
+      <a href="my-board" class="NavLink py-4 px-6 transition duration-300 hover:text-orange-400 text-xl">Mes Events</a>
+      <ng-container *ngIf="isConnected(); else loginLinkMobile">
+        <a (click)="logout()"
+          class="NavLink py-4 px-6 transition duration-300 hover:text-orange-400 text-xl">Déconnexion</a>
+      </ng-container>
+      <ng-template #loginLinkMobile>
+        <a (click)="login()"
+          class="NavLink py-4 px-6 transition duration-300 hover:text-orange-400 text-xl">Connexion</a>
+      </ng-template>
+    </div>
   </div>
 </nav>
+
+
 
 <div class="traits flex justify-center -mt-2">
   <hr class="w-1/2 border-t border-black">

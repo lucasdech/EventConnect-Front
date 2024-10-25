@@ -10,6 +10,9 @@ import { Component, OnInit, signal } from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
 
+  isBurgerMenuOpen = false;
+
+
   userId: number = 0;
   public isConnected = signal<boolean>(false);
   
@@ -38,5 +41,15 @@ export class NavBarComponent implements OnInit {
 
   login() {
     window.location.href = '/login';
+  }
+
+  toggleBurgerMenu() {
+    this.isBurgerMenuOpen = !this.isBurgerMenuOpen;
+    const burgerMenu = document.getElementById('BurgerMenu');
+    if (burgerMenu) {
+      burgerMenu.classList.toggle('hidden', !this.isBurgerMenuOpen);
+      burgerMenu.classList.toggle('flex', this.isBurgerMenuOpen);
+      burgerMenu.classList.toggle('show', this.isBurgerMenuOpen);
+    }
   }
 }
