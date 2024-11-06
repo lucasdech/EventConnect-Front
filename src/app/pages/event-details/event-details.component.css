@@ -1,6 +1,6 @@
 
 @media screen and (max-width: 768px) {
     .grid {
-        gap: 4px; /* Réduisez l'écart entre les éléments en vue mobile */
+        gap: 4px;
     }
 }

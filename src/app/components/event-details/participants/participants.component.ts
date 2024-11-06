@@ -117,4 +117,11 @@ export class ParticipantsComponent implements OnInit {
       }
     });
   }
+
+  isUserInEvent(userId: number) {
+    if (this.ParticipantsArray.includes(userId)) {
+      return true;
+    }
+    return false;
+  }
 }
