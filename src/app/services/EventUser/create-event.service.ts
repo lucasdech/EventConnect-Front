@@ -35,6 +35,19 @@ export class CreateEventService {
     );
   }
 
+  UpdateEvent(eventId: number, credentails: Credentials): Observable<any> {
+
+    return this.http.put(`${this.BASE_URL}/api/event/${eventId}`, credentails).pipe(
+      tap((result: any) => {
+        if (result) {
+          console.log('Événement mis à jour avec ID :', result.data.event.id);
+        } else {
+          console.log('Aucun événement dans la requête');
+        }
+      })
+    );
+  }
+
   participateInEvent(eventId: number): Observable<any> {
     const userIdString = localStorage.getItem('ID');
     const userId = userIdString ? parseInt(userIdString, 10) : null;

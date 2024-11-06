@@ -6,14 +6,26 @@ import { ChatComponent } from '../../components/event-details/chat/chat.componen
 import { ParticipantsComponent } from '../../components/event-details/participants/participants.component';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { MyEventsService } from '../../services/EventUser/my-events.service';
+import { CreateEventService, Credentials } from '../../services/EventUser/create-event.service';
+import { EventFormComponent } from '../../components/event-form/event-form.component';
+import { Observable } from 'rxjs';
+import { Form, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-event-details',
   standalone: true,
-  imports: [CommonModule, RouterModule, ChatComponent, ParticipantsComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    ChatComponent,
+    ParticipantsComponent,
+    EventFormComponent,
+    EventFormComponent,
+    ReactiveFormsModule,
+  ],
   providers: [MyEventsService],
   templateUrl: './event-details.component.html',
-  styleUrls: ['./event-details.component.css']
+  styleUrls: ['./event-details.component.css'],
 })
 export class EventDetailsComponent implements OnInit {
 
@@ -21,14 +33,26 @@ export class EventDetailsComponent implements OnInit {
   UserId = +(localStorage.getItem('ID') || 0);
   EventLocation = '';
   mapUrl: SafeResourceUrl | undefined;
+  updateEventForm: FormGroup;
+  isUpdateFormVisible = false;
 
   constructor(
     private getEventService: GetEventService,
+    private createEventService: CreateEventService,
     private route: ActivatedRoute,
     private router: Router,
     private sanitizer: DomSanitizer,
-
-  ) {}
+    private fb: FormBuilder
+  ) {
+    this.updateEventForm = this.fb.group({
+      title: [''],
+      location: [''],
+      description: [''],
+      starting_at: [''],
+      is_private: [''],
+      password: ['']
+    });
+  }
 
   ngOnInit() {
     this.isConnectedUser();
@@ -58,22 +82,28 @@ export class EventDetailsComponent implements OnInit {
       }
     }
   }
-  
+
   getEventDetails() {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       const eventId = params.get('id');
-      console.log('ID de l\'événement récupéré :', eventId);
+      console.log("ID de l'événement récupéré :", eventId);
 
       if (eventId) {
         this.getEventService.getEvent(+eventId).subscribe({
           next: (data) => {
             this.eventDetails = data.event;
             this.setEventLocation(this.eventDetails.location);
-            console.log('Détails de l\'événement pour la page HTML :', this.eventDetails);
+            console.log(
+              "Détails de l'événement pour la page HTML :",
+              this.eventDetails
+            );
           },
           error: (err) => {
-            console.error('Erreur lors de la récupération des détails de l\'événement :', err);
-          }
+            console.error(
+              "Erreur lors de la récupération des détails de l'événement :",
+              err
+            );
+          },
         });
       }
     });
@@ -81,22 +111,40 @@ export class EventDetailsComponent implements OnInit {
 
   deleteEvent() {
     const eventId = this.eventDetails.id;
-    console.log('ID de l\'événement à supprimer :', eventId);
+    console.log("ID de l'événement à supprimer :", eventId);
 
     if (eventId) {
       this.getEventService.deleteEvent(eventId).subscribe({
         next: (data) => {
-          console.log('Suppression de l\'événement réussie : ', data);
-          this.deleteParticipationEvent()
+          console.log("Suppression de l'événement réussie : ", data);
+          this.deleteParticipationEvent();
           this.router.navigate(['my-board']);
         },
         error: (err) => {
-          console.error('Erreur lors de la suppression de l\'événement :', err);
-        }
+          console.error("Erreur lors de la suppression de l'événement :", err);
+        },
       });
     }
   }
+
+  updateEvent() {
+    if (this.updateEventForm.invalid) { return; }
+    
+    const eventId = this.eventDetails.id;
+    const updatedEventData = this.updateEventForm.value;
+    this.isUpdateFormVisible = !this.isUpdateFormVisible;
   
+    this.createEventService.UpdateEvent(eventId, updatedEventData).subscribe({
+      next: (data) => {
+        console.log("Mise à jour de l'événement réussie : ", data);
+        this.eventDetails = { ...this.eventDetails, ...updatedEventData };
+      },
+      error: (err) => {
+        console.error("Erreur lors de la mise à jour de l'événement :", err);
+      },
+    });
+  }
+
   deleteParticipationEvent() {
     const eventId = this.eventDetails.id;
 
@@ -105,27 +153,35 @@ export class EventDetailsComponent implements OnInit {
         console.log('Suppression de la participation réussie : ', data);
       },
       error: (err) => {
-        console.error('Erreur lors de la suppression de la participation :', err);
-      }
+        console.error(
+          'Erreur lors de la suppression de la participation :',
+          err
+        );
+      },
     });
   }
 
-  deleteMyParticipation(event_id :number) {
+  deleteMyParticipation(event_id: number) {
     const userId = localStorage.getItem('ID');
     this.getEventService.deleteParticipationEvent(event_id).subscribe({
       next: (data: any) => {
         console.log('Suppression de la participation réussie : ', data);
-        this.router.navigate(['my-board'])
+        this.router.navigate(['my-board']);
       },
       error: (err: any) => {
-        console.error('Erreur lors de la suppression de la participation :', err);
-      }
-      });
-    }
+        console.error(
+          'Erreur lors de la suppression de la participation :',
+          err
+        );
+      },
+    });
+  }
 
   setEventLocation(location: string) {
     this.EventLocation = location;
-    const url = `https://www.google.com/maps/embed/v1/place?q=${encodeURIComponent(this.EventLocation)}&key=AIzaSyDA-wAzfEDLcn_9AmpmqR6pdjcYWLlEJW8`;
+    const url = `https://www.google.com/maps/embed/v1/place?q=${encodeURIComponent(
+      this.EventLocation
+    )}&key=AIzaSyDA-wAzfEDLcn_9AmpmqR6pdjcYWLlEJW8`;
     this.mapUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 }

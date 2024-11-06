@@ -11,7 +11,7 @@ import { CreateEventService, Credentials } from '../../services/EventUser/create
 })
 export class EventFormComponent {
   private eventService = inject(CreateEventService);
-  
+
   eventForm: FormGroup;
   invalidCredentials = false;
 
@@ -50,4 +50,5 @@ export class EventFormComponent {
       }
     });
   }
+
 }

@@ -28,12 +28,72 @@
             </div>
 
             <div *ngIf="eventDetails.user_id == UserId" class="flex justify-center space-x-4">
-                <button class="bg-[#F27649] text-white px-4 py-2 rounded-lg">Modifier l'Évent</button>
+                <button class="bg-[#F27649] text-white px-4 py-2 rounded-lg" (click)="isUpdateFormVisible = !isUpdateFormVisible">Modifier l'Évent</button>
                 <button (click)="deleteEvent()" class="bg-[#F35733] text-white px-4 py-2 rounded-lg">Supprimer l'Évent</button>
             </div>
         </div>
     </div>
 </div>
+
+
+  <!-- Formulaire de mise à jour de l'événement -->
+  <form *ngIf="isUpdateFormVisible" id="event_form" [formGroup]="updateEventForm" (ngSubmit)="updateEvent()"
+        class="p-8 rounded-lg shadow-md w-full max-w-5xl mx-auto text-white space-y-4 mt-8 bg-[#F35733] mb-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Première colonne : Lieu et Description -->
+          <div class="space-y-4 mt-4 md:mt-24">
+              <div>
+                  <label for="location" class="block mb-2 text-lg">Le lieu :</label>
+                  <input type="text" id="location" name="location" required formControlName="location" value="{{ eventDetails.loaction }}"
+                         class="w-full p-2 rounded-md text-black">
+              </div>
+              <div>
+                  <label for="description" class="block mb-2 text-lg">Une description :</label>
+                  <textarea id="description" name="description" required formControlName="description"  value="{{ eventDetails.description }}"
+                            class="w-full p-2 rounded-md text-black h-32"></textarea>
+              </div>
+          </div>
+  
+          <!-- Deuxième colonne : Titre et Image -->
+          <div class="space-y-4 md:space-y-14">
+              <div>
+                  <label for="title" class="block mb-2 text-lg">Un titre :</label>
+                  <input type="text" id="title" name="title" required formControlName="title"  value="{{ eventDetails.title }}"
+                         class="w-full p-2 rounded-md text-black">
+              </div>
+              <div class="flex justify-center items-center h-30">
+                  <img src="assets/images/Forms/Event-form.png" alt="Personne avec un téléphone en main" 
+                       class="w-[150px] md:w-[200px]">
+              </div>
+          </div>
+  
+          <!-- Troisième colonne : Date, Événement privé, et Mot de passe -->
+          <div class="space-y-4 mt-4 md:mt-24">
+              <div>
+                  <label for="starting_at" class="block mb-2 text-lg">La date :</label>
+                  <input type="datetime-local" id="starting_at" name="starting_at" required formControlName="starting_at" value="{{ eventDetails.starting_at }}"
+                         class="w-full p-2 rounded-md text-black">
+              </div>
+              <div class="flex items-center space-x-4">
+                  <label for="is_private" class="text-lg">Événement privé :</label>
+                  <input type="checkbox" id="is_private" name="is_private" formControlName="is_private"
+                         class="h-6 w-6 rounded-md">
+              </div>
+              <div>
+                  <label for="password" class="block mb-2 mt-8 text-lg">Mot de passe :</label>
+                  <input type="password" id="password" name="password" formControlName="password"  value="{{ eventDetails.password }}"
+                         class="w-full p-2 rounded-md text-black">
+              </div>
+          </div>
+      </div>
+  
+      <div class="text-center mt-4">
+          <button type="submit" class="bg-transparent border border-white text-white py-2 px-4 rounded-md text-lg font-semibold">
+              Mettre à jour
+          </button>
+      </div>
+  </form>
+  
 
 
 <ng-template #loading>

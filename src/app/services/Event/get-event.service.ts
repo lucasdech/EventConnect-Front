@@ -71,9 +71,8 @@ export class GetEventService {
         } else {
           console.log('Aucune participation dans la requête');
         }
-      }
-    ),
-  );
-}
+      }),
+    );
+  }
 
 }
