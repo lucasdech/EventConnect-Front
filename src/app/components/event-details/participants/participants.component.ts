@@ -107,6 +107,7 @@ export class ParticipantsComponent implements OnInit {
   }
 
   addParticipants(userId: number) {
+
     this.participantsService.addParticipant(userId, this.EventId).subscribe({
       next: (result) => {
         console.log('Participant ajouté avec succès :', result);
@@ -123,5 +124,12 @@ export class ParticipantsComponent implements OnInit {
       return true;
     }
     return false;
+  }
+
+  upScroll() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   }
 }
