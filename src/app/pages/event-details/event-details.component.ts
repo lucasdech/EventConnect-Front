@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GetEventService } from '../../services/Event/get-event.service';
-import { ActivatedRoute } from '@angular/router';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ChatComponent } from '../../components/event-details/chat/chat.component';
 import { ParticipantsComponent } from '../../components/event-details/participants/participants.component';
-import { Router } from '@angular/router';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { MyEventsService } from '../../services/EventUser/my-events.service';
-import { error } from 'console';
 
 @Component({
   selector: 'app-event-details',
@@ -21,8 +19,16 @@ export class EventDetailsComponent implements OnInit {
 
   eventDetails: any;
   UserId = +(localStorage.getItem('ID') || 0);
+  EventLocation = '';
+  mapUrl: SafeResourceUrl | undefined;
 
-  constructor(private getEventService: GetEventService, private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private getEventService: GetEventService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private sanitizer: DomSanitizer,
+
+  ) {}
 
   ngOnInit() {
     this.isConnectedUser();
@@ -62,7 +68,8 @@ export class EventDetailsComponent implements OnInit {
         this.getEventService.getEvent(+eventId).subscribe({
           next: (data) => {
             this.eventDetails = data.event;
-            console.log('Détails de l\'événement pour la pageb HTML :', this.eventDetails);
+            this.setEventLocation(this.eventDetails.location);
+            console.log('Détails de l\'événement pour la page HTML :', this.eventDetails);
           },
           error: (err) => {
             console.error('Erreur lors de la récupération des détails de l\'événement :', err);
@@ -115,5 +122,10 @@ export class EventDetailsComponent implements OnInit {
       }
       });
     }
-  
+
+  setEventLocation(location: string) {
+    this.EventLocation = location;
+    const url = `https://www.google.com/maps/embed/v1/place?q=${encodeURIComponent(this.EventLocation)}&key=AIzaSyDA-wAzfEDLcn_9AmpmqR6pdjcYWLlEJW8`;
+    this.mapUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
 }

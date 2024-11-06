@@ -3,7 +3,7 @@
   <ul class="space-y-2">
     <div class="max-h-64 overflow-y-scroll">
       <ng-container *ngFor="let participant of participants()" class="">
-        <li class="bg-transparent border border-white rounded-lg p-2 flex items-center">
+        <li class="bg-transparent border border-white rounded-lg p-2 m-2 flex items-center">
 
             <img *ngIf="participant.profile_picture != 'default_PP' || participant.profile_picture != null; else defaultPP"
           src="https://eventconnectapi.projets.p8.garage404.com/storage/{{ participant.profile_picture }}"
