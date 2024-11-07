@@ -22,8 +22,8 @@
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18v18H3V3zM12 8a4 4 0 110 8 4 4 0 010-8z" /></svg>
       </label>
       <input type="file" (change)="onFileChange($event)" id="profile_picture" class="hidden">
-      <!-- <span *ngIf="" class="text-white ml-2">{{ file.name }}</span> -->
       <span class="text-white">Choisir une image</span>
+      <p *ngIf="IsProfilePictureSet()" class="mt-6 ms-2">✔️</p>
     </div>
 
     <div class="register_password">

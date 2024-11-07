@@ -53,6 +53,10 @@ export class RegisterFormComponent implements OnInit {
     });
   }
 
+  IsProfilePictureSet() {
+    return this.registerForm.value.profile_picture !== null;
+  }
+
   onSubmit() {
     const { password, confirmPassword } = this.registerForm.value;
 

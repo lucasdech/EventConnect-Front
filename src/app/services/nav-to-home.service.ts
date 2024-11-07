@@ -15,11 +15,18 @@ export class NavToHomeService {
 
   showLogin() {
     console.log('showLogin called');
+    if (this._showRegisterForm.value) {
+      this._showRegisterForm.next(false);
+    }
     this._showLoginForm.next(!this._showLoginForm.value); // Inverse la valeur
   }
 
   showRegister() {
     console.log('showRegister called');
+    if (this._showLoginForm.value) {
+      this._showLoginForm.next(false);
+      
+    }
     this._showRegisterForm.next(!this._showRegisterForm.value); // Inverse la valeur
   }
 
