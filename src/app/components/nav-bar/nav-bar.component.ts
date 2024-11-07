@@ -1,5 +1,6 @@
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { NavToHomeService } from '../../services/nav-to-home.service';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, signal } from '@angular/core';
 
 @Component({
   selector: 'app-nav-bar',
@@ -10,17 +11,30 @@ import { Component, OnInit, signal } from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
 
+  private navToHomeService = inject(NavToHomeService);
+
   isBurgerMenuOpen = false;
-
-
   userId: number = 0;
   public isConnected = signal<boolean>(false);
-  
 
   constructor() {}
 
   ngOnInit() {
     this.IsconnectedUser();
+
+    
+    this.navToHomeService.showLoginForm$.subscribe(show => {
+      console.log('showLoginForm state changed:', show);
+      if (show) {
+        document.getElementById('loginForm')?.classList.remove('hidden');
+      } else {
+        document.getElementById('loginForm')?.classList.add('hidden');
+      }
+    });
+  }
+
+  showLoginForm() {
+    this.navToHomeService.showLogin();
   }
 
   logout() {
@@ -37,10 +51,6 @@ export class NavBarComponent implements OnInit {
     } else {
       this.isConnected.set(false);
     }
-  }
-
-  login() {
-    window.location.href = '/login';
   }
 
   toggleBurgerMenu() {

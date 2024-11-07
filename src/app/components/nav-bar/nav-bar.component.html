@@ -15,8 +15,8 @@
             class="NavLink py-4 px-6 transition duration-300 hover:text-orange-400 text-xl">Déconnexion</a>
         </ng-container>
         <ng-template #loginLink>
-          <a (click)="login()"
-            class="NavLink py-4 px-6 transition duration-300 hover:text-orange-400 text-xl">Connexion</a>
+          <a (click)="showLoginForm()"
+          id="loginBtn" class="text-xl no-underline btn btn-connexion NavLink" >Se Connecter</a>
         </ng-template>
       </div>
     </div>
@@ -40,7 +40,7 @@
           class="NavLink py-4 px-6 transition duration-300 hover:text-orange-400 text-xl">Déconnexion</a>
       </ng-container>
       <ng-template #loginLinkMobile>
-        <a (click)="login()"
+        <a (click)="showLoginForm()"
           class="NavLink py-4 px-6 transition duration-300 hover:text-orange-400 text-xl">Connexion</a>
       </ng-template>
     </div>
