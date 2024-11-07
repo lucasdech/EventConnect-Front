@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RegisterFormComponent } from '../../components/register-form/register-form.component';
 import { LoginFormComponent } from '../../components/login-form/login-form.component';
 import { NavToHomeService } from '../../services/nav-to-home.service';
@@ -10,10 +10,21 @@ import { NavToHomeService } from '../../services/nav-to-home.service';
   styleUrls: ['./home.component.css'],
   imports: [RegisterFormComponent, LoginFormComponent],
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
 
   constructor(private navToHomeService: NavToHomeService) { }
 
+  ngOnInit(): void {
+
+    this.navToHomeService.showRegisterForm$.subscribe(show => {
+      console.log('showRegisterForm state changed:', show);
+      if (show) {
+        document.getElementById('registerForm')?.classList.remove('hidden');
+      } else {
+        document.getElementById('registerForm')?.classList.add('hidden');
+      }
+    });
+  }
 
   showLoginForm() {
     this.navToHomeService.showLogin();

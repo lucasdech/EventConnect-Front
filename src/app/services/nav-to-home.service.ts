@@ -25,6 +25,7 @@ export class NavToHomeService {
 
   hideForms() {
     this._showLoginForm.next(false);
+    this._showRegisterForm.next(false);
   }
 }
 
