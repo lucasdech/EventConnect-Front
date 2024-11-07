@@ -33,8 +33,8 @@
                 
         <div *ngIf="event.showPasswordForm">
           <form [formGroup]="PassWordForm" (ngSubmit)="submitPassword(event)">
-            <input type="password" formControlName="password" placeholder="Mot de Passe" class="w-full inputPassword text-black">  
-            <button type="submit" class="btn btn-primary rounded p-2 border border-black mt-2">Submit</button>
+            <input type="password" formControlName="password" placeholder="Mot de Passe" class="w-full inputPassword rounded-xl text-black">  
+            <button type="submit" class="btn btn-primary rounded p-2 border border-[#63281A] mt-2">Envoyer</button>
           </form>
         </div>
       </div>
