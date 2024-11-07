@@ -35,6 +35,10 @@ export class NavBarComponent implements OnInit {
 
   showLoginForm() {
     this.navToHomeService.showLogin();
+    const loginForm = document.querySelector('#loginForm');
+    if (loginForm) {
+      loginForm.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 
   logout() {

@@ -1,5 +1,6 @@
 .NavLink {
   color: #F35733;
+  cursor: pointer;
 }
 
 .NavLink :hover {
