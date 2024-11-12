@@ -10,6 +10,7 @@ import { CreateEventService, Credentials } from '../../services/EventUser/create
 import { EventFormComponent } from '../../components/event-form/event-form.component';
 import { Observable } from 'rxjs';
 import { Form, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ParticipantsService } from '../../services/EventUser/participants.service';
 
 @Component({
   selector: 'app-event-details',
@@ -42,7 +43,8 @@ export class EventDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private sanitizer: DomSanitizer,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private participantsService: ParticipantsService
   ) {
     this.updateEventForm = this.fb.group({
       title: [''],
@@ -161,18 +163,13 @@ export class EventDetailsComponent implements OnInit {
     });
   }
 
-  deleteMyParticipation(eventId: number) {
-    const userId = +(localStorage.getItem('ID') || 0);
-    this.getEventService.deleteParticipationEvent(userId, eventId).subscribe({
-      next: (data: any) => {
-        console.log('Suppression de la participation réussie : ', data);
-        this.router.navigate(['my-board']);
+  deleteParticipant(eventId: number) {
+    this.participantsService.deleteParticipant(this.UserId, eventId).subscribe({
+      next: (data) => {
+        console.log('Participant supprimé :', data);
       },
-      error: (err: any) => {
-        console.error(
-          'Erreur lors de la suppression de la participation :',
-          err
-        );
+      error: (err) => {
+        console.error('Erreur lors de la suppression du participant :', err);
       },
     });
   }
