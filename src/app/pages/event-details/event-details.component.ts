@@ -148,7 +148,7 @@ export class EventDetailsComponent implements OnInit {
   deleteParticipationEvent() {
     const eventId = this.eventDetails.id;
 
-    this.getEventService.deleteParticipationEvent(eventId).subscribe({
+    this.getEventService.deleteParticipationsEvent(eventId).subscribe({
       next: (data) => {
         console.log('Suppression de la participation réussie : ', data);
       },
@@ -161,9 +161,9 @@ export class EventDetailsComponent implements OnInit {
     });
   }
 
-  deleteMyParticipation() {
+  deleteMyParticipation(eventId: number) {
     const userId = +(localStorage.getItem('ID') || 0);
-    this.getEventService.deleteParticipationEvent(userId).subscribe({
+    this.getEventService.deleteParticipationEvent(userId, eventId).subscribe({
       next: (data: any) => {
         console.log('Suppression de la participation réussie : ', data);
         this.router.navigate(['my-board']);
