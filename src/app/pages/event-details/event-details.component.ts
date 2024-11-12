@@ -167,6 +167,7 @@ export class EventDetailsComponent implements OnInit {
     this.participantsService.deleteParticipant(this.UserId, eventId).subscribe({
       next: (data) => {
         console.log('Participant supprimé :', data);
+        this.router.navigate(['my-board']);
       },
       error: (err) => {
         console.error('Erreur lors de la suppression du participant :', err);
