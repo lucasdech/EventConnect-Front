@@ -30,7 +30,7 @@ export class RegisterFormComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       profile_picture: null,
       password: ['', Validators.required],
-      confirmPassword: ['', Validators.required]
+      confirmPassword: ['', Validators.required],
     });
   }
 
@@ -75,10 +75,19 @@ export class RegisterFormComponent implements OnInit {
   }
 
   Register() {
-    if (this.registerForm.invalid) return;
+
+    let cgu = document.getElementById('CGU') as HTMLInputElement;
+    console.log(cgu.checked);
+
+    if (cgu.checked === false) {
+      alert('Vous devez accepter les conditions générales d\'utilisation pour continuer');
+      return;
+    }
+
+    if (this.registerForm.invalid ) return;
 
     console.log('Inscription en cours...', this.registerForm.value);
-
+    
     this.RegisterService.register(this.registerForm.value as Credentials).subscribe({
       next: (success: boolean) => {
         if (success) {

@@ -39,12 +39,17 @@
         Les mots de passe ne correspondent pas !
       </div>
 
+      <div class="flex items-center">
+        <label class="" for="CGU"><a href="/cgu">Accepter les CGU :</a></label>
+        <input type="checkbox" name="CGU" id="CGU" class="mr-2" required>
+      </div>
+
       <div>
         <button type="submit" class="p-2 mt-6 rounded-md" [disabled]="registerForm.invalid">
           {{ BtnContent }}
         </button>
-
       </div>
+
     </div>
   </form>
 </div>

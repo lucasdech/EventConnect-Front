@@ -6,6 +6,7 @@ import { ConnectedUserComponent } from './pages/connected-user/connected-user.co
 import { EventDetailsComponent } from './pages/event-details/event-details.component';
 import { UserDetailComponent } from './pages/user-detail/user-detail.component';
 import { LegalsMentionsComponent } from './pages/legals-mentions/legals-mentions.component';
+import { CGUComponent } from './pages/cgu/cgu.component';
 
 
 export const routes: Routes = [
@@ -15,5 +16,6 @@ export const routes: Routes = [
   { path: 'my-board', component: ConnectedUserComponent },
   { path: 'event/:id', component: EventDetailsComponent },
   { path: 'my-account', component: UserDetailComponent},
-  { path: 'legals', component: LegalsMentionsComponent }
+  { path: 'legals', component: LegalsMentionsComponent },
+  { path: 'cgu', component: CGUComponent }
 ];
