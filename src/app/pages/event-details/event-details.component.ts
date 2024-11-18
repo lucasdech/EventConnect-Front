@@ -61,7 +61,7 @@ export class EventDetailsComponent implements OnInit {
     this.getEventDetails();
     setTimeout(() => {
       this.isUserInEvent();
-    }, 800);
+    }, 8000);
   }
 
   isConnectedUser() {
